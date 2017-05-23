@@ -1,0 +1,26 @@
+<footer class="site-footer">
+
+<div>
+  <amp-social-share type="twitter"></amp-social-share>
+  <amp-social-share type="linkedin" width="60" height="44"
+    data-param-text=">خرید شارژ همراه اول - ایرانسل - رایتل - تالیا"
+    data-param-url="https://overcharge.ir/">
+  </amp-social-share>
+
+
+<amp-facebook-like width=90 height=20
+    layout="fixed"
+    data-layout="button_count"
+    data-href="https://www.facebook.com/echarge.ir/">
+</amp-facebook-like>
+
+
+</div>
+
+<hr/>
+  <a class="subscribe" href="/amplify/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> Subscribe!</span></a>
+    <div class="inner">
+         <section class="copyright">All content copyright <a href="mailto:your-email@domain.com">Your Name</a> &copy; 2016 &bull; All rights reserved.</section>
+         <section class="poweredby">Made with <a href="http://jekyllrb.com"> Jekyll</a> and <a href="https://github.com/ageitgey/amplify">Amplify</a></section>
+    </div>
+</footer>

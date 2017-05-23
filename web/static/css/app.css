@@ -1,1 +1,19 @@
 /* This file is for your main application css. */
+
+.pl1 {
+    color: #7fa919;
+}
+
+.text-right {
+    direction: rtl;
+    text-align: right
+}
+
+.text-center {
+    text-align: center
+}
+
+.login-form {
+    margin: auto;
+    width: 80%;
+}

@@ -8,8 +8,8 @@ use Mix.Config
 # with brunch.io to recompile .js and .css sources.
 config :overcharge, Overcharge.Endpoint,
   http: [port: 4000],
-  debug_errors: true,
-  code_reloader: true,
+  debug_errors: false,
+  code_reloader: false,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]
@@ -36,8 +36,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :overcharge, Overcharge.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "overcharge",
-  password: "rrferl",
+  username: "postgres",
+  password: "postgres",
   database: "overcharge_dev",
   hostname: "localhost",
   pool_size: 10
