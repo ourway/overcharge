@@ -2,23 +2,66 @@ defmodule Overcharge.PageController do
   use Overcharge.Web, :controller
 
   def index(conn, _params) do
-    render conn, "index.html"
+    render conn, "index.html",
+      description: "خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز",
+      title:       "خرید شارژ همراه اول - ایرانسل - رایتل - تالیا",
+      subtitle:    "خرید شارژ سریع و ارزان",
+      color:       "#f8f8f8",
+      page_type:   "landing",
+      product:  "",
+      product:  ""
   end
 
   def mci(conn, _params) do
-    render conn, "mci.html"
+    render conn, "mci.html",
+      description: "خرید ارزان و سریع شارژ مستقیم همراه اول و شارژ مستقیم همراه اول",
+      title:       "خرید شارژ همراه اول",
+      subtitle:    "خرید پین و شارژ مستقیم همراه اول",
+      color:       "#e3fffe",
+      page_type:   "shop",
+      product:  "mci",
+      product_fr:  "همراه اول"
+
+
   end
 
   def irancell(conn, _params) do
-    render conn, "irancell.html"
+    render conn, "irancell.html",
+      description: "خرید سریع و ارزان شارژ مستقیم و بسته های اینترنتی ایرانسل بدون نیاز به وارد کردن رمز و کد",
+      title:       "خرید شارژ ایرانسل",
+      subtitle:    "خرید شارژ مستقیم و بسته های اینترنتی ایرانسل",
+      color:       "#fff2a7",
+      page_type:   "shop",
+      product:  "irancell",
+      product_fr:  "ایرانسل"
+
+
+
   end
 
   def rightel(conn, _params) do
-    render conn, "rightel.html"
+    render conn, "rightel.html",
+      description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد",
+      title:       "خرید شارژ رایتل",
+      subtitle:    "خرید شارژ مستقیم رایتل",
+      color:       "#ffedf8",
+      page_type:   "shop",
+      product:  "rightel",
+      product_fr:  "رایتل"
   end
 
   def taliya(conn, _params) do
-    render conn, "taliya.html"
+    render conn, "taliya.html",
+      description: "خرید سریع و ارزان شارژ مستقیم تالیا بدون نیاز به وارد کردن رمز و کد",
+      title:       "خرید شارژ تالیا",
+      subtitle:    "خرید شارژ مستقیم تالیا",
+      color:       "#ffc1c1",
+      page_type:   "shop",
+      product:  "taliya",
+      product_fr:  "تالیا"
+
+
+
   end
 
 

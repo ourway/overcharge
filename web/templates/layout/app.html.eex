@@ -10,8 +10,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز">
-    <title>خرید شارژ همراه اول - ایرانسل - رایتل - تالیا</title>
+    <meta name="description" content="<%= @description %>">
+    <title><%= @title %></title>
     <meta name="author" content="Overcharge Framework 1/1">
     <meta content="شارژ,ایرانسل,ايرانسل,کارت,اینترنتی,آنلاین,خرید شارژ،همراه اول،تالیا،رایتل" name="keywords" />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -161,10 +161,13 @@ main { display: block; }
 
 body { 
 font-family: 'IRANSans', sans-serif;
+background-image: url(/images/bg-<%= @product %>.jpg);
+background-size: cover;
+background-color: <%= @color %>;
  margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-font-feature-settings: "liga=1, dlig=1"; -ms-font-feature-settings: "liga", "dlig"; -webkit-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; }
 
 .site-header { position: relative; width: 100%; max-width: 700px; margin: 16px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-@media only screen and (max-width: 800px) { .site-header { padding: 0 16px; } }
+@media only screen and (max-width: 800px) { .site-header { padding: 0 0px; } }
 .site-header .page-links { display: block; position: absolute; top: 10px; right: 16px; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
 .site-header .page-links a { text-decoration: none;}
 .site-header .page-links a:hover {}
@@ -173,8 +176,8 @@ font-family: 'IRANSans', sans-serif;
 .blog-header .blog-title { margin-bottom: 8px; font-size: 50px; font-weight: 700; letter-spacing: -2px; outline: 0; line-height: 50px; word-break: break-word; color: #333333; }
 .blog-header .blog-description { font-size: 28px; margin: 0 0 20px; padding: 0; line-height: 1.2; color: #666666; font-weight: 300; }
 
-.content { min-height: 500px; width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-@media only screen and (max-width: 800px) { .content { padding: 0 16px; } }
+.content { width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+@media only screen and (max-width: 800px) { .content { padding: 0 0px; } }
 .content article { padding: 20px 0; border-bottom: 1px solid #f2f2f0; }
 .content article:last-child { border-bottom: 0px; }
 .content article .post-title { letter-spacing: -0.02em; font-weight: 700; font-style: normal; display: block; font-size: 36px; line-height: 1.15; margin: 0 0; }
@@ -239,6 +242,8 @@ font-family: 'IRANSans', sans-serif;
 .post .bottom-teaser .isRight .site-footer a { color: #333333; text-decoration: none; }
 .post .bottom-teaser .isRight .site-footer a:hover { text-decoration: underline; }
 .post .bottom-teaser .isRight .site-footer .poweredby { display: block; padding-bottom: 18px; font-weight: 700; color: #333333; }
+.logo {padding: 2%};
+hr {background: #02a8ff; height: 2px; border: none;}
 .footer-links i {
     vertical-align: sub;
 }
@@ -251,13 +256,15 @@ font-family: 'IRANSans', sans-serif;
   display: inline-block;
 }
 .intro_text {
-  font-size:18px;
+  font-size:14px;
   color: #02a8ff;
 }
 .mci_color {color: #00a09c;}
 .irancell_color {color: #d0b000;}
 .rightel_color {color: #941063;}
 .taliya_color {color: #d00b11;}
+.default_color {color: #333;}
+.grey_color {color: #b3acac;}
 
 .share { text-align: right; padding: 20px 0 0; }
 .share a { text-decoration: none; color: #bbbbbb; padding-left: 12px; }
@@ -273,16 +280,17 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 .index_page {
     direction: rtl;
+    margin-top: 8%;
     padding: 0px;
     text-align: right;
 }
 
 .index_page a.select_package {
-    width: 95%;
+    width: 100%;
     padding: 1%;
     display: inline-flex;
     margin: auto;
-    margin-bottom: 1%;
+    margin-top: 2%;
     border-radius: 5px;
   }
 
@@ -344,10 +352,10 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
   <script async src="https://cdn.ampproject.org/v0.js"></script>
-  <!--
-  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
-  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
-  !-->
+  <%= if @page_type=="shop" do %>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+  <% end %>
 
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
@@ -381,36 +389,74 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 
     <header class="site-header">
-  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo-solo-2.png" width="96" height="80" /></span></a>
-
+  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_n.png" width="64" height="64" /></span></a>
 
 
   <div class="page-links">
     <h1 align="center" class="intro_text">
-    <b>خرید شارژ</b>
-     سریع و ارزان
+      <%= @subtitle %>
+        <i class="fa  fa-hand-o-left grey_color"></i>
     </h1>
-    <hr/>
-    <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
-      <a itemscope itemtype="http://schema.org/Thing" 
-      itemprop="item" class="page-link mci_color" 
-      href="/mci"><span itemprop="name">شارژ همراه اول</span></a>
-      <meta itemprop="position" content="1" />
-     </li> &bull;
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
-      <a itemscope itemtype="http://schema.org/Thing" 
-      itemprop="item" class="page-link irancell_color" 
-      href="/irancell"><span itemprop="name">شارژ ایرانسل</span></a>
-      <meta itemprop="position" content="1" />
-     </li> &bull;
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
-      <a itemscope itemtype="http://schema.org/Thing" 
-      itemprop="item" class="page-link rightel_color" 
-      href="/rightel"><span itemprop="name">شارژ رایتل</span></a>
-      <meta itemprop="position" content="1" />
-     </li>
-    </ol>
+    <hr class="blue_hr" />
+
+    <%= if @page_type == "landing" do %>
+        <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+          <a itemscope itemtype="http://schema.org/Thing" 
+          itemprop="item" class="page-link mci_color" 
+          href="/mci"><span itemprop="name">شارژ همراه اول</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+
+
+        <i class="fa fa-circle grey_color"></i>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+          <a itemscope itemtype="http://schema.org/Thing" 
+          itemprop="item" class="page-link irancell_color" 
+          href="/irancell"><span itemprop="name">شارژ ایرانسل</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+
+        
+        <i class="fa fa-circle grey_color"></i>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+          <a itemscope itemtype="http://schema.org/Thing" 
+          itemprop="item" class="page-link rightel_color" 
+          href="/rightel"><span itemprop="name">شارژ رایتل</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        </ol>
+    <% end %>
+
+
+    <%= if @page_type == "shop" or @page_type == "product" do %>
+        <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+          <a itemscope itemtype="http://schema.org/Thing" 
+          itemprop="item" class="page-link" 
+          href="/"><span itemprop="name">فروشگاه</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        
+        <i class="fa fa-angle-double-left grey_color"></i>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+          <a itemscope itemtype="http://schema.org/Thing" 
+          itemprop="item" class="page-link <%= @product %>_color" 
+          href="/<%= @product %>" > <span itemprop="name"><%= @product_fr %></span></a>
+          <meta itemprop="position" content="2" />
+        </li> 
+        <%= if @page_type == "product" do %>
+            <i class="fa fa-angle-double-left grey_color"></i>
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+              <a itemscope itemtype="http://schema.org/Thing" 
+              itemprop="item" class="page-link <%= @product %>_color" 
+              href="<%= @conn.request_path %>" > <span itemprop="name"><%= @title %></span></a>
+              <meta itemprop="position" content="3" />
+            </li>
+        <% end %>
+        </ol>
+    <% end %>
+
       
     
       
