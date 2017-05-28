@@ -1,0 +1,25 @@
+<form method="post"
+  class="p2"
+  action-xhr="/components/amp-form/submit-form-xhr"
+  target="_top">
+  <div class="ampstart-input inline-block relative mb3">
+    <input type="tel"
+      name="my_tel"
+      placeholder="Telephone...">
+  </div>
+  <input type="submit"
+    value="OK"
+    class="ampstart-btn caps">
+  <div submit-success>
+    <template type="amp-mustache">
+      Success! Thanks for trying the
+      <code>amp-form</code> demo!
+    </template>
+  </div>
+  <div submit-error>
+    <template type="amp-mustache">
+      Error!
+    </template>
+  </div>
+</form>
+

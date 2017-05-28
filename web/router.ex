@@ -40,6 +40,10 @@ defmodule Overcharge.Router do
   scope "/", Overcharge do
     pipe_through :browser # Use the default browser stack
     get "/", PageController, :index
+    get "/mci", PageController, :mci
+    get "/irancell", PageController, :irancell
+    get "/rightel", PageController, :rightel
+    get "/taliya", PageController, :taliya
   end
 
 

@@ -1,3 +1,51 @@
+<div class="index_page">
+
+    <a href="/mci" class="select_package mci" itemscope itemtype="http://schema.org/Product">
+        <h1>
+            <i class="fa fa-tags"></i>
+
+            <span itemprop="name">
+      شارژ
+      <span itemprop="brand">همراه اول</span>
+            </span>
+            <br/>
+            <small itemprop="description">کارت شارژ و شارژ مستقیم سریع</small>
+        </h1>
+        <amp-img alt="خرید شارژ همراه اول با کلی تخفیف" src="/images/corporate-gifting.png" width="110" height="100" layout="fixed">
+        </amp-img>
 
 
-the index
+
+    </a>
+
+
+    <a href="/irancell" class="select_package irancell" itemscope itemtype="http://schema.org/Product">
+        <h1> <i class="fa fa-tags"></i>
+
+        <span itemprop="name">
+        شارژ 
+        <span itemprop="brand">ایرانسل</span>
+        </span>
+            <br/>
+            <small itemprop="description">شارژ مستقیم و بسته‌های اینترنتی</small>
+        </h1>
+        <amp-img alt="خرید شارژ ایرانسل اول با کلی تخفیف و جایزه" src="images/mobile-yellow.png" width="110" height="110" layout="fixed">
+        </amp-img>
+    </a>
+
+
+    <a href="/rightel" class="select_package rightel" itemscope itemtype="http://schema.org/Product">
+        <h1> <i class="fa  fa-tags"></i>
+
+        <span itemprop="name">
+         شارژ 
+         <span itemprop="brand">رایتل</span>
+         </span>
+            <br/>
+            <small itemprop="description">شارژ مستقیم سریع</small>
+        </h1>
+        <amp-img alt="خرید شارژ رایتل ارزان" src="images/mobile-wire.png" width="110" height="110" layout="fixed">
+        </amp-img>
+    </a>
+
+</div>

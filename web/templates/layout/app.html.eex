@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html ⚡ lang="en">
   <head>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
+
+
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,39 +27,65 @@
   
 {
   "@context": "http://schema.org",
-  "@type": "NewsArticle",
-  "mainEntityOfPage": "https://overcharge.ir",
-  "headline": "خرید شارژ همراه اول - ایرانسل - رایتل - تالیا",
-  "datePublished": "2017-06-15T04:03:22+00:00",
-  "dateModified": "2017-07-15T04:03:22+00:00",
-  "description": "خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز",
-  "author": {
-    "@type": "Person",
-    "name": "Asetman Telecom Ltd."
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Asetman Telecom Ltd",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://overcharge.ir/images/logo_solo.svg",
-      "width": 60,
-      "height": 60
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://overcharge.ir/images/logo_solo.svg",
-    "height": 60,
-    "width": 60
-  }
+  "@type": "WebSite",
+  "name": "Over Charge",
+  "alternateName": "اور شارژ",
+  "url": "https://overcharge.ir"
 }
+
 
   </script>
   
   <style amp-custom>
-  
   /** Syntax highlighting styles */
+
+
+@font-face {
+    font-family: IRANSans;
+    font-style: bold;
+    font-weight: 800;
+    src: url('/fonts/IRANSans/eot/IRANSansWeb_Bold.eot');
+    src: url('/fonts/IRANSans/eot/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('/fonts/IRANSans/woff2/IRANSansWeb_Bold.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('/fonts/IRANSans/woff/IRANSansWeb_Bold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans/ttf/IRANSansWeb_Bold.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: IRANSans;
+    font-style: light;
+    font-weight: 200;
+    src: url('/fonts/IRANSans/eot/IRANSansWeb_Light.eot');
+    src: url('/fonts/IRANSans/eot/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('/fonts/IRANSans/woff2/IRANSansWeb_Light.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('/fonts/IRANSans/woff/IRANSansWeb_Light.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans/ttf/IRANSansWeb_Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: ultralight;
+    font-weight: 100;
+    src: url('/fonts/IRANSans/eot/IRANSansWeb_UltraLight.eot');
+    src: url('/fonts/IRANSans/eot/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('/fonts/IRANSans/woff2/IRANSansWeb_UltraLight.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('/fonts/IRANSans/woff/IRANSansWeb_UltraLight.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans/ttf/IRANSansWeb_UltraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('/fonts/IRANSans/eot/IRANSansWeb.eot');
+    src: url('/fonts/IRANSans/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('/fonts/IRANSans/woff2/IRANSansWeb.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('/fonts/IRANSans/woff/IRANSansWeb.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans/ttf/IRANSansWeb.ttf') format('truetype');
+}
+
+
 .highlight { background: #fff; }
 .highlighter-rouge .highlight { background: #eef; }
 .highlight .c { color: #998; font-style: italic; }
@@ -124,25 +151,29 @@
 .icon > svg { display: inline-block; width: 16px; height: 16px; vertical-align: middle; }
 .icon > svg path { fill: #828282; }
 
-
+.hidden {
+  display:none;
+}
 
 .cf:after { content: ""; display: table; clear: both; }
 
 main { display: block; }
 
-body { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif; margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-font-feature-settings: "liga=1, dlig=1"; -ms-font-feature-settings: "liga", "dlig"; -webkit-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; }
+body { 
+font-family: 'IRANSans', sans-serif;
+ margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-font-feature-settings: "liga=1, dlig=1"; -ms-font-feature-settings: "liga", "dlig"; -webkit-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; }
 
 .site-header { position: relative; width: 100%; max-width: 700px; margin: 16px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 @media only screen and (max-width: 800px) { .site-header { padding: 0 16px; } }
-.site-header .page-links { display: block; position: absolute; top: 10px; right: 16px; font-weight: 200; font-style: normal; font-size: 18px; line-height: 30px; }
-.site-header .page-links a { text-decoration: none; color: #999999; }
-.site-header .page-links a:hover { color: #333333; }
+.site-header .page-links { display: block; position: absolute; top: 10px; right: 16px; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
+.site-header .page-links a { text-decoration: none;}
+.site-header .page-links a:hover {}
 
 .blog-header { width: 100%; max-width: 700px; margin: 0 auto; position: relative; padding: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .blog-header .blog-title { margin-bottom: 8px; font-size: 50px; font-weight: 700; letter-spacing: -2px; outline: 0; line-height: 50px; word-break: break-word; color: #333333; }
 .blog-header .blog-description { font-size: 28px; margin: 0 0 20px; padding: 0; line-height: 1.2; color: #666666; font-weight: 300; }
 
-.content { width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.content { min-height: 500px; width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 @media only screen and (max-width: 800px) { .content { padding: 0 16px; } }
 .content article { padding: 20px 0; border-bottom: 1px solid #f2f2f0; }
 .content article:last-child { border-bottom: 0px; }
@@ -154,7 +185,7 @@ body { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif;
 .content article .post-meta a { color: #b3b3b1; text-decoration: none; }
 .content article .post-meta a:hover { text-decoration: underline; }
 
-.post-template .content { max-width: 700px; }
+.post-template .content { max-width: 700px;}
 
 .index-headline { border-top: 1px solid #dededc; margin: 0; padding: 16px 0; }
 .index-headline span { color: #b3b3b1; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
@@ -208,6 +239,25 @@ body { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif;
 .post .bottom-teaser .isRight .site-footer a { color: #333333; text-decoration: none; }
 .post .bottom-teaser .isRight .site-footer a:hover { text-decoration: underline; }
 .post .bottom-teaser .isRight .site-footer .poweredby { display: block; padding-bottom: 18px; font-weight: 700; color: #333333; }
+.footer-links i {
+    vertical-align: sub;
+}
+
+.links_me {
+  list-style: none;
+  direction: rtl;
+}
+.links_me li {
+  display: inline-block;
+}
+.intro_text {
+  font-size:18px;
+  color: #02a8ff;
+}
+.mci_color {color: #00a09c;}
+.irancell_color {color: #d0b000;}
+.rightel_color {color: #941063;}
+.taliya_color {color: #d00b11;}
 
 .share { text-align: right; padding: 20px 0 0; }
 .share a { text-decoration: none; color: #bbbbbb; padding-left: 12px; }
@@ -221,15 +271,86 @@ code { padding: 1px 5px; }
 pre { padding: 8px 12px; overflow-x: scroll; }
 pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
+.index_page {
+    direction: rtl;
+    padding: 0px;
+    text-align: right;
+}
+
+.index_page a.select_package {
+    width: 95%;
+    padding: 1%;
+    display: inline-flex;
+    margin: auto;
+    margin-bottom: 1%;
+    border-radius: 5px;
+  }
+
+.index_page a {
+    text-decoration: none;
+    text-align: center;
+    margin: auto;
+    width: 90%;    
+}
+
+.index_page a.mci h1 {
+    color: white;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+}
+
+.index_page a.select_package h1 small {
+    border-top: 1px solid #f2f2f2;
+    padding:  5px;
+    font-size: 11px;
+}
+
+
+.index_page a.mci {
+    background-color:#03ccc7;
+}
+
+.index_page a.irancell h1 {
+    color: #333;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+}
+  
+
+.index_page a.irancell {
+    background-color:#ffd800;
+}
+
+
+.index_page a.rightel h1 {
+    color: white;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+}
+  
+
+.index_page a.rightel {
+    background-color:#941063;
+}
+
+
+
   </style>
 
 
 
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
   <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <!--
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+  !-->
+
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
-  <script async custom-element="amp-facebook-like" src="https://cdn.ampproject.org/v0/amp-facebook-like-0.1.js"></script>
 
 </head>
 
@@ -260,13 +381,36 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 
     <header class="site-header">
-  <a href="/amplify/" class="logo"><span class="logo"><amp-img src="/images/logo_solo.svg" width="48" height="48" /></span></a>
+  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo-solo-2.png" width="96" height="80" /></span></a>
+
+
 
   <div class="page-links">
-    <a class="page-link" href="/amplify/">Home</a>
-    
-      
-      • <a class="page-link" href="/amplify/about/">About</a>
+    <h1 align="center" class="intro_text">
+    <b>خرید شارژ</b>
+     سریع و ارزان
+    </h1>
+    <hr/>
+    <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+      <a itemscope itemtype="http://schema.org/Thing" 
+      itemprop="item" class="page-link mci_color" 
+      href="/mci"><span itemprop="name">شارژ همراه اول</span></a>
+      <meta itemprop="position" content="1" />
+     </li> &bull;
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+      <a itemscope itemtype="http://schema.org/Thing" 
+      itemprop="item" class="page-link irancell_color" 
+      href="/irancell"><span itemprop="name">شارژ ایرانسل</span></a>
+      <meta itemprop="position" content="1" />
+     </li> &bull;
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+      <a itemscope itemtype="http://schema.org/Thing" 
+      itemprop="item" class="page-link rightel_color" 
+      href="/rightel"><span itemprop="name">شارژ رایتل</span></a>
+      <meta itemprop="position" content="1" />
+     </li>
+    </ol>
       
     
       
@@ -283,7 +427,7 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
   <nav class="pagination" role="navigation">
     
-    <span class="page-number">Page 1 of 1</span>
+    <span class="page-number"></span>
     
   </nav>
 
