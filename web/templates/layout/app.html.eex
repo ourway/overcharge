@@ -154,7 +154,21 @@
 .hidden {
   display:none;
 }
+.subtitle{
+  direction:rtl;
+  margin: auto;
+  margin-top: -32px;
+  text-align:center;
+  font-weight: bold;
+  color: <%= @text_color %>;
+  width: 90%;
+  padding-bottom: 2px;
+}
 
+.subtitle h1{
+  font-size: 20px;
+
+}
 .cf:after { content: ""; display: table; clear: both; }
 
 main { display: block; }
@@ -166,7 +180,19 @@ background-size: cover;
 background-color: <%= @color %>;
  margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-font-feature-settings: "liga=1, dlig=1"; -ms-font-feature-settings: "liga", "dlig"; -webkit-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; }
 
-.site-header { position: relative; width: 100%; max-width: 700px; margin: 16px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.site-header { 
+    background: linear-gradient(90deg,#94103e 0,#db004d);
+    /* position: absolute; */
+    top: 0;
+    /* left: 0px; */
+    height: 164px;
+    /* right: 0; */
+    clip-path: polygon(155% 0%,0% 100%,0%0%);
+    -webkit-clip-path: polygon(155% 0%,0% 100%,0%0%);
+    color: white;
+    /* width: 100%; */
+
+}
 @media only screen and (max-width: 800px) { .site-header { padding: 0 0px; } }
 .site-header .page-links { display: block; position: absolute; top: 10px; right: 16px; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
 .site-header .page-links a { text-decoration: none;}
@@ -176,7 +202,7 @@ background-color: <%= @color %>;
 .blog-header .blog-title { margin-bottom: 8px; font-size: 50px; font-weight: 700; letter-spacing: -2px; outline: 0; line-height: 50px; word-break: break-word; color: #333333; }
 .blog-header .blog-description { font-size: 28px; margin: 0 0 20px; padding: 0; line-height: 1.2; color: #666666; font-weight: 300; }
 
-.content { width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.content {min-height: 150px; width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 @media only screen and (max-width: 800px) { .content { padding: 0 0px; } }
 .content article { padding: 20px 0; border-bottom: 1px solid #f2f2f0; }
 .content article:last-child { border-bottom: 0px; }
@@ -197,9 +223,22 @@ background-color: <%= @color %>;
 .pagination a { color: #999999; text-decoration: none; }
 .pagination a:hover { color: #333333; }
 
-.site-footer { margin: 0 auto; padding: 48px 0; width: 100%; max-width: 700px; font-size: 12px; text-align: center; color: #999999; line-height: 17.6px; }
-.site-footer a { color: #666666; text-decoration: none; }
-.site-footer a:hover { color: #333333; }
+.site-footer {
+    margin: 0 auto;
+    padding: 48px 0;
+    /* width: 100%; */
+    /* max-width: 700px; */
+    font-size: 12px;
+    text-align: center;
+    clip-path: polygon(500% 170%,0% 100%,0%0%);
+    -webkit-clip-path: polygon(500% 170%,0% 100%,0%0%);
+    color: white;
+    /* color: #999999; */
+    line-height: 17.6px;
+    background: linear-gradient(90deg,#94103e 0,#000000);
+ }
+.site-footer a { color: #ffadcc; text-decoration: none; }
+.site-footer a:hover { color: #f8f8f8; }
 
 .post .post-meta { font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif; }
 .post .post-title { font-weight: 700; font-style: normal; letter-spacing: -0.04em; font-size: 50px; line-height: 1.1; color: #333332; margin-bottom: 50px; }
@@ -259,12 +298,12 @@ hr {background: #02a8ff; height: 2px; border: none;}
   font-size:14px;
   color: #02a8ff;
 }
-.mci_color {color: #00a09c;}
-.irancell_color {color: #d0b000;}
-.rightel_color {color: #941063;}
-.taliya_color {color: #d00b11;}
-.default_color {color: #333;}
-.grey_color {color: #b3acac;}
+.mci_color {color: #b7fffd;}
+.irancell_color {color: #ffe761;}
+.rightel_color {color: #ffcdec;}
+.taliya_color {color: #fff;}
+.default_color {color: #f2f2f2;}
+.grey_color {color: #ffffff;}
 
 .share { text-align: right; padding: 20px 0 0; }
 .share a { text-decoration: none; color: #bbbbbb; padding-left: 12px; }
@@ -389,15 +428,11 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 
     <header class="site-header">
-  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_n.png" width="64" height="64" /></span></a>
+  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_n.png" width="96" height="96" /></span></a>
 
 
   <div class="page-links">
-    <h1 align="center" class="intro_text">
-      <%= @subtitle %>
-        <i class="fa  fa-hand-o-left grey_color"></i>
-    </h1>
-    <hr class="blue_hr" />
+
 
     <%= if @page_type == "landing" do %>
         <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
@@ -433,7 +468,7 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
         <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
-          itemprop="item" class="page-link" 
+          itemprop="item" class="page-link default_color" 
           href="/"><span itemprop="name">فروشگاه</span></a>
           <meta itemprop="position" content="1" />
         </li>
@@ -458,15 +493,13 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
     <% end %>
 
       
-    
-      
-    
       
     
   </div>
 </header>
-
-
+<div class="subtitle">
+ <h1> <%= @subtitle %> </h1>
+</div>
     <main class="content" role="main">
 
             <%= render @view_module, @view_template, assigns %>

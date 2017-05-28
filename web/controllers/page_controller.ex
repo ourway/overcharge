@@ -7,6 +7,7 @@ defmodule Overcharge.PageController do
       title:       "خرید شارژ همراه اول - ایرانسل - رایتل - تالیا",
       subtitle:    "خرید شارژ سریع و ارزان",
       color:       "#f8f8f8",
+      text_color:  "#ffffff",
       page_type:   "landing",
       product:  "",
       product:  ""
@@ -18,6 +19,7 @@ defmodule Overcharge.PageController do
       title:       "خرید شارژ همراه اول",
       subtitle:    "خرید پین و شارژ مستقیم همراه اول",
       color:       "#e3fffe",
+      text_color:  "#ffffff",
       page_type:   "shop",
       product:  "mci",
       product_fr:  "همراه اول"
@@ -31,6 +33,7 @@ defmodule Overcharge.PageController do
       title:       "خرید شارژ ایرانسل",
       subtitle:    "خرید شارژ مستقیم و بسته های اینترنتی ایرانسل",
       color:       "#fff2a7",
+      text_color:  "#333",
       page_type:   "shop",
       product:  "irancell",
       product_fr:  "ایرانسل"
@@ -45,6 +48,7 @@ defmodule Overcharge.PageController do
       title:       "خرید شارژ رایتل",
       subtitle:    "خرید شارژ مستقیم رایتل",
       color:       "#ffedf8",
+      text_color:  "#ffffff",
       page_type:   "shop",
       product:  "rightel",
       product_fr:  "رایتل"
@@ -55,7 +59,8 @@ defmodule Overcharge.PageController do
       description: "خرید سریع و ارزان شارژ مستقیم تالیا بدون نیاز به وارد کردن رمز و کد",
       title:       "خرید شارژ تالیا",
       subtitle:    "خرید شارژ مستقیم تالیا",
-      color:       "#ffc1c1",
+      color:       "#fffff",
+      text_color:   "#ffffff",
       page_type:   "shop",
       product:  "taliya",
       product_fr:  "تالیا"
