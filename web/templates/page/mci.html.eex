@@ -1,25 +1,80 @@
-<form method="post"
-  class="p2"
-  action-xhr="/components/amp-form/submit-form-xhr"
-  target="_top">
-  <div class="ampstart-input inline-block relative mb3">
-    <input type="tel"
-      name="my_tel"
-      placeholder="Telephone...">
-  </div>
-  <input type="submit"
-    value="OK"
-    class="ampstart-btn caps">
-  <div submit-success>
-    <template type="amp-mustache">
-      Success! Thanks for trying the
-      <code>amp-form</code> demo!
-    </template>
-  </div>
-  <div submit-error>
-    <template type="amp-mustache">
-      Error!
-    </template>
-  </div>
-</form>
 
+<div class="index_page">
+
+    <a href="/mci/topup" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
+        <h1>
+            <i class="fa fa-bolt fa-2x"></i>
+
+            <span itemprop="name">
+      شارژ مستقیم
+      <span itemprop="brand">همراه اول</span>
+            </span>
+            <br/>
+            <small itemprop="description">شارژ مستقیم بدون نیاز به ورود کد</small>
+        </h1>
+
+  <span class="hidden" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span  itemprop="ratingValue">4.9</span> stars, based on <span itemprop="reviewCount">89005
+      </span> reviews
+
+
+
+
+  </span>
+
+  <span class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="IRR" />
+    $<span itemprop="price">9750.0</span>
+    Available from: <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+                      <span itemprop="name">شرکت ارتباطات سیار ایران</span>
+                    </span>
+    <link itemprop="availability" href="http://schema.org/InStock"/>In stock! Order now!</span>
+
+
+    <amp-img alt="خرید شارژ مراه اول با کلی تخفیف" src="/images/top-up-leaflet.png" width="140" height="100" layout="fixed">
+    </amp-img>
+
+
+    </a>
+
+
+    <a href="/mci/pin" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
+        <h1>
+            <i class="fa fa-credit-card fa-2x"></i>
+
+            <span itemprop="name">
+      پین کد
+      <span itemprop="brand">همراه اول</span>
+            </span>
+            <br/>
+            <small itemprop="description">پین کد 1000 تومانی به قیمت
+             <strong>950 تومان</strong>
+             </small>
+        </h1>
+  <span class="hidden" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span  itemprop="ratingValue">4.93</span> stars, based on <span itemprop="reviewCount">119107
+      </span> reviews
+
+
+  </span>
+
+
+
+  <span class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="IRR" />
+    $<span itemprop="price">9500.0</span>
+    Available from: <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+                      <span itemprop="name">شرکت ارتباطات سیار ایران</span>
+                    </span>
+    <link itemprop="availability" href="http://schema.org/InStock"/>In stock! Order now!</span>
+
+
+        <amp-img alt="خرید شارژ همراه اول با کلی تخفیف" src="/images/w-icon-cards.png" width="140" height="100" layout="fixed">
+        </amp-img>
+
+    </a>
+
+
+
+
+</div>
