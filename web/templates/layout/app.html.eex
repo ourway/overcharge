@@ -19,9 +19,28 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
     <link rel="manifest" href="/images/manifest.json">
     <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="canonical" href="<%= Overcharge.Router.Helpers.url(@conn) <> @conn.request_path %>">
 
-  <link rel="canonical" href="https://overcharge.ir">
-  <link rel="alternate" type="application/rss+xml" title="Amplify Demo Site" href="https://overcharge.ir/feed.xml">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@chargcell">
+    <meta name="twitter:title" content="<%= @title %>">
+    <meta name="twitter:description" content="<%= @description %>">
+    <meta name="twitter:creator" content="@author_handle">
+    <meta name="twitter:image" content="<%= Overcharge.Router.Helpers.url(@conn) %>/images/apple-touch-icon.png">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="<%= @title %>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="<%= Overcharge.Router.Helpers.url(@conn) %>" />
+    <meta property="og:image" content="<%= Overcharge.Router.Helpers.url(@conn) %>/images/apple-touch-icon.png" />
+    <meta property="og:description" content="<%= @description %>" /> 
+    <meta property="og:site_name" content="OverCharge" />
+    <meta property="fb:admins" content="220534798462355" />
+
+
+
+
+
 
   <script type="application/ld+json">
   

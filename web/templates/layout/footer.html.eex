@@ -6,7 +6,7 @@
     data-param-text="توصیه میکنم از این سایت شارژ بخرید" ></amp-social-share>
   <amp-social-share type="linkedin"
     data-param-text="توصیه میکنم از این سایت شارژ بخرید"
-    data-param-url="https://overcharge.ir/">
+    data-param-url="<%= Overcharge.Router.Helpers.url(@conn) %>">
   </amp-social-share>
 
 
@@ -14,7 +14,7 @@
 
   <a href="/sessions/new" class="footer-links">ورود به باشگاه مشتریان <i class="fa fa-sign-in"></i></a>
     <div class="inner">
-         <section class="copyright">تمامی حقوق این سایت متعلق به <a href="mailto:info@overcharge.ir">شرکت ارتباطات آسمان</a> می‌باشد</section>
-         <section class="poweredby"><i class="fa fa-google"> با سپاس از حمایت <a href="https://google.com?q=overcharge.ir" target="_blank"> کمپانی گوگل </i></a></section>
+         <section class="copyright">تمامی حقوق این سایت متعلق به <a href="mailto:info@aseman-telecom.com">شرکت ارتباطات آسمان</a> می‌باشد</section>
+         <section class="poweredby"><i class="fa fa-google"> با سپاس از حمایت <a href="https://google.com?q=<%= Overcharge.Router.Helpers.url(@conn) %>" target="_blank"> کمپانی گوگل </i></a></section>
     </div>
 </footer>
