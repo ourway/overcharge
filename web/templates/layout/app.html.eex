@@ -38,23 +38,30 @@
     <meta property="fb:admins" content="220534798462355" />
 
 
-
-
-
-
   <script type="application/ld+json">
-  
 {
   "@context": "http://schema.org",
   "@type": "WebSite",
-  "name": "Over Charge",
-  "alternateName": "اور شارژ",
-  "url": "https://overcharge.ir"
-}
-
-
+  "name": "CharGELL",
+  "alternateName": "شارژل",
+  "url": "<%= Overcharge.Router.Helpers.url(@conn) %>"
   </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "http://www.google.com",
+  "logo": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/logo_s.png",
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+98-21-44237749",
+    "contactType": "customer service"
+  }]
+}
+</script>
   
+
   <style amp-custom>
   /** Syntax highlighting styles */
 
@@ -103,6 +110,22 @@
     url('/fonts/IRANSans/woff/IRANSansWeb.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
     url('/fonts/IRANSans/ttf/IRANSansWeb.ttf') format('truetype');
 }
+
+form.amp-form-submit-success [submit-success],
+form.amp-form-submit-error [submit-error]{
+  margin-top: 16px;
+}
+form.amp-form-submit-success [submit-success] {
+  color: green;
+}
+form.amp-form-submit-error [submit-error] {
+  color: red;
+}
+form.amp-form-submit-success.hide-inputs > input {
+  display: none;
+}
+
+
 
 
 .highlight { background: #fff; }
@@ -167,6 +190,26 @@
 .highlight .vi { color: #008080; }
 .highlight .il { color: #099; }
 
+.ampstart-btn, .ampstart-btn[disabled], .ampstart-btn[disabled]:focus, .ampstart-btn[disabled]:hover, a.ampstart-btn, a.ampstart-btn[disabled], a.ampstart-btn[disabled]:focus, a.ampstart-btn[disabled]:hover {
+    color: darkgreen;
+    border: 1px solid darkgreen;
+    }
+
+.ampstart-btn {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    padding: .7em .8em;
+    text-decoration: none;
+    word-wrap: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid darkgreen;
+}
+
+
 .icon > svg { display: inline-block; width: 16px; height: 16px; vertical-align: middle; }
 .icon > svg path { fill: #828282; }
 
@@ -176,12 +219,30 @@
 .subtitle{
   direction:rtl;
   margin: auto;
-  margin-top: -32px;
+  margin-top: -45px;
   text-align:center;
   font-weight: bold;
   color: <%= @text_color %>;
   width: 90%;
-  padding-bottom: 2px;
+}
+[visible-when-invalid].visible {
+    display: initial;
+    color: darkred;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+[visible-when-invalid].visible[visible-when-invalid=valueMissing] {
+    display: none;
+}
+
+
+p {
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: <%= @color %>;
+  font-size: 12px;
 }
 
 .subtitle h1{
@@ -235,7 +296,7 @@ background-color: <%= @color %>;
 .blog-header .blog-title { margin-bottom: 8px; font-size: 50px; font-weight: 700; letter-spacing: -2px; outline: 0; line-height: 50px; word-break: break-word; color: #333333; }
 .blog-header .blog-description { font-size: 28px; margin: 0 0 20px; padding: 0; line-height: 1.2; color: #666666; font-weight: 300; }
 
-.content {min-height: 150px; width: 100%; max-width: 700px; margin: 25px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.content {min-height: 450px; width: 100%; max-width: 700px; margin: 0px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 @media only screen and (max-width: 800px) { .content { padding: 0 0px; } }
 .content article { padding: 20px 0; border-bottom: 1px solid #f2f2f0; }
 .content article:last-child { border-bottom: 0px; }
@@ -346,6 +407,9 @@ hr {background: #02a8ff; height: 2px; border: none;}
 .share a { text-decoration: none; color: #bbbbbb; padding-left: 12px; }
 .share a .hidden { display: none; }
 .share a:hover { color: #333333; }
+.vertical_center {
+  vertical-align: middle;
+}
 
 pre, code { font-size: 15px; border: 1px solid #e8e8e8; border-radius: 3px; background-color: #eeeeff; }
 
@@ -423,6 +487,51 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
     background-color:#941063;
 }
 
+form.amp-form-submit-success > input {
+  display: none
+}
+
+
+.mci_topup_form {
+  background-color: #10b0bf;
+  border: 5px solid white;
+  padding: 5px;
+  text-align: center;
+}
+
+.mci_topup_form .msisdn_field{
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: white;
+  margin-bottom: 20px;
+}
+
+input.msisdn {
+  text-align: center;
+  font-family: "IranSans";
+  color: darkgreen;
+  direction: ltr;
+  padding: 5px;
+  font-weight: 800;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1rem;
+  outline: none;
+  border:none;
+}
+
+  amp-selector.mci_topup_products amp-img[aria-selected=false] {
+    background-color: #0ebeb1;
+    border-radius: 5px;
+    border: none;
+}
+
+  amp-selector.mci_topup_products amp-img[aria-selected=true] { 
+    background-color: #333;
+    border: none;
+}
+
+
 
 
   </style>
@@ -469,7 +578,7 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 
     <header class="site-header">
-  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_n.png" width="96" height="96" /></span></a>
+  <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_s_topbar.png" width="96" height="96" /></span></a>
 
 
   <div class="page-links">

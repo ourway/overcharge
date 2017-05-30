@@ -1,0 +1,75 @@
+
+
+<form method="post"
+  custom-validation-reporting="show-all-on-submit"
+  class="hide-inputs p3 mci_topup_form right"
+  action-xhr="/api/mci_topup_invoice"
+  target="_top">
+<p class="right">
+ <i class="fa fa-life-saver"></i>
+برای دریافت شارژ 
+مستقیم 
+همراه اول،
+ شماره موبایل اعتباری خود را وارد و سپس شارژ مورد نظر را انتخاب کنید
+ 
+ <i class="fa fa-arrow-circle-down fa-2x"></i>
+ </p>
+  <div class="ampstart-input msisdn_field inline-block relative mb3">
+
+
+
+    <input type="tel"
+      class="msisdn"
+      placeholder="09x-xxx-xxxx"
+      required
+      title="شماره موبایل اعتباری خود را وارد کنید"
+      pattern="(09|9)(\d{9})"
+      id="msisdn"
+      name="msisdn" autofocus>
+    <i class="fa fa-phone mci_color vertical_center"></i>
+
+        <div class="right center" visible-when-invalid="valueMissing"
+          validation-for="msisdn"><br/></div>
+        <div class="right center" visible-when-invalid="patternMismatch"
+          validation-for="msisdn"><br/>
+          شماره موبایل وارد شده معتبر نمی‌باشد
+        </div>  
+
+
+
+  </div>
+
+<amp-selector class="mci_topup_products" name="amount" layout="container">
+<%= for p <- [1_000,2_000,5_000,10_000,20_000,50_000] do %>
+
+
+  <amp-img src="/images/mci-topup-<%= p %>.png"
+    width="100"
+    height="75"
+    <%= if p == 2000 do %>
+    selected
+    <% end %>
+    alt="شارژ مستقیم <%= p %> تومانی همراه اول "
+    title="شارژ مستقیم <%= p %> تومانی همراه اول "
+    option="<%= p %>"></amp-img>
+
+<% end %>
+</amp-selector>
+
+  <hr/>
+  <input type="submit"
+    value="مرحله بعد"
+    class="ampstart-btn caps">
+
+  <div submit-success>
+    <template type="amp-mustache">
+      Success! <a href="/api/link/{{message}}">{{message}}<a/> Thanks for trying the
+      <code>amp-form</code> demo!
+    </template>
+  </div>
+  <div submit-error>
+    <template type="amp-mustache">
+      Error!
+    </template>
+  </div>
+</form>

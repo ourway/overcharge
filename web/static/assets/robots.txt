@@ -1,5 +1,13 @@
 # See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 #
 # To ban all spiders from the entire site uncomment the next two lines:
-# User-agent: *
-# Disallow: /
+
+User-agent: *
+Disallow: /  ## disable when publish
+Disallow: /admin
+Disallow: /invoice
+Disallow: /api
+Disallow: /reports
+Disallow: /*.pdf$
+
+Sitemap: https://overcharge.ir/sitemaps/sitemap.xml

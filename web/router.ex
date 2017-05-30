@@ -11,8 +11,20 @@ defmodule Overcharge.Router do
     plug Coherence.Authentication.Session
   end
 
+
+  pipeline :admin do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug Overcharge.Admin
+  end
+
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug Overcharge.CORS
   end
 
 
@@ -40,7 +52,9 @@ defmodule Overcharge.Router do
   scope "/", Overcharge do
     pipe_through :browser # Use the default browser stack
     get "/", PageController, :index
+    get "/invoice/:refid", PageController, :invoice
     get "/mci", PageController, :mci
+    get "/mci/topup", PageController, :mci_topup
     get "/irancell", PageController, :irancell
     get "/rightel", PageController, :rightel
     get "/taliya", PageController, :taliya
@@ -52,7 +66,18 @@ defmodule Overcharge.Router do
     # Add protected routes below
   end
 
+  scope "/api", Overcharge do
+    pipe_through :api
+    get "/ping", ApiController, :ping
+    post "/mci_topup_invoice", ApiController, :mci_topup_invoice
+    # Add protected routes below
+  end
 
+  scope "/admin", Overcharge do
+    pipe_through :admin
+    get "/index", PageController, :admin
+    # Add protected routes below
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", Overcharge do

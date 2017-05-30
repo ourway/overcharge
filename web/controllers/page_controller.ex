@@ -13,9 +13,12 @@ defmodule Overcharge.PageController do
       product:  ""
   end
 
+
+  ##################### MCI ###########################
+
   def mci(conn, _params) do
     render conn, "mci.html",
-      description: "خرید ارزان و سریع شارژ مستقیم همراه اول و شارژ مستقیم همراه اول",
+      description: "خرید ارزان و سریع شارژ مستقیم همراه اول و کارت شارژ همراه اول",
       title:       "خرید شارژ همراه اول",
       subtitle:    "خرید پین و شارژ مستقیم همراه اول",
       color:       "#e3fffe",
@@ -23,9 +26,27 @@ defmodule Overcharge.PageController do
       page_type:   "shop",
       product:  "mci",
       product_fr:  "همراه اول"
-
-
   end
+
+
+  def mci_topup(conn, _params) do
+    render conn, "mci-topup.html",
+      description: "خرید ارزان و سریع شارژ مستقیم همراه اول",
+      title:       "شارژ مستقیم همراه اول",
+      subtitle:    "شارژ مستقیم همراه اول",
+      color:       "#e3fffe",
+      text_color:  "#ffffff",
+      page_type:   "product",
+      product:  "mci",
+      product_fr:  "همراه اول"
+  end
+
+
+
+
+
+
+########################################################################
 
   def irancell(conn, _params) do
     render conn, "irancell.html",
@@ -37,9 +58,6 @@ defmodule Overcharge.PageController do
       page_type:   "shop",
       product:  "irancell",
       product_fr:  "ایرانسل"
-
-
-
   end
 
   def rightel(conn, _params) do
@@ -69,6 +87,35 @@ defmodule Overcharge.PageController do
 
   end
 
+
+  def admin(conn, _params) do
+    render conn, "admin.html",
+      description: "پنل کنترل",
+      title:       "پنل ادمین",
+      subtitle:    "",
+      color:       "#fffff",
+      text_color:   "#ffffff",
+      page_type:   "admin",
+      product:  "",
+      product_fr:  ""
+
+  end
+
+
+
+  def invoice(conn, params) do
+    
+    render conn, "invoice.html",
+      description: "",
+      title:       "",
+      subtitle:    "",
+      color:       "",
+      text_color:  "",
+      page_type:   "",
+      product:  "",
+      product_fr:  ""
+
+  end
 
 
 
