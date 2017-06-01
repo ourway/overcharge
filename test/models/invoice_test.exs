@@ -3,7 +3,7 @@ defmodule Overcharge.InvoiceTest do
 
   alias Overcharge.Invoice
 
-  @valid_attrs %{status: "pending", success_callback_action: "mci_topup_1000_989120228207", amount: 42, raw_amount: 40, tax: 0.09, client: "some content", description: "some content", is_checked_out: true, paylink: "some content", refid: "some content"}
+  @valid_attrs %{product: "mci charge", quantity: 10, rate: 2000,  status: "pending", success_callback_action: "mci_topup_1000_989120228207", amount: 42, raw_amount: 40, tax: 0.09, client: "some content", description: "some content", is_checked_out: true, paylink: "some content", refid: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

@@ -104,16 +104,18 @@ defmodule Overcharge.PageController do
 
 
   def invoice(conn, params) do
-    
+
+    invoice = Overcharge.Utils.get_invoice(params["refid"])
     render conn, "invoice.html",
-      description: "",
-      title:       "",
+      description: "فاکتور فروش شماره #{params["refid"]}",
+      invoice:     invoice,
+      title:       "فاکتور #{params["refid"]}",
       subtitle:    "",
-      color:       "",
+      color:       "#3366a9",
       text_color:  "",
-      page_type:   "",
-      product:  "",
-      product_fr:  ""
+      page_type:   "invoice",
+      product:     "invoice-page",
+      product_fr:  "فاکتور"
 
   end
 

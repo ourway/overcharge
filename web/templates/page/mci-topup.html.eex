@@ -63,8 +63,7 @@
 
   <div submit-success>
     <template type="amp-mustache">
-      Success! <a href="/api/link/{{message}}">{{message}}<a/> Thanks for trying the
-      <code>amp-form</code> demo!
+      فاکتور شما صادر شد.
     </template>
   </div>
   <div submit-error>

@@ -10,13 +10,15 @@ defmodule Overcharge.ApiController do
   def mci_topup_invoice(conn, params) do
       host = Overcharge.Router.Helpers.url(conn)
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
-      amount = params["amount"]
+      raw_amount = params["amount"] |> String.to_integer
+      amount = raw_amount/1.09 |> round
       action = "topup_mci_#{amount}_#{msisdn}"
+      product = "شارژ مستقیم #{raw_amount} تومانی همراه اول برای +#{msisdn}"
       client = msisdn |> Overcharge.Utils.get_client
-      invoice = Overcharge.Utils.create_invoice(action, amount, client)
+      invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
        conn 
         #|> put_resp_header("amp-redirect-to", "https://ss2.ir/u7WJ")
-        |> put_resp_header("AMP-Redirect-To", "#{host}/invoice/#{invoice.refid}")
+        |> put_resp_header("AMP-Redirect-To", "#{host}/invoice/#{invoice.refid}#invoice")
         |> json(%{message: :pong})
   end
 

@@ -1,0 +1,64 @@
+
+
+<%= if @invoice do %>
+
+  <div class="invoice text_right right" id="invoice">
+    <header>
+      <section>
+        <h1><i class="fa fa-file"></i> فاکتور فروش </h1>
+        <span class="invoice_date"><%= @invoice.inserted_at |> Overcharge.Utils.date_to_persian  %></span>
+      </section>
+
+      <section>
+        <span class="invoice_refid"><%=  @invoice.refid %>-<%=  @invoice.id %><i class="fa fa-barcode"></i></span>
+        <hr/>
+        <span class="invoice_status"><%=  case @invoice.status do
+                "pending" ->
+                    "در انتظار پرداخت"
+                "payed" ->
+                    "پرداخت شده و تحویل نشده"
+                "completed" ->
+                    "پرداخت شده و تحویل شده"
+                _ ->
+                    "نامشخص"
+            end %></span>
+      </section>
+    </header>
+
+    <main>
+      <section>
+        <span><i class="fa  fa-caret-square-o-down"></i> محصول / مالیات </span>
+        <span>&nbsp;</span>
+        <span><i class="fa  fa-money"></i> قیمت</span>
+      </section>
+
+      <section>
+        <figure>
+          <span><i class="fa fa-asterisk"></i> <strong><%= @invoice.product |> String.replace(" +989", " 9") %></strong> </span>
+          <span>&nbsp;</span>
+          <span><%= @invoice.raw_amount %> تومان </span>
+        </figure>
+
+        <figure>
+          <span><i class="fa fa-braille"></i> <strong><a href="https://evat.ir/" target="_new">مالیات بر ارزش افزوده</a></strong> (<%= @invoice.tax*100 |> round %>%)</span>
+          <span>&nbsp;</span>
+          <span><%= (@invoice.raw_amount*0.09) |> Float.floor |> round  %> تومان</span>
+        </figure>
+      </section>
+
+      <section>
+        <span><i class="fa fa-database"></i> جمع پرداختی</span>
+        <span><strong><%= @invoice.amount %></strong> تومان</span>
+      </section>
+    </main>
+
+    <footer>
+      <a href="/payments/invoice/<%= @invoice.refid %>"> <i class="fa fa-credit-card-alt"></i> پرداخت</a>
+    </footer>
+  </div>
+
+<% else %>
+
+    <h1 class="center">فاکتور یافت نشد</h1>
+    <h3 class="center"><a href="/">بازگشت</a></h3>
+<% end %>

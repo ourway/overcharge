@@ -12,8 +12,14 @@
 
 </div>
     <br />
+    <div class="partners">
+        <a href="https://pay.ir/r/13208" target="_blank" class="logo"><span class="logo"><amp-img src="https://pay.ir/assets/img/pay-trust.png" width="100" height="60" /></span></a>
+    </div>
+
     <div class="inner">
          <section class="copyright">تمامی حقوق این سایت متعلق به <a href="mailto:info@aseman-telecom.com">شرکت ارتباطات آسمان</a> می‌باشد</section>
          <section class="poweredby"><i class="fa fa-google"> با سپاس از حمایت <a href="https://google.com?q=<%= Overcharge.Router.Helpers.url(@conn) %>" target="_blank"> کمپانی گوگل </i></a></section>
     </div>
+
+
 </footer>
