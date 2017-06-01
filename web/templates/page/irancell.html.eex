@@ -1,0 +1,80 @@
+
+<div class="index_page">
+
+    <a href="/irancell/topup#form" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+        <h1>
+            <i class="fa fa-bolt fa-2x"></i>
+
+            <span itemprop="name">
+      شارژ مستقیم
+      <span itemprop="brand">ایرانسل</span>
+            </span>
+            <br/>
+            <small itemprop="description">شارژ مستقیم بدون نیاز به ورود کد</small>
+        </h1>
+
+  <span class="hidden" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span  itemprop="ratingValue">4.9</span> stars, based on <span itemprop="reviewCount">89123
+      </span> reviews
+
+
+
+
+  </span>
+
+  <span class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="IRR" />
+    $<span itemprop="price">9750.0</span>
+    Available from: <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+                      <span itemprop="name">ایرانسل</span>
+                    </span>
+    <link itemprop="availability" href="http://schema.org/InStock"/>In stock! Order now!</span>
+
+
+    <amp-img title="خرید شار ایرانسل با کلی تخفیف" alt="خرید شارژ ایرانسل با کلی تخفیف" src="/images/top-up-leaflet-blue.png" width="140" height="100" layout="fixed">
+    </amp-img>
+
+
+    </a>
+
+
+    <a href="/irancell/internet" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+        <h1>
+            <i class="fa  fa-wifi  fa-2x"></i>
+
+            <span itemprop="name">
+            بسته های اینترنتی
+     <span itemprop="brand">ایرانسل</span>
+            </span>
+            <br/>
+            <small itemprop="description">انواع اینترنت ماهیانه، هفتگی، روزانه و ساعتی
+             <strong></strong>
+             </small>
+        </h1>
+  <span class="hidden" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span  itemprop="ratingValue">4.93</span> stars, based on <span itemprop="reviewCount">119107
+      </span> reviews
+
+
+  </span>
+
+
+
+  <span class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="IRR" />
+    $<span itemprop="price">9500.0</span>
+    Available from: <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+                      <span itemprop="name">ایرانسل</span>
+                    </span>
+    <link itemprop="availability" href="http://schema.org/InStock"/>In stock! Order now!</span>
+
+
+        <amp-img title="خرید بسته های اینترنتی ایرانسل با کلی تخفیف" alt="خرید بسته های اینترنتی ایرانسل با کلی تخفیف" src="/images/internet.png" width="140" height="100" layout="fixed">
+        </amp-img>
+
+    </a>
+
+
+
+
+</div>

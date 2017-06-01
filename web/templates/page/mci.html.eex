@@ -1,7 +1,7 @@
 
 <div class="index_page">
 
-    <a href="/mci/topup" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/mci/topup#form" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-bolt fa-2x"></i>
 
@@ -31,7 +31,7 @@
     <link itemprop="availability" href="http://schema.org/InStock"/>In stock! Order now!</span>
 
 
-    <amp-img alt="خرید شارژ مراه اول با کلی تخفیف" src="/images/top-up-leaflet.png" width="140" height="100" layout="fixed">
+    <amp-img title="خرید شارژ مستقیم همراه اول با کلی تخفیف" alt="خرید شارژ مستقیم همراه اول با کلی تخفیف" src="/images/top-up-leaflet.png" width="140" height="100" layout="fixed">
     </amp-img>
 
 
@@ -69,7 +69,7 @@
     <link itemprop="availability" href="http://schema.org/InStock"/>In stock! Order now!</span>
 
 
-        <amp-img alt="خرید شارژ همراه اول با کلی تخفیف" src="/images/w-icon-cards.png" width="140" height="100" layout="fixed">
+        <amp-img title="خرید کارت شارژ همراه اول با کلی تخفیف"   alt="خرید کارت شارژ همراه اول با کلی تخفیف" src="/images/w-icon-cards.png" width="140" height="100" layout="fixed">
         </amp-img>
 
     </a>

@@ -2,14 +2,14 @@
 
 <form method="post" id="form"
   custom-validation-reporting="show-all-on-submit"
-  class="hide-inputs p3 mci_topup_form right"
-  action-xhr="/api/mci_topup_invoice"
+  class="hide-inputs p3 irancell_topup_form right"
+  action-xhr="/api/irancell_topup_invoice"
   target="_top">
 <p class="right">
  <i class="fa fa-life-saver"></i>
 برای دریافت شارژ 
 مستقیم 
-همراه اول،
+ایرانسل،
  شماره موبایل اعتباری خود را وارد و سپس شارژ مورد نظر را انتخاب کنید
  
  <i class="fa fa-arrow-circle-down fa-2x"></i>
@@ -26,7 +26,7 @@
       pattern="(09|9)(\d{9})"
       id="msisdn"
       name="msisdn" autofocus>
-    <i class="fa fa-phone mci_color vertical_center"></i>
+    <i class="fa fa-phone irancell_color vertical_center"></i>
 
         <div class="right center" visible-when-invalid="valueMissing"
           validation-for="msisdn"><br/></div>
@@ -39,7 +39,7 @@
 
   </div>
 
-<amp-selector class="mci_topup_products" name="amount" layout="container">
+<amp-selector class="irancell_topup_products" name="amount" layout="container">
 <%= for p <- [1_000,2_000,5_000,10_000,20_000] do %>
 
 
@@ -48,12 +48,12 @@
 {
   "@context": "http://schema.org/",
   "@type": "Product",
-  "name": "شارژ مستقیم <%= p %> تومانی همراه اول",
+  "name": "شارژ مستقیم <%= p %> تومانی ایرانسل",
   "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/mci-topup-<%= p %>.png",
-  "description": " شارژ مستقیم <%= p %> تومانی همراه اول به شما امکان مکالمه سریع و ارزان بدون نیاز به ورود رمز را میدهد",
+  "description": " شارژ مستقیم <%= p %> تومانی ایرانسل به شما امکان مکالمه سریع و ارزان بدون نیاز به ورود رمز را میدهد",
   "brand": {
     "@type": "Thing",
-    "name": "همراه اول"
+    "name": "ایرانسل"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -68,7 +68,7 @@
     "availability": "http://schema.org/InStock",
     "seller": {
       "@type": "Organization",
-      "name": "شرکت ارتباطات سیار ایران"
+      "name": "irancell"
     }
   }
 }
@@ -81,8 +81,8 @@
     <%= if p == 2000 do %>
     selected
     <% end %>
-    alt="شارژ مستقیم <%= p %> تومانی همراه اول "
-    title="شارژ مستقیم <%= p %> تومانی همراه اول "
+    alt="شارژ مستقیم <%= p %> تومانی ایرانسل "
+    title="شارژ مستقیم <%= p %> تومانی ایرانسل "
     option="<%= p %>"></amp-img>
 
 <% end %>

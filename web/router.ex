@@ -56,6 +56,7 @@ defmodule Overcharge.Router do
     get "/mci", PageController, :mci
     get "/mci/topup", PageController, :mci_topup
     get "/irancell", PageController, :irancell
+    get "/irancell/topup", PageController, :irancell_topup
     get "/rightel", PageController, :rightel
     get "/taliya", PageController, :taliya
   end
@@ -70,6 +71,7 @@ defmodule Overcharge.Router do
     pipe_through :api
     get "/ping", ApiController, :ping
     post "/mci_topup_invoice", ApiController, :mci_topup_invoice
+    post "/irancell_topup_invoice", ApiController, :irancell_topup_invoice
     # Add protected routes below
   end
 

@@ -45,6 +45,7 @@
   "name": "CharGELL",
   "alternateName": "شارژل",
   "url": "<%= Overcharge.Router.Helpers.url(@conn) %>"
+ }
   </script>
 
   <script type="application/ld+json">
@@ -498,6 +499,23 @@ form.amp-form-submit-success > input {
 }
 
 
+
+.irancell_topup_form {
+  background-color: #faac33;
+  border: 5px solid white;
+  padding: 5px;
+  text-align: center;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.13);
+}
+
+.irancell_topup_form .msisdn_field{
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: white;
+  margin-bottom: 20px;
+}
+
+
 .mci_topup_form {
   background-color: #10b0bf;
   border: 5px solid white;
@@ -538,6 +556,19 @@ input.msisdn {
     background-color: #333;
     border: none;
 }
+
+  amp-selector.irancell_topup_products amp-img[aria-selected=false] {
+    background-color: #bf7b09;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.13);
+    border-radius: 5px;
+    border: none;
+}
+
+  amp-selector.irancell_topup_products amp-img[aria-selected=true] { 
+    background-color: #333;
+    border: none;
+}
+
 
 .partners {
   

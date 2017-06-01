@@ -46,12 +46,12 @@ defmodule Overcharge.PageController do
 
 
 
-########################################################################
+####################### IRANCELL  ##########################################
 
   def irancell(conn, _params) do
     render conn, "irancell.html",
       description: "خرید سریع و ارزان شارژ مستقیم و بسته های اینترنتی ایرانسل بدون نیاز به وارد کردن رمز و کد",
-      title:       "خرید شارژ ایرانسل",
+      title:       "خرید شارژ ایرانسل و بسته های اینترنتی ایرانسل",
       subtitle:    "خرید شارژ مستقیم و بسته های اینترنتی ایرانسل",
       color:       "#fff2a7",
       text_color:  "#333",
@@ -59,6 +59,23 @@ defmodule Overcharge.PageController do
       product:  "irancell",
       product_fr:  "ایرانسل"
   end
+
+
+  def irancell_topup(conn, _params) do
+    render conn, "irancell-topup.html",
+      description: "خرید ارزان و سریع شارژ مستقیم ایرانسل",
+      title:       "شارژ مستقیم ایرانسل",
+      subtitle:    "شارژ مستقیم ایرانسل",
+      color:       "#fff2a",
+      text_color:  "#333",
+      page_type:   "product",
+      product:  "irancell",
+      product_fr:  "ایرانسل"
+  end
+
+
+###########################################################################
+
 
   def rightel(conn, _params) do
     render conn, "rightel.html",
