@@ -1,0 +1,41 @@
+
+<div class="right">
+
+    <small>برای فعال سازی روی نام آهنگ پیشواز کلیک کنید.</small>
+    <small>قیمت تمام آهنگ ها ۳۰۰ تومان و یک ماهه می‌باشند.</small>
+    <br/>
+    <small>اگر به اندازه کافی اعتبار ندارید،  <a href="/mci/topup">با خرید شارژ از اینجا</a> اعتبار خود را بیشتر کنید.</small>
+
+    <h4 class="center">فعال سازی با ارسال کد به 8989</h4>
+
+<table class="mci-rbt" id="form">
+
+        <tr>
+            <td><b>دانلود</b></td>
+            <td><b>نام اثر</b></td>
+            <td><b>هنرمند</b></td>
+            <td><b>کد آهنگ</b></td>
+        </tr>
+
+    <%= for rbt <- @data do %>
+        <tr>
+            <td><a href="<%= rbt.wave %>" target="_new"> <i class="fa fa-music"></i> بشونید</a></td>
+            <td> <a   href="sms:8989;&body=<%= rbt.code %>"><i class="fa fa-file"></i> <%= rbt.name %> </a>  </td>
+            <td><a  href="sms:8989;&body=<%= rbt.code %>"><i class="fa fa-user"></i> <%= rbt.artist %></a></td>
+            <td><code><%= rbt.code %></code></td>
+        </tr>
+    <% end %>
+
+</table>
+    <br/>
+    <hr/>
+    <div class="center">
+        <h6><%= @page+1 %></h6>
+        <%= if @page > 0 do %>
+            <a href="?page=<%= @page - 1 %>#form">صفحه قبل</a>
+        <% end %>
+        <a href="?page=<%= @page + 1 %>#form">صفحه بعد</a>
+    </div>
+
+</div>
+

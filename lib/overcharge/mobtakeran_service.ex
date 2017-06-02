@@ -24,10 +24,10 @@ defmodule Overcharge.Mobtakeran do
             <mrs:CellNumber><%= msisdn %></mrs:CellNumber>
             <mrs:ChargeType>0</mrs:ChargeType>
             <mrs:DeviceType>59</mrs:DeviceType>
-            <mrs:LocalDateTime></mrs:LocalDateTime>
+            <mrs:LocalDateTime><%= datetime %></mrs:LocalDateTime>
             <mrs:Password>IdeR@sha</mrs:Password>
-            <mrs:ReserveNumber>238742947239472</mrs:ReserveNumber>
-            <mrs:TotalAmount>10000</mrs:TotalAmount>
+            <mrs:ReserveNumber><%= refid %></mrs:ReserveNumber>
+            <mrs:TotalAmount><%= amount %></mrs:TotalAmount>
             <mrs:Username>rashauser</mrs:Username>
          </tem:req>
       </tem:ReserveCharge>

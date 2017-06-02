@@ -52,9 +52,14 @@ defmodule Overcharge.Router do
   scope "/", Overcharge do
     pipe_through :browser # Use the default browser stack
     get "/", PageController, :index
+    get "/faq", PageController, :faq
+    get "/contact", PageController, :contact
+    get "/about", PageController, :about
+    get "/articles", PageController, :articles
     get "/invoice/:refid", PageController, :invoice
     get "/mci", PageController, :mci
     get "/mci/topup", PageController, :mci_topup
+    get "/mci/rbt", PageController, :mci_rbt
     get "/irancell", PageController, :irancell
     get "/irancell/topup", PageController, :irancell_topup
     get "/rightel", PageController, :rightel
@@ -70,7 +75,8 @@ defmodule Overcharge.Router do
   scope "/api", Overcharge do
     pipe_through :api
     get "/ping", ApiController, :ping
-    post "/mci_topup_invoice", ApiController, :mci_topup_invoice
+    post "/mci_topup_invoice",      ApiController, :mci_topup_invoice
+    get "/get_mci_rbt",            ApiController, :get_mci_rbt
     post "/irancell_topup_invoice", ApiController, :irancell_topup_invoice
     # Add protected routes below
   end

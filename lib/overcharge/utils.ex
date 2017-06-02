@@ -77,6 +77,31 @@ defmodule Overcharge.Utils do
 
         "#{p1} #{p2}"
     end
-    
+
+
+    def get_mci_rbt_data(page) do
+
+        case Cachex.get(:overcharge_cache, "mci_rbt_cache_page_#{page}") do
+            {:missing, nil} ->
+                url = "https://rbt.mci.ir/AJAX/latestTones.jsp?pgs=#{page}"
+                {:ok, resp} = HTTPoison.get(url)
+                html = resp.body
+                rows = Floki.find(html, "tr") |> Enum.slice(1,10)
+
+                result = rows |> Enum.map(fn({_,_, row}) ->
+                    row |> Enum.map(fn({_,_,[k]}) ->
+                        k
+                end)
+                    end) |> Enum.map(fn(d) -> 
+                        [code, name, artist, duration, price] = d |> Enum.slice(0,5)
+                        %{name: name, code: code, artist: artist, duration: duration, price: price, wave: "https://rbt.mci.ir/wave/#{code}.wav"}
+                end)
+                {:ok, true} = Cachex.set(:overcharge_cache, "mci_rbt_cache_page_#{page}", result)
+                result
+            {:ok, data} ->
+                data
+        end
+
+    end
 
 end

@@ -28,7 +28,7 @@ defmodule Overcharge.ApiController do
       host = Overcharge.Router.Helpers.url(conn)
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
-      amount = raw_amount/1.01 |> round
+      amount = raw_amount/1.09 |> round
       action = "topup_irancell_#{amount}_#{msisdn}"
       product = "شارژ مستقیم #{raw_amount} تومانی ایرانسل برای +#{msisdn}"
       client = msisdn |> Overcharge.Utils.get_client
@@ -37,6 +37,12 @@ defmodule Overcharge.ApiController do
         #|> put_resp_header("amp-redirect-to", "https://ss2.ir/u7WJ")
         |> put_resp_header("AMP-Redirect-To", "#{host}/invoice/#{invoice.refid}#invoice")
         |> json(%{message: :pong})
+  end
+
+  def get_mci_rbt(conn, params) do
+     page = params["page"] || 0
+     data = Overcharge.Utils.get_mci_rbt_data(page)
+     conn |> json(%{items: data})
   end
 
 

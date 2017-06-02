@@ -42,6 +42,21 @@ defmodule Overcharge.PageController do
   end
 
 
+  def mci_rbt(conn, params) do
+     page = params["page"] || "0"
+     data = Overcharge.Utils.get_mci_rbt_data(page)
+     render conn, "mci-rbt.html",
+      description: "لیست کامل آهنگ های پیشواز همراه اول",
+      title:       "آوای انتظار همراه اول",
+      page:        page |> String.to_integer,
+      data:        data,
+      subtitle:    "لیست کامل آهنگ های پیشواز همراه اول",
+      color:       "#fbfbfb",
+      text_color:  "#515151",
+      page_type:   "list",
+      product:  "mci/rbt",
+      product_fr:  "آهنگ های پیشواز همراه اول"
+  end
 
 
 
@@ -109,11 +124,11 @@ defmodule Overcharge.PageController do
     render conn, "admin.html",
       description: "پنل کنترل",
       title:       "پنل ادمین",
-      subtitle:    "",
+      subtitle:    "Admin Panel",
       color:       "#fffff",
-      text_color:   "#ffffff",
+      text_color:   "",
       page_type:   "admin",
-      product:  "",
+      product:  "admin",
       product_fr:  ""
 
   end
@@ -135,6 +150,70 @@ defmodule Overcharge.PageController do
       product_fr:  "فاکتور"
 
   end
+
+
+
+  def faq(conn, _params) do
+
+    render conn, "faq.html",
+      description: "سوالات متداول در مورد خرید شارژ و پشتیبانی",
+      title:       "سوالات متداول",
+      subtitle:    "سوالات متداول",
+      color:       "#f8f8f8",
+      text_color:  "",
+      page_type:   "faq",
+      product:     "faq-page",
+      product_fr:  "سوالات متداول"
+
+  end
+
+
+
+  def contact(conn, _params) do
+
+    render conn, "contact.html",
+      description: "ثبت شکایات، پشتیبانی و تماس با ما",
+      title:       "تماس با ما",
+      subtitle:    "با ما تماس بگیرید",
+      color:       "#f8f8f8",
+      text_color:  "",
+      page_type:   "contact",
+      product:     "contact-page",
+      product_fr:  "تماس با ما"
+
+  end
+
+  def about(conn, _params) do
+
+    render conn, "about.html",
+      description: "شارژل سرویس سریع و با کیفیت شارژ موبایل همراه اول، ایرانسل، تالیا و رایتل است",
+      title:       "درباره شارژل",
+      subtitle:    "درباره شارژل",
+      color:       "#f8f8f8",
+      text_color:  "",
+      page_type:   "about",
+      product:     "about-page",
+      product_fr:  "درباره شارژل"
+
+  end
+
+
+  def articles(conn, _params) do
+
+    render conn, "articles.html",
+      description: "مقالات و مطالب مربوط به آخرین رویدادهای مربوط به شارژ در ایران",
+      title:       "مقالات شارژل",
+      subtitle:    "مقالات",
+      color:       "#f8f8f8",
+      text_color:  "",
+      page_type:   "articles",
+      product:     "articles-page",
+      product_fr:  "مقالات"
+
+  end
+
+
+
 
 
 

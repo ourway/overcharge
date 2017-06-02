@@ -740,6 +740,42 @@ input.msisdn {
   background-color: #fe8888;
 }
 
+.links {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.links ul{
+  text-align: left;
+}
+
+.links ul li {
+  list-style: none;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.mci-rbt{
+  background: white;
+  margin: 5px;
+  width: 100%;
+  font-size: 11px;
+
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #f2f2f2;
+}
+
+.mci-rbt tr{
+}
+
+.mci-rbt td a{
+    color: darkred;
+    text-decoration: none;
+  }
+
+
+
 
 
   </style>
@@ -752,6 +788,9 @@ input.msisdn {
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
     <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+  <% end %>
+
+  <%= if @page_type=="list" do %>
   <% end %>
 
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>

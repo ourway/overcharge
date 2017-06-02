@@ -19,7 +19,7 @@ defmodule Overcharge.Mixfile do
   def application do
     [mod: {Overcharge, []},
      applications: [:phoenix, :phoenix_pubsub, :coherence, :sitemap,
-                    :jalaali, :exml, :calendar, :cachex, :mailman, :ssl,
+                    :jalaali, :exml, :calendar, :cachex, :mailman, :ssl, :floki, :mochiweb,
                     :phoenix_html, :cowboy, :logger, :gettext,:httpoison,
                     :phoenix_ecto, :postgrex]]
   end
@@ -42,6 +42,7 @@ defmodule Overcharge.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
+     {:floki, "~> 0.17.2"},
      {:sitemap, "~> 0.9.1"},
      {:calendar, "~> 0.16.1"},
      {:jalaali, "~> 0.1.1"},
