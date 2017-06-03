@@ -308,7 +308,7 @@ main { display: block; }
 
 body { 
 font-family: 'IRANSans', sans-serif;
-background-image: url(/images/bg-<%= @product %>.jpg);
+background-image: url(/images/bg-<%= @product %>.svg);
 background-size: cover;
 background-position: 0px -50px;
 background-color: <%= @color %>;

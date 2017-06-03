@@ -22,7 +22,7 @@ defmodule Overcharge.PageController do
       title:       "خرید شارژ همراه اول",
       subtitle:    "خرید پین و شارژ مستقیم همراه اول",
       color:       "#e3fffe",
-      text_color:  "#ffffff",
+      text_color:  "#333",
       page_type:   "shop",
       product:  "mci",
       product_fr:  "همراه اول"
@@ -39,7 +39,7 @@ defmodule Overcharge.PageController do
       color:       "#e3fffe",
       amount:      amount |> String.to_integer,
       msisdn:      msisdn,
-      text_color:  "#ffffff",
+      text_color:  "#333",
       page_type:   "product",
       product:  "mci",
       product_fr:  "همراه اول"
