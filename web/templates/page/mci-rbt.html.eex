@@ -1,14 +1,14 @@
 
 <div class="right padded">
-
-    <small class="padded">برای فعال سازی روی نام آهنگ پیشواز کلیک کنید.</small>
+<p>
+    <span class="padded">برای فعال سازی روی نام آهنگ پیشواز کلیک کنید.</span>
     <br/>
-    <small class="padded">قیمت تمام آهنگ ها ۳۰۰ تومان و یک ماهه می‌باشند.</small>
+    <span class="padded">قیمت تمام آهنگ ها ۳۰۰ تومان و یک ماهه می‌باشند.</span>
     <br/>
-    <small class="padded">اگر به اندازه کافی اعتبار ندارید،  <a href="/mci/topup">با خرید شارژ از اینجا</a> اعتبار خود را بیشتر کنید.</small>
+    <span class="padded">اگر به اندازه کافی اعتبار ندارید،  <a class="mci_color" href="/mci/topup">با خرید شارژ از اینجا</a> اعتبار خود را بیشتر کنید.</span>
 
-    <h4 class="center">فعال سازی با ارسال کد به 8989</h4>
-
+</p>
+    <h4 class="center whitecolor">فعال سازی با ارسال کد به 8989</h4>
 <table class="mci-rbt" id="form">
 
         <tr>
@@ -20,7 +20,7 @@
 
     <%= for rbt <- @data do %>
         <tr>
-            <td><a href="<%= rbt.wave %>" target="_new"> <i class="fa fa-music"></i> بشونید</a></td>
+            <td><a href="<%= rbt.wave %>" target="_blank"> <i class="fa fa-music"></i> بشونید</a></td>
             <td> <a   href="sms:8989;&body=<%= rbt.code %>"><i class="fa fa-file"></i> <%= rbt.name %> </a>  </td>
             <td><a  href="sms:8989;&body=<%= rbt.code %>"><i class="fa fa-user"></i> <%= rbt.artist %></a></td>
             <td><code><%= rbt.code %></code></td>
@@ -29,13 +29,13 @@
 
 </table>
     <br/>
-    <hr/>
-    <div class="center">
+    <br/>
+    <div class="center whitecolor">
         <h6><%= @page+1 %></h6>
         <%= if @page > 0 do %>
-            <a href="?page=<%= @page - 1 %>#form">صفحه قبل</a>
+            <a class="mci_color" href="?page=<%= @page - 1 %>#form">صفحه قبل</a>
         <% end %>
-        <a href="?page=<%= @page + 1 %>#form">صفحه بعد</a>
+        <a class="mci_color" href="?page=<%= @page + 1 %>#form">صفحه بعد</a>
     </div>
 
 </div>

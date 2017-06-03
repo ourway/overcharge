@@ -161,8 +161,14 @@ defmodule Overcharge.Utils do
     end
 
 
-    def handle_reason_behind_error({_gateway, _errorcode}) do
-        :not_implemented
+    def handle_reason_behind_error({_gateway, errorcode}) do
+        case errorcode do
+            :halt ->
+                :halt
+            _ ->
+                :not_implemented
+            
+        end
     end
 
 
@@ -190,23 +196,26 @@ defmodule Overcharge.Utils do
                                     {:ok, true, ivs }
                                 {:error, errorcode} ->  ## find error
                                     case {:gasedak, errorcode} |> handle_reason_behind_error do  ## decide what to do
+                                        :halt ->
+                                            ivs = invoice |> set_invoice_status("payed")
+                                            {:error, ivs}
                                         :reschedule ->
-                                            IO.puts("why 2")
                                             ivs = invoice 
                                                       |> set_invoice_status("payed")
                                                       |> reschedule_invoice  ## reschedule for retrying
                                             {:error, ivs}
-                                        _ ->
-                                            IO.puts("why 3")
-                                            ivs = invoice 
-                                                    |> set_invoice_status("payed")
-                                                    |> reschedule_invoice  ## reschedule for retrying
+                                        _ ->  ## same as halt
+                                            ivs = invoice |> set_invoice_status("payed")
                                             {:error, ivs} 
                                     end
                             end
+                        {:error, :halt} ->
+                            ivs = invoice |> set_invoice_status("debugging")
+                            {:error, ivs}
+
                         er ->
                             er |> IO.inspect
-                            IO.puts("why 4")
+                            IO.puts("ERRRRRRRRRRRRRRRRRRR")
                             invoice |> set_invoice_status("payed")
                             invoice |> reschedule_invoice
                             :error
@@ -221,6 +230,13 @@ defmodule Overcharge.Utils do
                 {:ok, true, invoice}
             "processing" ->
                 {:ok, true, invoice}
+            "debugging" ->
+
+            Task.async( fn() ->
+                        :timer.sleep(1000*120) ## 1 minute later
+                        invoice |> set_invoice_status("payed")
+            end)
+             {:error, invoice}
         end
     end
 

@@ -45,6 +45,10 @@
         <b>۱۰ دقیقه</b>
          مشکل برطرف نشود،  با شما تماس  میگیریم و 
          <u>مبلغ پرداخت شده به شما برگردانده می‌شود</u>.
+         <br/>
+         لطفا
+         <b> ۲ دقیقه</b>
+          دیگر این صفحه را بروز نمایید و منتظر باشید.
     </div>
     <br/>
     <div class="center">
@@ -67,7 +71,7 @@
 <hr/>
 <div class="center">
 <small>از خرید شما ممنونیم.</small>
-<small>فاکتور شما در زیر آمده است.</small>
+<small>فاکتور شما در زیر آمده است</small>
 </div>
 </div>
 <%= render Overcharge.PageView, "invoice.html", conn: @conn, invoice: @invoice %>

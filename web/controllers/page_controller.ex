@@ -22,7 +22,7 @@ defmodule Overcharge.PageController do
       title:       "خرید شارژ همراه اول",
       subtitle:    "خرید پین و شارژ مستقیم همراه اول",
       color:       "#e3fffe",
-      text_color:  "#333",
+      text_color:  "#fff",
       page_type:   "shop",
       product:  "mci",
       product_fr:  "همراه اول"
@@ -39,7 +39,7 @@ defmodule Overcharge.PageController do
       color:       "#e3fffe",
       amount:      amount |> String.to_integer,
       msisdn:      msisdn,
-      text_color:  "#333",
+      text_color:  "#fff",
       page_type:   "product",
       product:  "mci",
       product_fr:  "همراه اول"
@@ -61,8 +61,8 @@ defmodule Overcharge.PageController do
       data:        data,
       subtitle:    "لیست کامل آهنگ های پیشواز همراه اول",
       color:       "#fbfbfb",
-      text_color:  "#515151",
-      page_type:   "product",
+      text_color:  "#fff",
+      page_type:   "shop",
       product:  "rbt",
       product_fr:  "آهنگ های پیشواز همراه اول"
   end
@@ -103,7 +103,12 @@ defmodule Overcharge.PageController do
 
 
   def irancell_internet(conn, _params) do
-    packages = [ %{ persian: "هفتگی", en: "weekly"}, %{ persian:  "ماهانه", en: "monthly"}, %{ persian: "روزانه", en: "daily" }, %{ en: "hourly", persian: "ساعتی نامحدود"} ]
+    packages = [ 
+        %{ persian: "هفتگی", en: "weekly", data: Overcharge.Gasedak.get_irancell_packages(47)},
+        %{ persian:  "ماهانه", en: "monthly", data: Overcharge.Gasedak.get_irancell_packages(48)},
+        %{ persian: "روزانه", en: "daily", data: Overcharge.Gasedak.get_irancell_packages(46) },
+        %{ persian: "ساعتی نامحدود", en: "hourly", data: Overcharge.Gasedak.get_irancell_packages(50)},
+      ]
     render conn, "irancell-internet.html",
       description: "خرید ارزان و سریع بسته اینترنتی ایرانسل",
       title:       "بسته اینترنتی ایرانسل",
@@ -113,7 +118,7 @@ defmodule Overcharge.PageController do
       text_color:  "#333",
       page_type:   "shop",
       product:  "irancell",
-      product_fr:  "ایرانسل"
+      product_fr:  "بسته‌های اینترنتی ایرانسل"
   end
 
 
@@ -253,9 +258,9 @@ defmodule Overcharge.PageController do
       subtitle:    "مقالات",
       color:       "#f8f8f8",
       text_color:  "",
-      page_type:   "articles",
-      product:     "articles-page",
-      product_fr:  "مقالات"
+      page_type:   "article",
+      product:     "article",
+      product_fr:  "مقاله"
 
   end
 
@@ -263,12 +268,14 @@ defmodule Overcharge.PageController do
     def deliver(conn, params) do
 
       uuid = params["uuid"]
-      ivs = uuid |> Overcharge.Utils.get_invoice_uuid
-                     |> Overcharge.Utils.set_invoice_checked_out
+      target = uuid |> Overcharge.Utils.get_invoice_uuid
+                    |> Overcharge.Utils.set_invoice_checked_out
                      
-      ivs = if ivs.status == "pending" do  ## only first time
-        ivs |> Overcharge.Utils.set_invoice_status("payed")
-      end
+      ivs = if target.status == "pending" do  ## only first time
+              target |> Overcharge.Utils.set_invoice_status("payed")
+            else
+              target
+            end
 
       {code, invoice} = case (ivs |> Overcharge.Utils.deliver) do
           {:ok, true, iv} ->
@@ -281,7 +288,7 @@ defmodule Overcharge.PageController do
 
 
     render conn, "deliver.html",
-      description: "asd",
+      description: "",
       title:       "فاکتور #{invoice.refid} | تحویل کالا",
       subtitle:    "تحویل محصول",
       color:       "#fff",

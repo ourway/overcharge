@@ -53,6 +53,20 @@
     <meta property="og:site_name" content="OverCharge" />
     <meta property="fb:admins" content="220534798462355" />
 
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <%= if @page_type=="product" do %>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+  <% end %>
+
+  <%= if @page_type=="list" do %>
+  <% end %>
+
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+
 
   <script type="application/ld+json">
 {
@@ -328,7 +342,7 @@ background-color: <%= @color %>;
 
 }
 @media only screen and (max-width: 800px) { .site-header { padding: 0 0px; } }
-.site-header .page-links { display: block; position: absolute; top: 10px; right: 1px; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
+.site-header .page-links { display: block; position: absolute; top: 10px; right: 0; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
 .site-header .page-links a { text-decoration: none;}
 .site-header .page-links a:hover {}
 
@@ -336,7 +350,7 @@ background-color: <%= @color %>;
 .blog-header .blog-title { margin-bottom: 8px; font-size: 50px; font-weight: 700; letter-spacing: -2px; outline: 0; line-height: 50px; word-break: break-word; color: #333333; }
 .blog-header .blog-description { font-size: 28px; margin: 0 0 20px; padding: 0; line-height: 1.2; color: #666666; font-weight: 300; }
 
-.content {min-height: 450px; width: 100%; max-width: 700px; margin: 0px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.content {min-height: 450px; width: 100%; max-width: 700px; margin: 0px auto 0 auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; overflow-x: hidden;}
 @media only screen and (max-width: 800px) { .content { padding: 0 0px; } }
 .content article { padding: 20px 0; border-bottom: 1px solid #f2f2f0; }
 .content article:last-child { border-bottom: 0px; }
@@ -504,7 +518,11 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 
 .index_page a.mci {
-    background-color:#03ccc7;
+    background-color:rgba(3, 204, 199, 0.67);
+}
+
+.index_page a.mci:hover, .index_page a.mci:active{
+    background-color: rgba(0, 194, 255, 0.8);
 }
 
 .index_page a.irancell h1 {
@@ -516,6 +534,10 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
   
 
 .index_page a.irancell {
+    background-color:rgba(255, 216, 0, 0.82);
+}
+
+.index_page a.irancell:hover, .index_page a.irancell:active {
     background-color:#ffd800;
 }
 
@@ -529,7 +551,12 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
   
 
 .index_page a.rightel {
-    background-color:#941063;
+    background-color:rgba(148, 16, 99, 0.75);
+}
+
+
+.index_page a.rightel:hover, .index_page a.rightel:active {
+    background-color: rgba(189, 22, 127, 0.82);
 }
 
 form.amp-form-submit-success > input {
@@ -539,7 +566,7 @@ form.amp-form-submit-success > input {
 
 
 .irancell_topup_form {
-  background-color: #faac33;
+  background-color: rgba(250, 172, 51, 0.64);
   border: 5px solid white;
   padding: 5px;
   text-align: center;
@@ -555,7 +582,7 @@ form.amp-form-submit-success > input {
 
 
 .mci_topup_form {
-  background-color: #10b0bf;
+  background-color: rgba(16, 176, 191, 0.76);
   border: 5px solid white;
   padding: 5px;
   text-align: center;
@@ -832,19 +859,6 @@ input.msisdn {
 
 
 
-  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-  <script async src="https://cdn.ampproject.org/v0.js"></script>
-  <%= if @page_type=="product" do %>
-    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
-    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
-    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
-  <% end %>
-
-  <%= if @page_type=="list" do %>
-  <% end %>
-
-  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-  <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
 
 </head>
 
@@ -880,14 +894,22 @@ input.msisdn {
 
   <div class="page-links">
 
+        <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+          <a itemscope itemtype="http://schema.org/Thing" 
+          itemprop="item" class="page-link whitecolor" 
+          href="/"><strong itemprop="name">CharGELL</strong></a>
+          <meta itemprop="position" content="1" />
+        </li>
+
 
     <%= if @page_type == "landing" do %>
-        <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <i class="fa fa-angle-double-left grey_color"></i>
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link mci_color" 
           href="/mci"><span itemprop="name">شارژ همراه اول</span></a>
-          <meta itemprop="position" content="1" />
+          <meta itemprop="position" content="2" />
         </li>
 
 
@@ -896,7 +918,7 @@ input.msisdn {
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link irancell_color" 
           href="/irancell"><span itemprop="name">شارژ ایرانسل</span></a>
-          <meta itemprop="position" content="1" />
+          <meta itemprop="position" content="2" />
         </li>
 
         
@@ -905,43 +927,40 @@ input.msisdn {
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link rightel_color" 
           href="/rightel"><span itemprop="name">شارژ رایتل</span></a>
-          <meta itemprop="position" content="1" />
+          <meta itemprop="position" content="2" />
         </li>
-        </ol>
     <% end %>
 
 
     <%= if @page_type == "shop" or @page_type == "product" do %>
-        <ol class="links_me" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <i class="fa fa-angle-double-left grey_color"></i>
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link default_color" 
           href="/"><span itemprop="name">فروشگاه</span></a>
-          <meta itemprop="position" content="1" />
+          <meta itemprop="position" content="2" />
         </li>
         
         <i class="fa fa-angle-double-left grey_color"></i>
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link <%= @product %>_color" 
-          href="/<%= @product %>" > <span itemprop="name"><%= @product_fr |> String.slice(0,12) %>
-          <%= if (@product_fr |> String.length) > 12 do %> ... <% end %>
+          href="/<%= @product %>" > <span itemprop="name"><%= @product_fr  %>
           </span></a>
-          <meta itemprop="position" content="2" />
+          <meta itemprop="position" content="3" />
         </li> 
         <%= if @page_type == "product" do %>
             <i class="fa fa-angle-double-left grey_color"></i>
             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
               <a itemscope itemtype="http://schema.org/Thing" 
               itemprop="item" class="page-link <%= @product %>_color" 
-              href="<%= @conn.request_path %>" > <span itemprop="name"><%= @title |> String.slice(0,12) %>
-              <%= if (@product_fr |> String.length) > 12 do %> ... <% end %>
+              href="<%= @conn.request_path %>" > <span itemprop="name"><%= @title %>
               </span></a>
-              <meta itemprop="position" content="3" />
+              <meta itemprop="position" content="4" />
             </li>
         <% end %>
-        </ol>
     <% end %>
+        </ol>
 
       
       
@@ -949,7 +968,11 @@ input.msisdn {
   </div>
 </header>
 <div class="subtitle">
- <h1> <%= @subtitle %> </h1>
+<%= if @subtitle != "" do %>
+ <h1>
+  <i class="fa fa-ioxhost"></i>
+  <%= @subtitle %> </h1>
+<% end %>
 </div>
     <main class="content" role="main">
 

@@ -3,7 +3,7 @@
 
 <%= for package <- @packages do %>
 
-    <a href="/irancell/internet/<%= package.en %>/#form" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/irancell/internet/<%= package.en %>/" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-wifi fa-2x"></i>
 
@@ -13,7 +13,18 @@
       <span itemprop="brand">ایرانسل</span>
             </span>
             <br/>
-            <small itemprop="description">بسته اینترنتی <%= package.persian %> ایرانسل</small>
+            <small itemprop="description">
+            بسته‌های اینترنتی <%= package.persian %> ایرانسل
+            <br/>
+            از 
+            <u>
+            <%= package.data |> List.first |> Map.get(:minmax) |> List.first |> div(10) %>
+            </u>
+            تومان
+            تا
+            <%= package.data |> List.first |> Map.get(:minmax) |> List.last |> div(10) %>
+            تومان
+            </small>
         </h1>
 
   <span class="hidden" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
@@ -27,7 +38,7 @@
 
   <span class="hidden" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
     <meta itemprop="priceCurrency" content="IRR" />
-    $<span itemprop="price">20000</span>
+    <span itemprop="price"> <%= package.data |> List.first |> Map.get(:minmax) |> List.first %></span>
     Available from: <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
                       <span itemprop="name">ایرانسل</span>
                     </span>
@@ -36,7 +47,7 @@
 
     <amp-img
     title="خرید بسته اینترنتی <%= package.persian %> ایرانسل یا کلی تخفیف و جایزه" 
-     alt="خرید بسته اینترنتی <%= package.persian %> ایرانسل یا کلی تخفیف و جایزه" src="/images/internet-<%= package.en %>.png" width="140" height="100" layout="fixed">
+     alt="خرید بسته اینترنتی <%= package.persian %> ایرانسل یا کلی تخفیف و جایزه" src="/images/internet-<%= package.en %>.png" width="150" height="100" layout="fixed">
     </amp-img>
 
 
