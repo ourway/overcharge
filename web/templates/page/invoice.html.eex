@@ -10,7 +10,7 @@
       </section>
 
       <section>
-        <span class="invoice_refid"><%=  @invoice.refid %>-<%=  @invoice.id %><i class="fa fa-barcode"></i></span>
+        <pre class="ltr"><%=  @invoice.refid %>|<%=  @invoice.id %></pre>
         <hr/>
         <span class="invoice_status"><%=  case @invoice.status do
                 "pending" ->
@@ -19,6 +19,8 @@
                     "پرداخت شده و تحویل نشده"
                 "completed" ->
                     "پرداخت شده و تحویل شده"
+                "processing" ->
+                    "پرداخت شده و در حال تحویل"
                 _ ->
                     "نامشخص"
             end %></span>
@@ -40,7 +42,7 @@
         </figure>
 
         <figure>
-          <span><i class="fa fa-braille"></i> <strong><a href="https://evat.ir/" target="_new">مالیات بر ارزش افزوده</a></strong> (<%= @invoice.tax*100 |> round %>%)</span>
+          <span><i class="fa fa-braille"></i> <strong><a href="https://evat.ir/" target="_blank">مالیات بر ارزش افزوده</a></strong> (<%= @invoice.tax*100 |> round %>%)</span>
           <span>&nbsp;</span>
           <span><%= (@invoice.raw_amount*0.09) |> Float.floor |> round  %> تومان</span>
         </figure>
@@ -53,7 +55,12 @@
     </main>
 
     <footer>
-      <a href="/payments/invoice/<%= @invoice.refid %>"> <i class="fa fa-credit-card-alt"></i> پرداخت</a>
+      <%= if @invoice.is_checked_out != true do %>
+        <a href="/api/gopay/<%= @invoice.refid %>"> <i class="fa fa-credit-card-alt"></i> پرداخت</a>
+      <% else %>
+        <i class="fa fa-check-square-o success"></i>
+        پرداخت شده است
+      <% end %>
     </footer>
   </div>
 

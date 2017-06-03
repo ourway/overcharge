@@ -12,7 +12,7 @@ defmodule Overcharge.ApiController do
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
       amount = raw_amount/1.09 |> round
-      action = "topup_mci_#{amount}_#{msisdn}"
+      action = "topup_mci_#{raw_amount}_#{msisdn}"
       product = "شارژ مستقیم #{raw_amount} تومانی همراه اول برای +#{msisdn}"
       client = msisdn |> Overcharge.Utils.get_client
       invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
@@ -29,7 +29,7 @@ defmodule Overcharge.ApiController do
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
       amount = raw_amount/1.09 |> round
-      action = "topup_irancell_#{amount}_#{msisdn}"
+      action = "topup_irancell_#{raw_amount}_#{msisdn}"
       product = "شارژ مستقیم #{raw_amount} تومانی ایرانسل برای +#{msisdn}"
       client = msisdn |> Overcharge.Utils.get_client
       invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
@@ -44,6 +44,14 @@ defmodule Overcharge.ApiController do
      data = Overcharge.Utils.get_mci_rbt_data(page)
      conn |> json(%{items: data})
   end
+
+  def gopay(conn, params) do
+      refid = params["refid"]
+      gateway = Overcharge.Gasedak
+      paylink = conn |> gateway.checkout(refid)
+      redirect conn, external: paylink
+  end
+
 
 
 end

@@ -14,11 +14,27 @@
     <title><%= @title %></title>
     <meta name="author" content="Overcharge Framework 1/1">
     <meta content="شارژ,ایرانسل,ايرانسل,کارت,اینترنتی,آنلاین,خرید شارژ،همراه اول،تالیا،رایتل" name="keywords" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-    <link rel="manifest" href="/images/manifest.json">
-    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+<link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="manifest" href="/images/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
     <link rel="canonical" href="<%= Overcharge.Router.Helpers.url(@conn) <> @conn.request_path %>">
 
     <!-- Twitter Card data -->
@@ -191,6 +207,24 @@ form.amp-form-submit-success.hide-inputs > input {
 .highlight .vi { color: #008080; }
 .highlight .il { color: #099; }
 
+.darkback {
+  background: darkgreen;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.blueback {
+  background: #0ab6ff;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.13);
+  }
+
+.whitecolor {
+  color: white;
+}
+
+
 .ampstart-btn, .ampstart-btn[disabled], .ampstart-btn[disabled]:focus, .ampstart-btn[disabled]:hover, a.ampstart-btn, a.ampstart-btn[disabled], a.ampstart-btn[disabled]:focus, a.ampstart-btn[disabled]:hover {
     color: darkgreen;
     border: 1px solid darkgreen;
@@ -294,7 +328,7 @@ background-color: <%= @color %>;
 
 }
 @media only screen and (max-width: 800px) { .site-header { padding: 0 0px; } }
-.site-header .page-links { display: block; position: absolute; top: 10px; right: 16px; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
+.site-header .page-links { display: block; position: absolute; top: 10px; right: 1px; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
 .site-header .page-links a { text-decoration: none;}
 .site-header .page-links a:hover {}
 
@@ -322,6 +356,9 @@ background-color: <%= @color %>;
 .pagination { text-align: center; padding: 16px 0 0; font-size: 12px; }
 .pagination a { color: #999999; text-decoration: none; }
 .pagination a:hover { color: #333333; }
+.ltr {
+  direction: ltr;
+}
 
 .site-footer {
     margin: 0 auto;
@@ -399,6 +436,7 @@ hr {background: #02a8ff; height: 2px; border: none;}
   color: #02a8ff;
 }
 .mci_color {color: #b7fffd;}
+.rbt_color {color: #b7fffd;}
 .irancell_color {color: #ffe761;}
 .rightel_color {color: #ffcdec;}
 .taliya_color {color: #fff;}
@@ -597,6 +635,8 @@ input.msisdn {
 
 .invoice_status {
   background: #f2f2f2;
+  font-size: 11px;
+  font-weight: bold;
   padding: 2px;
 }
 
@@ -744,6 +784,13 @@ input.msisdn {
   margin-top: 50px;
   margin-bottom: 30px;
 }
+.success{
+  color: darkgreen;
+}
+
+.danger{
+  color: darkred;
+}
 
 .links ul{
   text-align: left;
@@ -765,12 +812,15 @@ input.msisdn {
   border-radius: 3px;
   border: 1px solid #f2f2f2;
 }
+.padded {
+  padding:5px;
+}
 
 .mci-rbt tr{
 }
 
 .mci-rbt td a{
-    color: darkred;
+    color: #467b9c;
     text-decoration: none;
   }
 
@@ -874,7 +924,9 @@ input.msisdn {
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link <%= @product %>_color" 
-          href="/<%= @product %>" > <span itemprop="name"><%= @product_fr %></span></a>
+          href="/<%= @product %>" > <span itemprop="name"><%= @product_fr |> String.slice(0,12) %>
+          <%= if (@product_fr |> String.length) > 12 do %> ... <% end %>
+          </span></a>
           <meta itemprop="position" content="2" />
         </li> 
         <%= if @page_type == "product" do %>
@@ -882,7 +934,9 @@ input.msisdn {
             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
               <a itemscope itemtype="http://schema.org/Thing" 
               itemprop="item" class="page-link <%= @product %>_color" 
-              href="<%= @conn.request_path %>" > <span itemprop="name"><%= @title %></span></a>
+              href="<%= @conn.request_path %>" > <span itemprop="name"><%= @title |> String.slice(0,12) %>
+              <%= if (@product_fr |> String.length) > 12 do %> ... <% end %>
+              </span></a>
               <meta itemprop="position" content="3" />
             </li>
         <% end %>

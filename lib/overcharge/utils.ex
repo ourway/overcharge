@@ -59,6 +59,13 @@ defmodule Overcharge.Utils do
         |> Overcharge.Repo.one
     end
 
+    def get_invoice_uuid(uuid) do
+        (from i in Overcharge.Invoice, 
+                          where: i.uuid == ^uuid, 
+                          select: i)
+        |> Overcharge.Repo.one
+    end
+
 
     def date_to_tehran_timezone(date) do
         date |> Calendar.DateTime.shift_zone!("Asia/Tehran") 
@@ -103,5 +110,119 @@ defmodule Overcharge.Utils do
         end
 
     end
+
+    def post_xml(url, data) do
+        {:ok, resp} = HTTPoison.post(url, data, ["Content-Type": "text/xml"])
+        resp
+    end
+
+
+    def set_transactionid(invoice, transactionid) do
+        Overcharge.Invoice.changeset(
+            invoice,
+                %{
+                transactionid: transactionid |> to_string,
+            })
+                |> Overcharge.Repo.update!
+    end
+
+
+    def set_invoice_status(invoice, status) do
+        Overcharge.Invoice.changeset(
+            invoice,
+                %{
+                status: status,
+            })
+                |> Overcharge.Repo.update!
+    end
+
+
+    def set_invoice_checked_out(invoice) do
+        Overcharge.Invoice.changeset(
+            invoice,
+                %{
+                is_checked_out: true,
+            })
+                |> Overcharge.Repo.update!
+    end
+
+    def parse_invoice_action(action) do
+        [func, operator, amount, msisdn] = action |> String.split("_")
+        {func, operator, amount |> String.to_integer, msisdn}
+    end
+
+
+    def reschedule_invoice(invoice) do
+        Task.async( fn() ->
+                :timer.sleep(1000*60) ## 1 minute later
+                deliver(invoice)
+            end)
+        invoice
+    end
+
+
+    def handle_reason_behind_error({_gateway, _errorcode}) do
+        :not_implemented
+    end
+
+
+    @doc """
+        {:ok, true}
+        :error
+    """
+    def deliver(invoice) do
+         case invoice.status do
+            "pending" ->
+                :error
+            "payed" -> 
+                {func, _operator, amount, msisdn} = invoice.success_callback_action |> parse_invoice_action        
+                cond do
+                  func == "topup" ->
+                    case Overcharge.Gasedak.topup(msisdn, amount, invoice.refid) do  ## do charge
+                        {:ok, true, transactionid} ->
+                            :timer.sleep(500)
+                            invoice = invoice |> set_invoice_status("processing")
+                            case transactionid |> Overcharge.Gasedak.check_transaction_status do  ## check status
+                                {:ok, true} ->
+                                    ivs = invoice 
+                                                |> set_transactionid(transactionid)
+                                                |> set_invoice_status("completed")
+                                    {:ok, true, ivs }
+                                {:error, errorcode} ->  ## find error
+                                    case {:gasedak, errorcode} |> handle_reason_behind_error do  ## decide what to do
+                                        :reschedule ->
+                                            IO.puts("why 2")
+                                            ivs = invoice 
+                                                      |> set_invoice_status("payed")
+                                                      |> reschedule_invoice  ## reschedule for retrying
+                                            {:error, ivs}
+                                        _ ->
+                                            IO.puts("why 3")
+                                            ivs = invoice 
+                                                    |> set_invoice_status("payed")
+                                                    |> reschedule_invoice  ## reschedule for retrying
+                                            {:error, ivs} 
+                                    end
+                            end
+                        er ->
+                            er |> IO.inspect
+                            IO.puts("why 4")
+                            invoice |> set_invoice_status("payed")
+                            invoice |> reschedule_invoice
+                            :error
+                    end
+                func == "pin" ->
+                    :not_implemented
+                true ->
+                    :not_implemented
+                    
+                end
+            "completed" ->
+                {:ok, true, invoice}
+            "processing" ->
+                {:ok, true, invoice}
+        end
+    end
+
 
 end

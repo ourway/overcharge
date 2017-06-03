@@ -13,7 +13,16 @@ use Mix.Config
 # which you typically run after static files are built.
 config :overcharge, Overcharge.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: System.get_env("DOMAIN"), port: 443, scheme: "https"]],
+  https: [port: 4443,
+          otp_app: :overcharge,
+          keyfile: "priv/keys/localhost.key",
+          certfile: "priv/keys/localhost.cert"],
+  url: [host: System.get_env("DOMAIN"), port: 4443, scheme: "https"],
+  server: true,
+  check_origin: false,
+  gzip: true,
+  root: ".",
+  version: Mix.Project.config[:version],
   cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production

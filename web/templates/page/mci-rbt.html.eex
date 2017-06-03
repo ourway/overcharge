@@ -1,10 +1,11 @@
 
-<div class="right">
+<div class="right padded">
 
-    <small>برای فعال سازی روی نام آهنگ پیشواز کلیک کنید.</small>
-    <small>قیمت تمام آهنگ ها ۳۰۰ تومان و یک ماهه می‌باشند.</small>
+    <small class="padded">برای فعال سازی روی نام آهنگ پیشواز کلیک کنید.</small>
     <br/>
-    <small>اگر به اندازه کافی اعتبار ندارید،  <a href="/mci/topup">با خرید شارژ از اینجا</a> اعتبار خود را بیشتر کنید.</small>
+    <small class="padded">قیمت تمام آهنگ ها ۳۰۰ تومان و یک ماهه می‌باشند.</small>
+    <br/>
+    <small class="padded">اگر به اندازه کافی اعتبار ندارید،  <a href="/mci/topup">با خرید شارژ از اینجا</a> اعتبار خود را بیشتر کنید.</small>
 
     <h4 class="center">فعال سازی با ارسال کد به 8989</h4>
 
@@ -39,3 +40,39 @@
 
 </div>
 
+
+
+
+<script type="application/ld+json">
+{
+  "@context":"http://schema.org/",
+  "@type":"Dataset",
+  "name":"آهنگ های پیشواز همراه اول صفحه <%= @page %>",
+  "description":"لیستی از بهترین آهنگ های پیشواز",
+  "url":"<%= Overcharge.Router.Helpers.url(@conn) %>/mci/rbt?page=<%= @page %>",
+  "sameAs":"https://rbt.mci.ir/AJAX/latestTones.jsp?pgs=<%= @page %>",
+  "keywords":[
+    <%= for k <- @keywords do %>
+        "<%= k%>"<%= if k != (@keywords |> List.last) do %>,<% end %>
+    <% end %>
+  ],
+  "creator":{
+     "@type":"Organization",
+     "url": "<%= Overcharge.Router.Helpers.url(@conn) %>/about",
+     "name":"شارژل",
+     "contactPoint":{
+        "@type":"ContactPoint",
+        "contactType": "customer service",
+        "telephone":"+98-214-421-7749",
+        "email":"support@chargell.com"
+     }
+  },
+  "distribution":[
+     {
+        "@type":"DataDownload",
+        "encodingFormat":"JSON",
+        "contentUrl":"<%= Overcharge.Router.Helpers.url(@conn) %>/api/get_mci_rbt?page=<%= @page %>"
+     }
+  ]
+}
+</script>

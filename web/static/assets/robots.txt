@@ -6,6 +6,7 @@ User-agent: *
 Disallow: /  ## disable when publish
 Disallow: /admin
 Disallow: /invoice
+Disallow: /deliver
 Disallow: /payments/
 Disallow: /api
 Disallow: /reports

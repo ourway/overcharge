@@ -5,7 +5,7 @@ defmodule Overcharge.PageController do
     render conn, "index.html",
       description: "خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز",
       title:       "خرید شارژ همراه اول - ایرانسل - رایتل - تالیا",
-      subtitle:    "خرید شارژ سریع و ارزان",
+      subtitle:    "خرید شارژ و بسته اینترنتی",
       color:       "#f8f8f8",
       text_color:  "#ffffff",
       page_type:   "landing",
@@ -29,12 +29,16 @@ defmodule Overcharge.PageController do
   end
 
 
-  def mci_topup(conn, _params) do
+  def mci_topup(conn, params) do
+    msisdn = params["msisdn"]
+    amount = params["amount"] || "2000"
     render conn, "mci-topup.html",
       description: "خرید ارزان و سریع شارژ مستقیم همراه اول",
       title:       "شارژ مستقیم همراه اول",
       subtitle:    "شارژ مستقیم همراه اول",
       color:       "#e3fffe",
+      amount:      amount |> String.to_integer,
+      msisdn:      msisdn,
       text_color:  "#ffffff",
       page_type:   "product",
       product:  "mci",
@@ -45,16 +49,21 @@ defmodule Overcharge.PageController do
   def mci_rbt(conn, params) do
      page = params["page"] || "0"
      data = Overcharge.Utils.get_mci_rbt_data(page)
+     artists = data |> Enum.map(fn(x) -> x.artist end) |> Enum.uniq
+     songs = data |> Enum.map(fn(x) -> x.name end) |> Enum.uniq
+     title_postfix = artists |> Enum.join(" و ")
+     description_postfix = songs |> Enum.join(" ، ")
      render conn, "mci-rbt.html",
-      description: "لیست کامل آهنگ های پیشواز همراه اول",
-      title:       "آوای انتظار همراه اول",
+      description: "آهنگ های پیشواز همراه اول شامل #{description_postfix}",
+      title:       "آوای انتظار همراه اول از #{title_postfix}",
+      keywords:    artists ++ songs,
       page:        page |> String.to_integer,
       data:        data,
       subtitle:    "لیست کامل آهنگ های پیشواز همراه اول",
       color:       "#fbfbfb",
       text_color:  "#515151",
-      page_type:   "list",
-      product:  "mci/rbt",
+      page_type:   "product",
+      product:  "rbt",
       product_fr:  "آهنگ های پیشواز همراه اول"
   end
 
@@ -76,17 +85,55 @@ defmodule Overcharge.PageController do
   end
 
 
-  def irancell_topup(conn, _params) do
+  def irancell_topup(conn, params) do
+    msisdn = params["msisdn"]
+    amount = params["amount"] || "2000"
     render conn, "irancell-topup.html",
       description: "خرید ارزان و سریع شارژ مستقیم ایرانسل",
       title:       "شارژ مستقیم ایرانسل",
       subtitle:    "شارژ مستقیم ایرانسل",
       color:       "#fff2a",
+      amount:      amount |> String.to_integer,
+      msisdn:      msisdn,
       text_color:  "#333",
       page_type:   "product",
       product:  "irancell",
       product_fr:  "ایرانسل"
   end
+
+
+  def irancell_internet(conn, _params) do
+    packages = [ %{ persian: "هفتگی", en: "weekly"}, %{ persian:  "ماهانه", en: "monthly"}, %{ persian: "روزانه", en: "daily" }, %{ en: "hourly", persian: "ساعتی نامحدود"} ]
+    render conn, "irancell-internet.html",
+      description: "خرید ارزان و سریع بسته اینترنتی ایرانسل",
+      title:       "بسته اینترنتی ایرانسل",
+      subtitle:    "بسته های اینترنتی ایرانسل",
+      color:       "#fff2a",
+      packages:   packages,
+      text_color:  "#333",
+      page_type:   "shop",
+      product:  "irancell",
+      product_fr:  "ایرانسل"
+  end
+
+
+
+  def irancell_internet_weekly(conn, params) do
+    msisdn = params["msisdn"]
+    package = params["package"]
+    render conn, "irancell-internet.html",
+      description: "خرید ارزان و سریع بسته اینترنتی ایرانسل",
+      title:       "بسته اینترنتی ایرانسل",
+      subtitle:    "بسته اینترنتی ایرانسل",
+      color:       "#fff2a",
+      package:     package,
+      msisdn:      msisdn,
+      text_color:  "#333",
+      page_type:   "product",
+      product:  "irancell",
+      product_fr:  "ایرانسل"
+  end
+
 
 
 ###########################################################################
@@ -211,6 +258,46 @@ defmodule Overcharge.PageController do
       product_fr:  "مقالات"
 
   end
+
+
+    def deliver(conn, params) do
+
+      uuid = params["uuid"]
+      ivs = uuid |> Overcharge.Utils.get_invoice_uuid
+                     |> Overcharge.Utils.set_invoice_checked_out
+                     
+      ivs = if ivs.status == "pending" do  ## only first time
+        ivs |> Overcharge.Utils.set_invoice_status("payed")
+      end
+
+      {code, invoice} = case (ivs |> Overcharge.Utils.deliver) do
+          {:ok, true, iv} ->
+              {"st-001", iv}
+          {:error, iv} ->
+              {"st-002", iv}
+          _ ->
+              {"st-003", ivs}
+      end
+
+
+    render conn, "deliver.html",
+      description: "asd",
+      title:       "فاکتور #{invoice.refid} | تحویل کالا",
+      subtitle:    "تحویل محصول",
+      color:       "#fff",
+      code:        code,
+      invoice:     invoice,
+      text_color:  "",
+      page_type:   "invoice",
+      product:     "invoice-page",
+      product_fr:  "تحویل کالا"
+
+  end
+
+
+
+
+  
 
 
 

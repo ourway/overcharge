@@ -22,6 +22,9 @@
       class="msisdn"
       placeholder="09x-xxx-xxxx"
       required
+      <%= if @msisdn do %>
+        value="<%= @msisdn %>"
+      <% end %>
       title="شماره موبایل اعتباری خود را وارد کنید"
       pattern="(09|9)(\d{9})"
       id="msisdn"
@@ -78,7 +81,7 @@
   <amp-img src="/images/mci-topup-<%= p %>.png"
     width="100"
     height="75"
-    <%= if p == 2000 do %>
+    <%= if p == @amount do %>
     selected
     <% end %>
     alt="شارژ مستقیم <%= p %> تومانی همراه اول "
