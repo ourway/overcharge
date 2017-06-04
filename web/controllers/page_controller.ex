@@ -162,7 +162,6 @@ defmodule Overcharge.PageController do
   def rightel(conn, params) do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
-
     render conn, "rightel.html",
       description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد",
       title:       "خرید شارژ رایتل",

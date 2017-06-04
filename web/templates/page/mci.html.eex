@@ -78,3 +78,29 @@
 
 
 </div>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "شارژ همراه اول",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/mci-topup.jpg",
+  "brand": {
+    "@type": "Thing",
+    "name": "ACME"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.96",
+    "ratingCount": "321"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "9500",
+    "highPrice": "200000",
+    "priceCurrency": "IRR"
+  }
+}
+</script>

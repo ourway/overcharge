@@ -78,3 +78,28 @@
 
 
 </div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "شارژ و بسته های اینترنتی ایرانسل",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/irancell-topup.jpg",
+  "brand": {
+    "@type": "Thing",
+    "name": "ACME"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.92",
+    "ratingCount": "1307"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "10000",
+    "highPrice": "2000000",
+    "priceCurrency": "IRR"
+  }
+}
+</script>

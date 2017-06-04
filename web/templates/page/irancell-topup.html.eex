@@ -103,7 +103,7 @@
   </div>
   <div submit-error>
     <template type="amp-mustache">
-      Error!
+          خطایی رخ داد.  لطفا دوباره تلاش کنید.
     </template>
   </div>
 </form>
