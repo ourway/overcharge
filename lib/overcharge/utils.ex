@@ -148,7 +148,7 @@ defmodule Overcharge.Utils do
 
     def parse_invoice_action(action) do
         [func, operator, amount, msisdn] = action |> String.split("_")
-        {func, operator, amount |> String.to_integer, msisdn}
+        {func, operator, amount, msisdn}
     end
 
 
@@ -183,12 +183,22 @@ defmodule Overcharge.Utils do
             "payed" -> 
                 {func, _operator, amount, msisdn} = invoice.success_callback_action |> parse_invoice_action        
                 cond do
-                  func == "topup" ->
-                    case Overcharge.Gasedak.topup(msisdn, amount, invoice.refid) do  ## do charge
+                  func == "topup" || func == "internet" ->
+                      {mode, sid, price} = case func do
+                          "topup" ->
+                              {1, 0, amount |> String.to_integer}
+                          "internet" ->
+                                {
+                                    5, 
+                                    amount |> String.split(":") |> List.first |> String.to_integer,
+                                    amount |> String.split(":") |> List.last |> String.to_integer,
+                                }
+                      end |> IO.inspect
+                    case Overcharge.Gasedak.topup(msisdn, price , invoice.refid, mode, sid) do  ## do charge
                         {:ok, true, transactionid} ->
                             :timer.sleep(500)
                             invoice = invoice |> set_invoice_status("processing")
-                            case transactionid |> Overcharge.Gasedak.check_transaction_status do  ## check status
+                            case transactionid |> Overcharge.Gasedak.check_transaction_status(invoice.refid, msisdn) do  ## check status
                                 {:ok, true} ->
                                     ivs = invoice 
                                                 |> set_transactionid(transactionid)

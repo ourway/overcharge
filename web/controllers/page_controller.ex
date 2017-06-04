@@ -123,16 +123,31 @@ defmodule Overcharge.PageController do
 
 
 
-  def irancell_internet_weekly(conn, params) do
+  def irancell_internet_package(conn, params) do
     msisdn = params["msisdn"]
-    package = params["package"]
-    render conn, "irancell-internet.html",
-      description: "خرید ارزان و سریع بسته اینترنتی ایرانسل",
-      title:       "بسته اینترنتی ایرانسل",
-      subtitle:    "بسته اینترنتی ایرانسل",
+    package_name = params["package_name"]
+    amount = params["amount"]
+    package = case package_name do
+      "weekly" ->
+        %{ persian: "هفتگی", en: "weekly", data: Overcharge.Gasedak.get_irancell_packages(47)}
+      "monthly" ->
+        %{ persian:  "ماهانه", en: "monthly", data: Overcharge.Gasedak.get_irancell_packages(48)}
+      "daily" ->
+        %{ persian: "روزانه", en: "daily", data: Overcharge.Gasedak.get_irancell_packages(46) }
+      "hourly" ->
+          %{ persian: "ساعتی نامحدود", en: "hourly", data: Overcharge.Gasedak.get_irancell_packages(50)}
+    end
+    sid = 47
+    data = Overcharge.Gasedak.get_irancell_packages(sid)
+    render conn, "irancell-internet-package.html",
+      description: "خرید ارزان و سریع بسته اینترنتی #{package.persian} ایرانسل ",
+      title:       "بسته‌های اینترنتی #{package.persian} ایرانسل",
+      subtitle:    "بسته اینترنتی #{package.persian} ایرانسل",
       color:       "#fff2a",
-      package:     package,
-      msisdn:      msisdn,
+      sid:        sid,
+      amount:     amount,
+      msisdn:     msisdn,
+      package:    package,
       text_color:  "#333",
       page_type:   "product",
       product:  "irancell",

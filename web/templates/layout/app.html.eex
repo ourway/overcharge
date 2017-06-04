@@ -639,6 +639,25 @@ input.msisdn {
   
 }
 
+.irancell_package_list {
+  background: rgba(255,255,255,0.9);
+  padding: 10px;
+  border: 5px dotted #fedc67;
+}
+
+.irancell_package_list li {
+  list-style: none;
+  margin-top: 5px;
+  border-radius: 5px;
+  padding: 3px;
+  padding-right: 13px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.irancell_package_list li:hover, .irancell_package_list li:active {
+  background: #fcc562;
+}
+
 
 
 /* ---------------------------------------------

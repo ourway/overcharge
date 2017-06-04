@@ -64,10 +64,7 @@ defmodule Overcharge.Router do
     get "/irancell", PageController, :irancell
     get "/irancell/topup", PageController, :irancell_topup
     get "/irancell/internet", PageController, :irancell_internet
-    get "/irancell/internet/weekly", PageController, :irancell_internet_weekly
-    get "/irancell/internet/daily", PageController, :irancell_internet_daily
-    get "/irancell/internet/hourly", PageController, :irancell_internet_hourly
-    get "/irancell/internet/monthly", PageController, :irancell_internet_monthly
+    get "/irancell/internet/:package_name", PageController, :irancell_internet_package
     get "/rightel", PageController, :rightel
     get "/taliya", PageController, :taliya
   end
@@ -80,11 +77,12 @@ defmodule Overcharge.Router do
 
   scope "/api", Overcharge do
     pipe_through :api
-    get "/ping", ApiController, :ping
-    post "/mci_topup_invoice",        ApiController, :mci_topup_invoice
-    get "/get_mci_rbt",               ApiController, :get_mci_rbt
-    post "/irancell_topup_invoice",   ApiController, :irancell_topup_invoice
-    get "/gopay/:refid",             ApiController, :gopay
+    get "/ping",                              ApiController, :ping
+    post "/mci_topup_invoice",                ApiController, :mci_topup_invoice
+    get "/get_mci_rbt",                       ApiController, :get_mci_rbt
+    post "/irancell_topup_invoice",           ApiController, :irancell_topup_invoice
+    post "/irancell_internet_invoice/:sid",   ApiController, :irancell_internet_invoice
+    get "/gopay/:refid",                      ApiController, :gopay
     # Add protected routes below
   end
 

@@ -39,6 +39,25 @@ defmodule Overcharge.ApiController do
         |> json(%{message: :pong})
   end
 
+
+
+  def irancell_internet_invoice(conn, params) do
+      host = Overcharge.Router.Helpers.url(conn)
+      msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
+      sid = params["sid"] |> String.to_integer
+      raw_amount = params["amount"] |> String.to_integer
+      amount = raw_amount/1.09 |> round
+      action = "internet_irancell_#{sid}:#{raw_amount}_#{msisdn}"
+     product =  "بسته اینترنتی ایرانسل #{Overcharge.Gasedak.get_irancell_package_info(sid, raw_amount*10)} برای +#{msisdn}"
+      client = msisdn |> Overcharge.Utils.get_client
+      invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
+       conn 
+        #|> put_resp_header("amp-redirect-to", "https://ss2.ir/u7WJ")
+        |> put_resp_header("AMP-Redirect-To", "#{host}/invoice/#{invoice.refid}#invoice")
+        |> json(%{message: :pong})
+  end
+
+
   def get_mci_rbt(conn, params) do
      page = params["page"] || 0
      data = Overcharge.Utils.get_mci_rbt_data(page)

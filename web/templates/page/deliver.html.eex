@@ -37,7 +37,18 @@
             </a>
         </div>
     </div>
-    <%= else %>
+    <%= end %>
+    <%= if func == "internet" && @code == "st-001" do %>
+        <%# sid = amount |> String.split(":") |> List.first |> String.to_integer %>
+        <%# price = amount |> String.split(":") |> List.last |> String.to_integer  %>
+        <%# info = Overcharge.Gasedak.get_irancell_package_info(sid, price*10) %>
+        <span class="success">
+            <%= @invoice.product |> String.replace( " +989", " شماره  9") %> با موفقیت فعال گردید.
+        </span>
+
+
+    <%= end %>
+    <%= if @invoice.status == "debugging" do %>
     <div class="danger padded">
         <i class="fa fa-info"></i>
         در هنگام انجام عملیات تحویل محصول خریداری شده توسط شما، خطایی رخ داده است.
@@ -71,7 +82,11 @@
 <hr/>
 <div class="center">
 <small>از خرید شما ممنونیم.</small>
-<small>فاکتور شما در زیر آمده است</small>
+<small>فاکتور شما در زیر آمده است.</small>
+<small>لطفا انتقاد و پیشنهاد خود را با ما درمیان گذارید
+<br/>
+    <a href="mailto:sales@chargell.i">sales@chargell.ir</a>
+<small>
 </div>
 </div>
 <%= render Overcharge.PageView, "invoice.html", conn: @conn, invoice: @invoice %>
