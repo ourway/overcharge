@@ -248,22 +248,28 @@ form.amp-form-submit-success.hide-inputs > input {
 
 .ampstart-btn, .ampstart-btn[disabled], .ampstart-btn[disabled]:focus, .ampstart-btn[disabled]:hover, a.ampstart-btn, a.ampstart-btn[disabled], a.ampstart-btn[disabled]:focus, a.ampstart-btn[disabled]:hover {
     color: darkgreen;
-    border: 1px solid darkgreen;
+    font-weight: 100;
+    border: 1px solid grey;
     }
 
 .ampstart-btn {
     font-family: inherit;
     font-weight: inherit;
     font-size: 1rem;
+    font-weight: 800;
     line-height: 1.125rem;
     padding: .7em .8em;
     text-decoration: none;
+    border-radius: 4px;
     word-wrap: normal;
     vertical-align: middle;
     cursor: pointer;
     background-color: #fff;
-    border: 1px solid darkgreen;
+    border: 5px solid <%= @color %>;
 }
+
+
+
 
 
 .icon > svg { display: inline-block; width: 16px; height: 16px; vertical-align: middle; }

@@ -207,15 +207,15 @@ defmodule Overcharge.Utils do
                                 {:error, errorcode} ->  ## find error
                                     case {:gasedak, errorcode} |> handle_reason_behind_error do  ## decide what to do
                                         :halt ->
-                                            ivs = invoice |> set_invoice_status("payed")
+                                            ivs = invoice |> set_invoice_status("debugging")
                                             {:error, ivs}
                                         :reschedule ->
                                             ivs = invoice 
-                                                      |> set_invoice_status("payed")
+                                                      |> set_invoice_status("debugging")
                                                       |> reschedule_invoice  ## reschedule for retrying
                                             {:error, ivs}
                                         _ ->  ## same as halt
-                                            ivs = invoice |> set_invoice_status("payed")
+                                            ivs = invoice |> set_invoice_status("debugging")
                                             {:error, ivs} 
                                     end
                             end
@@ -241,7 +241,6 @@ defmodule Overcharge.Utils do
             "processing" ->
                 {:ok, true, invoice}
             "debugging" ->
-
             Task.async( fn() ->
                         :timer.sleep(1000*120) ## 1 minute later
                         invoice |> set_invoice_status("payed")

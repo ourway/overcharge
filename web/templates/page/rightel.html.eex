@@ -109,13 +109,14 @@
   </div>
 </form>
 
+<p class="right">لطفا در ورود شماره موبایل خود دقت کنید.</p>
 
 <script type="application/ld+json">
 {
   "@context": "http://schema.org/",
   "@type": "Product",
   "name": "شارژ مستقیم رایتل",
-  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/iamges/rightel-topup.jpg",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/rightel-topup.jpg",
   "brand": {
     "@type": "Thing",
     "name": "ACME"

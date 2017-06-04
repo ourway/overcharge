@@ -91,7 +91,7 @@
 <% end %>
 </amp-selector>
 
-  <hr/>
+  <br/>
   <input type="submit"
     value="مرحله بعد"
     class="ampstart-btn caps">
@@ -109,12 +109,14 @@
 </form>
 
 
+<p class="right">لطفا در ورود شماره موبایل خود دقت کنید.</p>
+
 <script type="application/ld+json">
 {
   "@context": "http://schema.org/",
   "@type": "Product",
   "name": "شارژ مستقیم ایرانسل",
-  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/iamges/irancell-topup.jpg",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/irancell-topup.jpg",
   "brand": {
     "@type": "Thing",
     "name": "ACME"

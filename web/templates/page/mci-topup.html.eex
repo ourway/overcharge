@@ -109,13 +109,14 @@
 </form>
 
 
+<p class="right">لطفا در ورود شماره موبایل خود دقت کنید.</p>
 
 <script type="application/ld+json">
 {
   "@context": "http://schema.org/",
   "@type": "Product",
   "name": "شارژ مستقیم همراه اول",
-  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/iamges/mci-topup.jpg",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/mci-topup.jpg",
   "brand": {
     "@type": "Thing",
     "name": "ACME"

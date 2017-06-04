@@ -82,6 +82,7 @@ defmodule Overcharge.Router do
     get "/get_mci_rbt",                       ApiController, :get_mci_rbt
     post "/irancell_topup_invoice",           ApiController, :irancell_topup_invoice
     post "/irancell_internet_invoice/:sid",   ApiController, :irancell_internet_invoice
+    post "/rightel_topup_invoice",            ApiController, :rightel_topup_invoice
     get "/gopay/:refid",                      ApiController, :gopay
     # Add protected routes below
   end
