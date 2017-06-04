@@ -126,7 +126,7 @@ defmodule Overcharge.PageController do
   def irancell_internet_package(conn, params) do
     msisdn = params["msisdn"]
     package_name = params["package_name"]
-    amount = params["amount"]
+    amount = params["amount"] || "0"
     package = case package_name do
       "weekly" ->
         %{ persian: "هفتگی", en: "weekly", data: Overcharge.Gasedak.get_irancell_packages(47)}
@@ -145,7 +145,7 @@ defmodule Overcharge.PageController do
       subtitle:    "بسته اینترنتی #{package.persian} ایرانسل",
       color:       "#fff2a",
       sid:        sid,
-      amount:     amount,
+      amount:     amount |> String.to_integer,
       msisdn:     msisdn,
       package:    package,
       text_color:  "#333",
@@ -159,17 +159,26 @@ defmodule Overcharge.PageController do
 ###########################################################################
 
 
-  def rightel(conn, _params) do
+  def rightel(conn, params) do
+    msisdn = params["msisdn"]
+    amount = params["amount"] || "2000"
+
     render conn, "rightel.html",
       description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد",
       title:       "خرید شارژ رایتل",
       subtitle:    "خرید شارژ مستقیم رایتل",
       color:       "#ffedf8",
+      amount:       amount |> String.to_integer,
+      msisdn:       msisdn,
       text_color:  "#ffffff",
-      page_type:   "shop",
+      page_type:   "product",
       product:  "rightel",
       product_fr:  "رایتل"
   end
+
+
+
+########################################################  
 
   def taliya(conn, _params) do
     render conn, "taliya.html",

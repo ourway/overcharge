@@ -29,9 +29,9 @@
   <div>
       <amp-social-share type="twitter"></amp-social-share>
       <amp-social-share type="gplus"
-        data-param-text="توصیه میکنم از این سایت شارژ بخرید" ></amp-social-share>
+        data-param-text="<%= @title %>" ></amp-social-share>
       <amp-social-share type="linkedin"
-        data-param-text="توصیه میکنم از این سایت شارژ بخرید"
+        data-param-text="<%= @title %>"
         data-param-url="<%= Overcharge.Router.Helpers.url(@conn) %>">
       </amp-social-share>
   </div>

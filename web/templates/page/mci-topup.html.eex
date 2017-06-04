@@ -61,7 +61,7 @@
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
-    "reviewCount": "8009"
+    "reviewCount": "<%= 345-(p |> div(100) |> round ) %>"
   },
   "offers": {
     "@type": "Offer",
@@ -110,3 +110,26 @@
 
 
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "شارژ مستقیم همراه اول",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/iamges/mci-topup.jpg",
+  "brand": {
+    "@type": "Thing",
+    "name": "ACME"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.2",
+    "ratingCount": "320"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "10000",
+    "highPrice": "200000",
+    "priceCurrency": "IRR"
+  }
+}
+</script

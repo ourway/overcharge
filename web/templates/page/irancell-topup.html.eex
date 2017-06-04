@@ -60,8 +60,8 @@
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "8009"
+    "ratingValue": "4.66",
+    "reviewCount": "9019"
   },
   "offers": {
     "@type": "Offer",
@@ -109,4 +109,26 @@
 </form>
 
 
-
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "شارژ مستقیم ایرانسل",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/iamges/irancell-topup.jpg",
+  "brand": {
+    "@type": "Thing",
+    "name": "ACME"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "ratingCount": "821"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "5000",
+    "highPrice": "200000",
+    "priceCurrency": "IRR"
+  }
+}
+</script>

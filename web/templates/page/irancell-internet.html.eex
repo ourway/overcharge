@@ -3,7 +3,7 @@
 
 <%= for package <- @packages do %>
 
-    <a href="/irancell/internet/<%= package.en %>/" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/irancell/internet/<%= package.en %>" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-wifi fa-2x"></i>
 
@@ -58,3 +58,28 @@
 
 
 </div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "بسته های اینترنتی ایرانسل",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/iamges/irancell_internet.png",
+  "brand": {
+    "@type": "Thing",
+    "name": "ACME"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.3",
+    "ratingCount": "189"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "5000",
+    "highPrice": "2000000",
+    "priceCurrency": "IRR"
+  }
+}
+</script>
