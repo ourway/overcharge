@@ -41,7 +41,7 @@ defmodule Overcharge.Mixfile do
      {:exrm, "~> 1.0.8"},
      {:eiconv, github: "zotonic/eiconv"},
      {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:phoenix_live_reload, "~> 1.0"},
      {:gettext, "~> 0.11"},
      {:floki, "~> 0.17.2"},
      {:sitemap, "~> 0.9.1"},
