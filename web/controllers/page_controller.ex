@@ -305,7 +305,7 @@ defmodule Overcharge.PageController do
       uuid = params["uuid"]
       target = uuid |> Overcharge.Utils.get_invoice_uuid
                     |> Overcharge.Utils.set_invoice_checked_out
-                    |> Overcharge.pay.verify
+                    |> Overcharge.Pay.verify
                      
       ivs = if target.status == "pending" do  ## only first time
               target |> Overcharge.Utils.set_invoice_status("payed")
