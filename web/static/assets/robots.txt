@@ -3,10 +3,11 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 
 User-agent: *
-Disallow: /  ## disable when publish
+#Disallow: /  ## disable when publish
 Disallow: /admin
 Disallow: /invoice
 Disallow: /deliver
+Disallow: /show_invoice_pins
 Disallow: /payments/
 Disallow: /api
 Disallow: /reports

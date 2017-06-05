@@ -27,6 +27,43 @@ defmodule Overcharge.Utils do
         end
     end
 
+    def get_new_mci_pin(amount, invoice_id) do
+        case (from p in Overcharge.Pin,
+                where: p.is_active == true,
+                where: p.is_used == false,
+                preload: :invoice,
+                limit: 1,
+                select: p ) |> Overcharge.Repo.one do
+            nil ->
+                :error
+            np ->
+            {:ok, _} = Overcharge.Pin.changeset(np, %{ is_used: true}) 
+                |> Ecto.Changeset.change
+                |> Ecto.Changeset.put_assoc(:invoice, Overcharge.Invoice |> Overcharge.Repo.get(invoice_id))
+                |> Overcharge.Repo.update
+                #%{code: np.code, serial: np.serial}
+                :ok
+
+         end
+    end
+
+
+    def get_mci_pins(count, amount, invoice_id) do
+        for _n <- 1..count do
+            :ok = get_new_mci_pin(amount, invoice_id)
+        end
+
+        :ok
+    end
+
+
+    def get_invoice_pins(invoice_id) do
+        (from p in Overcharge.Pin,
+                where: p.invoice_id == ^invoice_id,
+                where: p.is_used == true,
+                select:  %{code: p.code, serial: p.serial} )
+                |> Overcharge.Repo.all
+    end 
 
     def create_invoice(action, amount, client, product) do 
       amount = amount
@@ -45,7 +82,7 @@ defmodule Overcharge.Utils do
                 })
                |> Ecto.Changeset.change
                |> Ecto.Changeset.put_assoc(:user, client)
-        |> Overcharge.Repo.insert
+               |> Overcharge.Repo.insert
 
         invoice
     end
@@ -177,11 +214,11 @@ defmodule Overcharge.Utils do
         :error
     """
     def deliver(invoice) do
+         {func, _operator, amount, msisdn} = invoice.success_callback_action |> parse_invoice_action        
          case invoice.status do
             "pending" ->
                 :error
             "payed" -> 
-                {func, _operator, amount, msisdn} = invoice.success_callback_action |> parse_invoice_action        
                 cond do
                   func == "topup" || func == "internet" ->
                       {mode, sid, price} = case func do
@@ -196,29 +233,33 @@ defmodule Overcharge.Utils do
                       end |> IO.inspect
                     case Overcharge.Gasedak.topup(msisdn, price , invoice.refid, mode, sid) do  ## do charge
                         {:ok, true, transactionid} ->
-                            :timer.sleep(500)
+                            #:timer.sleep(500)
                             invoice = invoice |> set_invoice_status("processing")
-                            case transactionid |> Overcharge.Gasedak.check_transaction_status(invoice.refid, msisdn) do  ## check status
-                                {:ok, true} ->
-                                    ivs = invoice 
-                                                |> set_transactionid(transactionid)
-                                                |> set_invoice_status("completed")
-                                    {:ok, true, ivs }
-                                {:error, errorcode} ->  ## find error
-                                    case {:gasedak, errorcode} |> handle_reason_behind_error do  ## decide what to do
-                                        :halt ->
-                                            ivs = invoice |> set_invoice_status("debugging")
-                                            {:error, ivs}
-                                        :reschedule ->
-                                            ivs = invoice 
-                                                      |> set_invoice_status("debugging")
-                                                      |> reschedule_invoice  ## reschedule for retrying
-                                            {:error, ivs}
-                                        _ ->  ## same as halt
-                                            ivs = invoice |> set_invoice_status("debugging")
-                                            {:error, ivs} 
-                                    end
+                            Task.async fn() -> 
+                                case transactionid |> Overcharge.Gasedak.check_transaction_status(invoice.refid, msisdn) do  ## check status
+                                    {:ok, true} ->
+                                        ivs = invoice 
+                                                    |> set_transactionid(transactionid)
+                                                    |> set_invoice_status("completed")
+                                        {:ok, true, ivs , nil}
+                                    {:error, errorcode} ->  ## find error
+                                        case {:gasedak, errorcode} |> handle_reason_behind_error do  ## decide what to do
+                                            :halt ->
+                                                ivs = invoice |> set_invoice_status("debugging")
+                                                {:error, ivs}
+                                            :reschedule ->
+                                                ivs = invoice 
+                                                        |> set_invoice_status("debugging")
+                                                        |> reschedule_invoice  ## reschedule for retrying
+                                                {:error, ivs}
+                                            _ ->  ## same as halt
+                                                ivs = invoice |> set_invoice_status("debugging")
+                                                {:error, ivs} 
+                                        end
+                                end
                             end
+                            ivs = invoice |> set_invoice_status("completed")
+                            {:ok, true, ivs , nil}
                         {:error, :halt} ->
                             ivs = invoice |> set_invoice_status("debugging")
                             {:error, ivs}
@@ -231,15 +272,26 @@ defmodule Overcharge.Utils do
                             :error
                     end
                 func == "pin" ->
-                    :not_implemented
+                    IO.puts("Not implemented yet")
+                    [count, price] = amount |> String.split(":") |> Enum.map(fn(x) -> x |> String.to_integer end) |> IO.inspect
+                    :ok = get_mci_pins(count, price, invoice.id) 
+                    ivs = invoice |> set_invoice_status("completed")
+                    {:ok, true, ivs , "deliver_pins"}
                 true ->
                     :not_implemented
                     
                 end
             "completed" ->
-                {:ok, true, invoice}
+                cond do
+                    func == "topup" || func == "internet" ->
+                        {:ok, true, invoice, nil}
+                    func == "pin" ->
+                        {:ok, true, invoice, "deliver_pins"}
+                    true ->
+                        {:ok, true, invoice, nil}
+                end
             "processing" ->
-                {:ok, true, invoice}
+                {:ok, true, invoice, nil}
             "debugging" ->
             Task.async( fn() ->
                         :timer.sleep(1000*120) ## 1 minute later

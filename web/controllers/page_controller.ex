@@ -3,7 +3,7 @@ defmodule Overcharge.PageController do
 
   def index(conn, _params) do
     render conn, "index.html",
-      description: "خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز",
+      description: "خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز + شارژ رایگان",
       title:       "خرید شارژ همراه اول - ایرانسل - رایتل - تالیا",
       subtitle:    "خرید شارژ و بسته اینترنتی",
       color:       "#f8f8f8",
@@ -18,7 +18,7 @@ defmodule Overcharge.PageController do
 
   def mci(conn, _params) do
     render conn, "mci.html",
-      description: "خرید ارزان و سریع شارژ مستقیم همراه اول و کارت شارژ همراه اول",
+      description: "خرید ارزان و سریع شارژ مستقیم همراه اول و کارت شارژ همراه اول به همراه کارت شارژ رایگان + شارژ مستقیم رایگان",
       title:       "خرید شارژ همراه اول",
       subtitle:    "خرید پین و شارژ مستقیم همراه اول",
       color:       "#e3fffe",
@@ -33,7 +33,7 @@ defmodule Overcharge.PageController do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
     render conn, "mci-topup.html",
-      description: "خرید ارزان و سریع شارژ مستقیم همراه اول",
+      description: "خرید ارزان و سریع شارژ مستقیم همراه اول + طرح ویژه شارژ رایگان همراه اول برای شما",
       title:       "شارژ مستقیم همراه اول",
       subtitle:    "شارژ مستقیم همراه اول",
       color:       "#e3fffe",
@@ -54,7 +54,7 @@ defmodule Overcharge.PageController do
      title_postfix = artists |> Enum.join(" و ")
      description_postfix = songs |> Enum.join(" ، ")
      render conn, "mci-rbt.html",
-      description: "آهنگ های پیشواز همراه اول شامل #{description_postfix}",
+      description: "آهنگ های پیشواز همراه اول شامل #{description_postfix} + ده‌ها سکه جایزه و شارژ رایگان",
       title:       "آوای انتظار همراه اول از #{title_postfix}",
       keywords:    artists ++ songs,
       page:        page |> String.to_integer,
@@ -68,13 +68,25 @@ defmodule Overcharge.PageController do
   end
 
 
+  def mci_pin(conn, params) do
+    render conn, "mci-pin.html",
+      description: "خرید کارت شارژ ۱۰۰۰ تومانی همراه اول با قیمت عمده باور نکردنی و تخفیف ویژه + کارت شارژ رایگان",
+      title:       "کارت شارژ همراه اول",
+      subtitle:    "فروش کارت شارژ 1000 تومانی همراه اول",
+      color:       "#e3fffe",
+      text_color:  "#fff",
+      page_type:   "product",
+      product:  "mci",
+      product_fr:  "همراه اول"
+  end
+
 
 
 ####################### IRANCELL  ##########################################
 
   def irancell(conn, _params) do
     render conn, "irancell.html",
-      description: "خرید سریع و ارزان شارژ مستقیم و بسته های اینترنتی ایرانسل بدون نیاز به وارد کردن رمز و کد",
+      description: "خرید سریع و ارزان شارژ مستقیم و بسته های اینترنتی ایرانسل بدون نیاز به وارد کردن رمز و کد + صدها جایزه و شارژ رایگان و اینترنت رایگان",
       title:       "خرید شارژ ایرانسل و بسته های اینترنتی ایرانسل",
       subtitle:    "خرید شارژ مستقیم و بسته های اینترنتی ایرانسل",
       color:       "#fff2a7",
@@ -89,7 +101,7 @@ defmodule Overcharge.PageController do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
     render conn, "irancell-topup.html",
-      description: "خرید ارزان و سریع شارژ مستقیم ایرانسل",
+      description: "خرید ارزان و سریع شارژ مستقیم ایرانسل به همراه جایزه سکه های طلایی + اینترنت رایگان",
       title:       "شارژ مستقیم ایرانسل",
       subtitle:    "شارژ مستقیم ایرانسل",
       color:       "#fff2a",
@@ -110,7 +122,7 @@ defmodule Overcharge.PageController do
         %{ persian: "ساعتی نامحدود", en: "hourly", data: Overcharge.Gasedak.get_irancell_packages(50)},
       ]
     render conn, "irancell-internet.html",
-      description: "خرید ارزان و سریع بسته اینترنتی ایرانسل",
+      description: "خرید ارزان و سریع بسته اینترنتی ایرانسل همراه با جایزه باورنکردنی + اینترنت رایگان برای شما!",
       title:       "بسته اینترنتی ایرانسل",
       subtitle:    "بسته های اینترنتی ایرانسل",
       color:       "#fff2a",
@@ -140,7 +152,7 @@ defmodule Overcharge.PageController do
     sid = 47
     data = Overcharge.Gasedak.get_irancell_packages(sid)
     render conn, "irancell-internet-package.html",
-      description: "خرید ارزان و سریع بسته اینترنتی #{package.persian} ایرانسل ",
+      description: "خرید ارزان و سریع بسته اینترنتی #{package.persian} ایرانسل همراه با جایزه و اینترنت رایگان",
       title:       "بسته‌های اینترنتی #{package.persian} ایرانسل",
       subtitle:    "بسته اینترنتی #{package.persian} ایرانسل",
       color:       "#fff2a",
@@ -163,7 +175,7 @@ defmodule Overcharge.PageController do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
     render conn, "rightel.html",
-      description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد",
+      description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد + شارژ رایگان جدید",
       title:       "خرید شارژ رایتل",
       subtitle:    "خرید شارژ مستقیم رایتل",
       color:       "#ffedf8",
@@ -300,13 +312,13 @@ defmodule Overcharge.PageController do
               target
             end
 
-      {code, invoice} = case (ivs |> Overcharge.Utils.deliver) do
-          {:ok, true, iv} ->
-              {"st-001", iv}
+      {code, invoice, tmpl} = case (ivs |> Overcharge.Utils.deliver) do
+          {:ok, true, iv, t} ->
+              {"st-001", iv, t}
           {:error, iv} ->
-              {"st-002", iv}
+              {"st-002", iv, nil}
           _ ->
-              {"st-003", ivs}
+              {"st-003", ivs, nil}
       end
 
 
@@ -316,6 +328,7 @@ defmodule Overcharge.PageController do
       subtitle:    "تحویل محصول",
       color:       "#fff",
       code:        code,
+      tmpl:        tmpl,
       invoice:     invoice,
       text_color:  "",
       page_type:   "invoice",
@@ -325,7 +338,13 @@ defmodule Overcharge.PageController do
   end
 
 
-
+  def show_invoice_pins(conn, params) do
+    invoice = params["uuid"] |> Overcharge.Utils.get_invoice_uuid
+    data = Overcharge.Utils.get_invoice_pins(invoice.id) 
+            |> Enum.map(fn(x) -> "#{x.serial} #{x.code}" end) 
+            |> Enum.join("\r\n")
+    conn |> text("      SERIAL            PIN    \r\n#{data}") 
+  end
 
   
 

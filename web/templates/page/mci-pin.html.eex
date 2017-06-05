@@ -1,0 +1,109 @@
+
+
+
+<h4 align="center" class="whitecolor">فروش کارت شارژ با ۶٪ تخفیف</h4>
+
+<form method="post" id="form"
+  custom-validation-reporting="show-all-on-submit"
+  class="hide-inputs p3 mci_topup_form right"
+  action-xhr="/api/mci_pin_invoice"
+  target="_top">
+<span class="center whitecolor">کارت های پین شارژ ۱۰۰۰ تومانی همراه اول با تخفیف و به قیمت عمده به فروش می‌رسند</span>
+<p class="right">
+ <i class="fa fa-life-saver"></i>
+
+برای خرید کارت های شارژ هزار تومانی تعداد رو مشغص کنید
+ 
+ <i class="fa fa-arrow-circle-down fa-2x"></i>
+ </p>
+
+
+<amp-selector class="mci_topup_products" name="count" layout="container">
+<%= for p <- [1, 5, 10, 20, 50, 100] do %>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "<%= p %> عدد کارت شارژ 1000 تومانی همراه اول",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/mci-pin-<%= p %>.png",
+  "description": "کارت شارژ به قیمت باورنکردنی عمده فقط در شارژل",
+  "brand": {
+    "@type": "Thing",
+    "name": "همراه اول"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "reviewCount": "<%= 345-p  %>"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "IRR",
+    "price": "<%= 9400*p %>",
+    "itemCondition": "http://schema.org/UsedCondition",
+    "availability": "http://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "شرکت ارتباطات سیار ایران"
+    }
+  }
+}
+</script>
+
+
+  <amp-img src="/images/mci-pin-<%= p %>.png"
+    width="100"
+    <%= if p == 1 do %>
+        selected
+    <% end %>
+    height="75"
+    alt="<%= p %> عدد کارت شارژ 1000 تومانی همراه اول"
+    title="<%= p %> عدد کارت شارژ 1000 تومانی همراه اول"
+    option="<%= p %>"></amp-img>
+
+<% end %>
+</amp-selector>
+
+  <hr/>
+  <input type="submit"
+    value="مرحله بعد"
+    class="ampstart-btn caps">
+
+  <div submit-success>
+    <template type="amp-mustache">
+      فاکتور شما صادر شد.
+    </template>
+  </div>
+  <div submit-error>
+    <template type="amp-mustache">
+          خطایی رخ داد.  لطفا دوباره تلاش کنید.
+    </template>
+  </div>
+</form>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "کارت شارژ هزار تومانی همراه اول",
+  "image": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/mci-pin-1.png",
+  "brand": {
+    "@type": "Thing",
+    "name": "ACME"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "ratingCount": "120"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "8500",
+    "highPrice": "9700",
+    "priceCurrency": "IRR"
+  }
+}
+</script>

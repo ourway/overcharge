@@ -60,6 +60,7 @@ defmodule Overcharge.Router do
     get "/invoice/:refid", PageController, :invoice
     get "/mci", PageController, :mci
     get "/mci/topup", PageController, :mci_topup
+    get "/mci/pin", PageController, :mci_pin
     get "/mci/rbt", PageController, :mci_rbt
     get "/irancell", PageController, :irancell
     get "/irancell/topup", PageController, :irancell_topup
@@ -67,6 +68,7 @@ defmodule Overcharge.Router do
     get "/irancell/internet/:package_name", PageController, :irancell_internet_package
     get "/rightel", PageController, :rightel
     get "/taliya", PageController, :taliya
+    get "/show_invoice_pins/:uuid", PageController, :show_invoice_pins
   end
 
 
@@ -79,6 +81,7 @@ defmodule Overcharge.Router do
     pipe_through :api
     get "/ping",                              ApiController, :ping
     post "/mci_topup_invoice",                ApiController, :mci_topup_invoice
+    post "/mci_pin_invoice",                  ApiController, :mci_pin_invoice
     get "/get_mci_rbt",                       ApiController, :get_mci_rbt
     post "/irancell_topup_invoice",           ApiController, :irancell_topup_invoice
     post "/irancell_internet_invoice/:sid",   ApiController, :irancell_internet_invoice

@@ -33,9 +33,9 @@
     <div class="center whitecolor">
         <h6><%= @page+1 %></h6>
         <%= if @page > 0 do %>
-            <a class="mci_color" href="?page=<%= @page - 1 %>#form">صفحه قبل</a>
+            <a class="mci_color" href="?page=<%= @page - 1 %>">صفحه قبل</a>
         <% end %>
-        <a class="mci_color" href="?page=<%= @page + 1 %>#form">صفحه بعد</a>
+        <a class="mci_color" href="?page=<%= @page + 1 %>">صفحه بعد</a>
     </div>
 
 </div>

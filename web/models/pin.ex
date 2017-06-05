@@ -3,7 +3,7 @@ defmodule Overcharge.Pin do
 
   schema "pins" do
     field :uuid, :binary_id
-    field :is_active, :boolean, default: false
+    field :is_active, :boolean, default: true
     field :is_used, :boolean, default: false
     field :prefix, :integer
     field :amount, :integer

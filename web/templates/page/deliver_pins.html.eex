@@ -1,0 +1,19 @@
+
+<div>
+<span>پین کد‌های خریداری شده شما به شرح زیر است.</span>
+<span>اطلاعات کامل پین‌های شما در <a target="_blank" href="/show_invoice_pins/<%= @invoice.uuid %>">این لینک</a> موجود است.</span>
+
+<ol>
+    <%= for pin <- @invoice.id |> Overcharge.Utils.get_invoice_pins do %>
+
+        <li class="pin">
+            <%= for i <- 0..4 do %> <%= pin.code |> String.slice(i,3) %><% end %>
+
+
+            <small class="pin-easy"><a href="tel:*140*<%= pin.code %>#">*140*<%= pin.code %>#</a></small>
+    <% end %>
+
+</ol>
+
+
+</div>

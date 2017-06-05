@@ -20,8 +20,10 @@
         end %></span>
         <span>به شماره موبایل</span>
         <span><%= msisdn |> String.slice(2,10) %></span>
-        <span>با موفقیت ارسال شد.</span>
-
+        <span>ارسال می‌شود.</span>
+           <br/>
+           <span>
+          برای آگاهی از موفقیت عملیات روی <a href="/deliver/<%= @invoice.uuid %>" target="_blank">این لینک</a> کلیک کنید.</span>
             <br/>
             <br/>
         <div class="center">
@@ -73,6 +75,9 @@
     <% end %>
 
 
+<%= if @tmpl do %>
+    <%= render Overcharge.PageView, "#{@tmpl}.html", conn: @conn, invoice: @invoice %>
+<% end %>
 
 </div>
 

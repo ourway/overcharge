@@ -18,7 +18,7 @@ defmodule Overcharge.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Overcharge, []},
-     applications: [:phoenix, :phoenix_pubsub, :coherence, :sitemap,
+     applications: [:phoenix, :phoenix_pubsub, :coherence, :sitemap, :ex_cron, :phoenix_live_reload,
                     :jalaali, :exml, :calendar, :cachex, :mailman, :ssl, :floki, :mochiweb,
                     :phoenix_html, :cowboy, :logger, :gettext,:httpoison,
                     :phoenix_ecto, :postgrex]]
@@ -38,6 +38,7 @@ defmodule Overcharge.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:mailman, "~> 0.3.0"},
      {:coherence, "~> 0.3"},
+     {:exrm, "~> 1.0.8"},
      {:eiconv, github: "zotonic/eiconv"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},

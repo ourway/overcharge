@@ -71,6 +71,25 @@ defmodule Overcharge.ApiController do
 
 
 
+  def mci_pin_invoice(conn, params) do
+      host = Overcharge.Router.Helpers.url(conn)
+      count = params["count"] |> String.to_integer
+      raw_amount = 940*count
+      amount = raw_amount/1.09 |> round
+      action = "pin_mci_#{count}:1000_#{}"
+      product =  "#{count} عدد کارت شارژ 1000 تومانی همراه اول"
+      client = "980000000000" |> Overcharge.Utils.get_client
+      invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
+       conn 
+        |> put_resp_header("AMP-Redirect-To", "#{host}/invoice/#{invoice.refid}#invoice")
+        |> json(%{message: :pong})
+  end
+
+
+
+
+
+
   def get_mci_rbt(conn, params) do
      page = params["page"] || 0
      data = Overcharge.Utils.get_mci_rbt_data(page)
