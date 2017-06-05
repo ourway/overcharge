@@ -30,8 +30,8 @@ defmodule Overcharge.Pay do
         } |> Poison.encode
         {:ok,  %HTTPoison.Response{body: body}} = HTTPoison.post("#{@baseurl}/verify", payload, 
 					 [{"Content-Type", "application/json"}], [])
-        %{ "status" => 1} = body |> Poison.decode!
-        :ok
+        %{ "status" => status} = body |> Poison.decode!
+        status
     end
 
 

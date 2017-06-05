@@ -233,7 +233,6 @@ defmodule Overcharge.Utils do
                                 }
                       end |> IO.inspect
                     
-                    invoice |> Overcharge.Pay.verify
                     case Overcharge.Gasedak.topup(msisdn, price , invoice.refid, mode, sid) do  ## do charge
                         {:ok, true, transactionid} ->
                             #:timer.sleep(500)
@@ -275,7 +274,6 @@ defmodule Overcharge.Utils do
                             :error
                     end
                 func == "pin" ->
-                    invoice |> Overcharge.Pay.verify
                     [count, price] = amount |> String.split(":") |> Enum.map(fn(x) -> x |> String.to_integer end)
                     :ok = get_mci_pins(count, price, invoice.id) 
                     ivs = invoice |> set_invoice_status("completed")

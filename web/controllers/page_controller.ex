@@ -307,7 +307,12 @@ defmodule Overcharge.PageController do
                     |> Overcharge.Utils.set_invoice_checked_out
                      
       ivs = if target.status == "pending" do  ## only first time
-              target |> Overcharge.Utils.set_invoice_status("payed")
+              case target |> Overcharge.Pay.verify do
+                1 ->
+                  target |> Overcharge.Utils.set_invoice_status("payed")
+                _ ->
+                  target
+              end
             else
               target
             end
