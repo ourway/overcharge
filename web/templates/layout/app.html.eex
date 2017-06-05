@@ -949,7 +949,7 @@ input.msisdn {
   <script type="application/json">
   {
     "vars": {
-      "account": "UA-XXXXX-Y"
+      "account": "UA-100499611-1"
     },
     "triggers": {
       "trackPageview": {
