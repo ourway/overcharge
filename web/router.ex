@@ -53,6 +53,7 @@ defmodule Overcharge.Router do
     pipe_through :browser # Use the default browser stack
     get "/", PageController, :index
     get "/deliver/:uuid", PageController, :deliver
+    post "/deliver/:uuid", PageController, :deliver
     get "/faq", PageController, :faq
     get "/contact", PageController, :contact
     get "/about", PageController, :about

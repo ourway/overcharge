@@ -4,7 +4,6 @@
   <head>
 
 
-  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +67,7 @@
     <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
   <% end %>
 
-  <%= if @page_type=="list" do %>
+  <%= if @page_type=="landing" do %>
   <% end %>
 
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
@@ -232,6 +231,11 @@ form.amp-form-submit-success.hide-inputs > input {
   background: darkgreen;
   border-radius: 5px;
   padding: 2px;
+}
+
+.blackback {
+  background:black;
+  padding: 10px;
 }
 
 .blueback {
@@ -937,6 +941,7 @@ input.msisdn {
 
 
 
+  <link async=true href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
 </head>
 

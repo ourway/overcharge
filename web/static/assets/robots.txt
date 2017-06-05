@@ -14,3 +14,4 @@ Disallow: /reports
 Disallow: /*.pdf$
 
 Sitemap: https://chargell.ir/sitemaps/sitemap.xml
+* [https://chargell.ir/irancell شارژ ایرانسل]

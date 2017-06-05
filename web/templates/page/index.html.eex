@@ -17,12 +17,6 @@
         </amp-img>
     </a>
 
-
-
-
-
-
-
     <a href="/mci" class="select_package mci" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-tags"></i>
@@ -59,3 +53,5 @@
     </a>
 
 </div>
+
+<br/>

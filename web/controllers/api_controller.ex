@@ -98,8 +98,8 @@ defmodule Overcharge.ApiController do
 
   def gopay(conn, params) do
       refid = params["refid"]
-      gateway = Overcharge.Gasedak
-      paylink = conn |> gateway.checkout(refid)
+      ivs = Overcharge.Utils.get_invoice(refid) |> Overcharge.Pay.request 
+      paylink = "https://pay.ir/payment/gateway/#{ivs.transactionid}"
       redirect conn, external: paylink
   end
 
