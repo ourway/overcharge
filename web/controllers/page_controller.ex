@@ -68,7 +68,7 @@ defmodule Overcharge.PageController do
   end
 
 
-  def mci_pin(conn, params) do
+  def mci_pin(conn, _params) do
     render conn, "mci-pin.html",
       description: "خرید کارت شارژ ۱۰۰۰ تومانی همراه اول با قیمت عمده باور نکردنی و تخفیف ویژه + کارت شارژ رایگان",
       title:       "کارت شارژ همراه اول",
@@ -149,14 +149,14 @@ defmodule Overcharge.PageController do
       "hourly" ->
           %{ persian: "ساعتی نامحدود", en: "hourly", data: Overcharge.Gasedak.get_irancell_packages(50)}
     end
-    sid = 47
-    data = Overcharge.Gasedak.get_irancell_packages(sid)
+    #sid = 47
+    #data = Overcharge.Gasedak.get_irancell_packages(sid)
     render conn, "irancell-internet-package.html",
       description: "خرید ارزان و سریع بسته اینترنتی #{package.persian} ایرانسل همراه با جایزه و اینترنت رایگان",
       title:       "بسته‌های اینترنتی #{package.persian} ایرانسل",
       subtitle:    "بسته اینترنتی #{package.persian} ایرانسل",
       color:       "#fff2a",
-      sid:        sid,
+      #sid:        sid,
       amount:     amount |> String.to_integer,
       msisdn:     msisdn,
       package:    package,
@@ -305,7 +305,6 @@ defmodule Overcharge.PageController do
       uuid = params["uuid"]
       target = uuid |> Overcharge.Utils.get_invoice_uuid
                     |> Overcharge.Utils.set_invoice_checked_out
-                    |> Overcharge.Pay.verify
                      
       ivs = if target.status == "pending" do  ## only first time
               target |> Overcharge.Utils.set_invoice_status("payed")

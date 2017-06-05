@@ -30,6 +30,7 @@ defmodule Overcharge.Utils do
     def get_new_mci_pin(amount, invoice_id) do
         case (from p in Overcharge.Pin,
                 where: p.is_active == true,
+                where: p.amount == ^amount,
                 where: p.is_used == false,
                 preload: :invoice,
                 limit: 1,
@@ -231,6 +232,8 @@ defmodule Overcharge.Utils do
                                     amount |> String.split(":") |> List.last |> String.to_integer,
                                 }
                       end |> IO.inspect
+                    
+                    invoice |> Overcharge.Pay.verify
                     case Overcharge.Gasedak.topup(msisdn, price , invoice.refid, mode, sid) do  ## do charge
                         {:ok, true, transactionid} ->
                             #:timer.sleep(500)
@@ -238,7 +241,7 @@ defmodule Overcharge.Utils do
                             Task.async fn() -> 
                                 case transactionid |> Overcharge.Gasedak.check_transaction_status(invoice.refid, msisdn) do  ## check status
                                     {:ok, true} ->
-                                        ivs = invoice 
+                                        ivs = invoice
                                                     |> set_transactionid(transactionid)
                                                     |> set_invoice_status("completed")
                                         {:ok, true, ivs , nil}
@@ -272,8 +275,8 @@ defmodule Overcharge.Utils do
                             :error
                     end
                 func == "pin" ->
-                    IO.puts("Not implemented yet")
-                    [count, price] = amount |> String.split(":") |> Enum.map(fn(x) -> x |> String.to_integer end) |> IO.inspect
+                    invoice |> Overcharge.Pay.verify
+                    [count, price] = amount |> String.split(":") |> Enum.map(fn(x) -> x |> String.to_integer end)
                     :ok = get_mci_pins(count, price, invoice.id) 
                     ivs = invoice |> set_invoice_status("completed")
                     {:ok, true, ivs , "deliver_pins"}
