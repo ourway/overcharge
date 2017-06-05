@@ -373,6 +373,10 @@ background-color: <%= @color %>;
     /* width: 100%; */
 
 }
+.bold {
+  font-weight: 800;
+  font-size: 14px;
+}
 @media only screen and (max-width: 800px) { .site-header { padding: 0 0px; } }
 .site-header .page-links { display: block; position: absolute; top: 10px; right: 0; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
 .site-header .page-links a { text-decoration: none;}
