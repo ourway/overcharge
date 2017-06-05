@@ -12,7 +12,7 @@ defmodule Overcharge.Sitemaps do
     
       for u <- [
                 "/", "/mci", "/mci/topup", "/mci/pin", "/taliya/topup", "/rightel/topup",
-                "/irancell/topup", "/irancell/internet"
+                "/irancell/topup", "/irancell/internet", 
         ] do
             add u, priority: 0.5, changefreq: "hourly"
       end
