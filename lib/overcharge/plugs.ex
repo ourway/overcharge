@@ -14,7 +14,7 @@ defmodule Overcharge.CORS do
         #origin = conn |> Plug.Conn.get_req_header("origin") |> List.first
         conn
             |> Plug.Conn.put_resp_header("amp-access-control-allow-source-origin", origin || host)
-            |> Plug.Conn.put_resp_header("access-control-allow-origin", origin || host)
+            |> Plug.Conn.put_resp_header("access-control-allow-origin", "*")
             |> Plug.Conn.put_resp_header("access-control-expose-headers", 
                 "amp-access-control-allow-source-origin, access-control-allow-origin, amp-redirect-to")
     end
