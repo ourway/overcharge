@@ -355,8 +355,11 @@ main { display: block; }
 body { 
 font-family: 'IRANSans', sans-serif;
 background-image: url(/images/bg-<%= @product %>.svg);
-background-size: cover;
 background-position: 0px -50px;
+<%= if @page_type == "landing" do %>
+    background-position: -378px 0px;
+<%= end %>
+background-size: cover;
 background-color: <%= @color %>;
  margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-font-feature-settings: "liga=1, dlig=1"; -ms-font-feature-settings: "liga", "dlig"; -webkit-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; }
 
