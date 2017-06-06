@@ -14,62 +14,57 @@
 >
 <url>
 	<loc>https://chargell.ir</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/mci</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/همراه-اول</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/mci/topup</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/همراه-اول/شارژ-مستقیم</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/mci/pin</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/همراه-اول/کارت-شارژ</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/mci/rbt</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/همراه-اول/آهنگ-پیشواز</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/taliya/topup</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/شارژ-رایتل</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/rightel/topup</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/ایرانسل/topup</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/irancell/topup</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/ایرانسل/internet</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/irancell/internet</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/ایرانسل/بسته‌های-اینترنتی/daily</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/irancell/internet/daily</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/ایرانسل/بسته‌های-اینترنتی/monthly</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url><url>
-	<loc>https://chargell.ir/irancell/internet/monthly</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
-	<changefreq>hourly</changefreq>
-	<priority>0.5</priority>
-</url><url>
-	<loc>https://chargell.ir/irancell/internet/daily/hourly</loc>
-	<lastmod>2017-06-05T14:16:09Z</lastmod>
+	<loc>https://chargell.ir/ایرانسل/بسته‌های-اینترنتی/daily/hourly</loc>
+	<lastmod>2017-06-06T01:45:07Z</lastmod>
 	<changefreq>hourly</changefreq>
 	<priority>0.5</priority>
 </url></urlset>

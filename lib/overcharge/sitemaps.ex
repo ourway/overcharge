@@ -11,9 +11,10 @@ defmodule Overcharge.Sitemaps do
     create do
     
       for u <- [
-                "/", "/mci", "/mci/topup", "/mci/pin", "/mci/rbt", "/taliya/topup", "/rightel/topup",
-                "/irancell/topup", "/irancell/internet", "/irancell/internet/daily", "/irancell/internet/monthly",  
-                "/irancell/internet/daily/hourly"
+                "/", "/همراه-اول", "/همراه-اول/شارژ-مستقیم", "/همراه-اول/کارت-شارژ", "/همراه-اول/آهنگ-پیشواز", 
+                "/شارژ-رایتل",
+                "/ایرانسل/topup", "/ایرانسل/internet", "/ایرانسل/بسته‌های-اینترنتی/daily", "/ایرانسل/بسته‌های-اینترنتی/monthly",  
+                "/ایرانسل/بسته‌های-اینترنتی/daily/hourly"
         ] do
             add u, priority: 0.5, changefreq: "hourly"
       end

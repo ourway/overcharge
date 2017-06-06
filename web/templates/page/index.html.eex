@@ -3,7 +3,7 @@
 
 
 
-    <a href="/irancell" class="select_package irancell" itemscope itemtype="http://schema.org/Product">
+    <a href="/ایرانسل" class="select_package irancell" itemscope itemtype="http://schema.org/Product">
         <h1> <i class="fa fa-tags"></i>
 
         <span itemprop="name">
@@ -17,7 +17,7 @@
         </amp-img>
     </a>
 
-    <a href="/mci" class="select_package mci" itemscope itemtype="http://schema.org/Product">
+    <a href="/همراه-اول" class="select_package mci" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-tags"></i>
 
@@ -38,7 +38,7 @@
 
 
 
-    <a href="/rightel" class="select_package rightel" itemscope itemtype="http://schema.org/Product">
+    <a href="/شارژ-رایتل" class="select_package rightel" itemscope itemtype="http://schema.org/Product">
         <h1> <i class="fa  fa-tags"></i>
 
         <span itemprop="name">

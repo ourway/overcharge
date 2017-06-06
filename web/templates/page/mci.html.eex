@@ -1,7 +1,7 @@
 
 <div class="index_page">
 
-    <a href="/mci/topup#form" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/همراه-اول/شارژ-مستقیم" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-bolt fa-2x"></i>
 
@@ -38,7 +38,7 @@
     </a>
 
 
-    <a href="/mci/pin" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/همراه-اول/کارت-شارژ", class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-credit-card fa-2x"></i>
 

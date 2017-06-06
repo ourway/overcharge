@@ -3,7 +3,7 @@
 
 <%= for package <- @packages do %>
 
-    <a href="/irancell/internet/<%= package.en %>" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/ایرانسل/بسته‌های-اینترنتی/<%= package.en %>" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-wifi fa-2x"></i>
 

@@ -5,9 +5,9 @@
   <div class="links"> 
 
     <ul >
-      <li> <a href="/mci" >شارژ همراه اول</a> <i class="fa fa-tag"></i></li>
-      <li><a href="/irancell" >شارژ ایرنسل</a> <i class="fa fa-tag"></i> </li>
-      <li><a href="/rightel" >شارژ رایتل</a> <i class="fa fa-tag"></i></li>
+      <li> <a href="/همراه-اول" >شارژ همراه اول</a> <i class="fa fa-tag"></i></li>
+      <li><a href="/ایرانسل" >شارژ ایرنسل</a> <i class="fa fa-tag"></i> </li>
+      <li><a href="/شارژ-رایتل" >شارژ رایتل</a> <i class="fa fa-tag"></i></li>
     </ul>
 
 

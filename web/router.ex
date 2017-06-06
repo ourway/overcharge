@@ -60,14 +60,22 @@ defmodule Overcharge.Router do
     get "/articles", PageController, :articles
     get "/invoice/:refid", PageController, :invoice
     get "/mci", PageController, :mci
+    get "/همراه-اول", PageController, :mci
     get "/mci/topup", PageController, :mci_topup
+    get "/همراه-اول/شارژ-مستقیم", PageController, :mci_topup
     get "/mci/pin", PageController, :mci_pin
+    get "/همراه-اول/کارت-شارژ", PageController, :mci_pin
     get "/mci/rbt", PageController, :mci_rbt
+    get "/همراه-اول/آهنگ-پیشواز", PageController, :mci_rbt
     get "/irancell", PageController, :irancell
-    get "/irancell/topup", PageController, :irancell_topup
+    get "/ایرانسل", PageController, :irancell
+    get "/ایرانسل/شارژ-مستقیم", PageController, :irancell_topup
     get "/irancell/internet", PageController, :irancell_internet
+    get "/ایرانسل/بسته‌های-اینترنتی", PageController, :irancell_internet
     get "/irancell/internet/:package_name", PageController, :irancell_internet_package
-    get "/rightel", PageController, :rightel
+    get "/ایرانسل/بسته‌های-اینترنتی/:package_name", PageController, :irancell_internet_package
+    get "/rightel/topup", PageController, :rightel
+    get "/شارژ-رایتل", PageController, :rightel
     get "/taliya", PageController, :taliya
     get "/show_invoice_pins/:uuid", PageController, :show_invoice_pins
   end
