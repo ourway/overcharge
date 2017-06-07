@@ -3,6 +3,11 @@ defmodule Overcharge.ApiController do
   
 
 
+  def echo(conn, params) do
+    params |> IO.inspect
+    json(conn, %{message: :pong})
+  end
+
   def ping(conn, _params) do
        json(conn, %{message: :pong})
   end

@@ -103,6 +103,12 @@ defmodule Overcharge.Router do
     # Add protected routes below
   end
 
+
+  scope "/bot", Overcharge do
+    pipe_through :api
+    post "/", ApiController, :echo
+  end
+
   scope "/admin", Overcharge do
     pipe_through :admin
     get "/index", PageController, :admin

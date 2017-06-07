@@ -40,3 +40,7 @@ config :coherence, Overcharge.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
   api_key: "your api key here"
 # %% End Coherence Configuration %%
+
+
+config :nadia,
+  token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws"
