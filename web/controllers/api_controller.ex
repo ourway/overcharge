@@ -109,5 +109,53 @@ defmodule Overcharge.ApiController do
   end
 
 
+  def admin_new_post(conn, params) do
+      {:ok, post} = Overcharge.Post.changeset(
+            %Overcharge.Post{},
+                %{
+                    title: params["title"],
+                    body:  params["body"],
+                    is_published:  true
+                }) |> Overcharge.Repo.insert
+      conn |> json(%{message: :created, status: 0, uuid: post.uuid})
+  end
+
+
+  def admin_publish_post(conn, params) do
+    (from p in Overcharge.Post,
+            where: p.uuid == ^params["uuid"],
+            select: p)
+    |> Overcharge.Repo.one
+    |> Overcharge.Charge.changeset(
+        %{ 
+          is_published:  true
+        }) 
+    |> Overcharge.Repo.update!
+
+      conn |> json(%{message: :published})
+  end
+
+  def admin_unpublish_post(conn, params) do
+
+    (from p in Overcharge.Post,
+            where: p.uuid == ^params["uuid"],
+            select: p)
+    |> Overcharge.Repo.one
+    |> Overcharge.Post.changeset(
+        %{ 
+          is_published:  false
+        }) 
+    |> Overcharge.Repo.update!
+
+      conn |> json(%{message: :unpublished})
+  end
+
+
+  def admin_delete_post(conn, params) do
+        (from p in Overcharge.Post, where: p.uuid == ^params["uuid"])
+        |> Overcharge.Repo.delete_all
+        conn |> json(%{message: :deleted})
+  end
+
 
 end

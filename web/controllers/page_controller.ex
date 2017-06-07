@@ -2,6 +2,9 @@ defmodule Overcharge.PageController do
   use Overcharge.Web, :controller
 
   def index(conn, _params) do
+
+
+
     render conn, "index.html",
       description: "شارژ نیاز دارید؟  بسته اینترنتی لازم دارید؟  با شارژل همه چی تو سه سوت! ",
       title:       "خرید شارژ",
@@ -287,17 +290,59 @@ defmodule Overcharge.PageController do
 
   def articles(conn, _params) do
 
+    posts = (from p in Overcharge.Post,
+            where: p.is_published == true,
+            order_by: [desc: p.inserted_at],
+            select: %{
+              title: p.title,
+              id:    p.id,
+              datetime:  p.updated_at
+            })
+    |> Overcharge.Repo.all
+
     render conn, "articles.html",
       description: "مقالات و مطالب مربوط به آخرین رویدادهای مربوط به شارژ در ایران",
       title:       "مقالات شارژل",
-      subtitle:    "مقالات",
+      subtitle:    "مقالات و رویدادهای دنیای مخابرت و تلفن‌های همراه",
+      posts:       posts,
       color:       "#f8f8f8",
       text_color:  "",
       page_type:   "article",
-      product:     "article",
+      product:     "news",
       product_fr:  "مقاله"
 
   end
+
+
+
+  def article_view(conn, params) do
+
+    post = (from p in Overcharge.Post,
+            where: p.id == ^params["id"],
+            where: p.is_published == true,
+            select: p)
+    |> Overcharge.Repo.one
+
+    {:ok, body, []} = post.body |> Earmark.as_html
+    text = body |> HtmlSanitizeEx.strip_tags
+
+    render conn, "article_view.html",
+      description: text,
+      title:       post.title,
+      subtitle:    post.title,
+      post:       post,
+      body:       body,
+      text:       text,
+      color:       "#f8f8f8",
+      text_color:  "",
+      page_type:   "article",
+      product:     "news",
+      product_fr:  "مقاله"
+
+  end
+
+
+
 
 
     def deliver(conn, params) do

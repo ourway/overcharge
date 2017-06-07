@@ -1,7 +1,19 @@
 
 <div class="right">
-    <ul>
-        <li><a href="/همراه-اول/آهنگ-پیشواز">لیست کامل آواهای انتظار همراه اول</a></li>
+
+    <ul class="newslist">
+    
+        <%= for p <- @posts do %>
+            <li>
+                <i class="fa fa-clock-o"></i>
+                <small><%= p.datetime |> Overcharge.Utils.date_to_persian |> String.split(" ") |> List.first  %></small>
+                <i class="fa fa-newspaper-o"></i>
+                <a href="/articles/<%= p.id %>/<%= p.title |> String.replace(" ", "-")%>"><%= p.title %></a>
+            </li>
+
+        <% end %>
+
     </ul>
+
 
 </div>

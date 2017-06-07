@@ -1,0 +1,46 @@
+<div class="center right grey">
+ <small  >منتشر شده در تاریخ <%= @post.inserted_at |> Overcharge.Utils.date_to_persian |> String.split(" ") |> List.first |> String.replace("-", "/")  %></small>
+ </div>
+<article class="article_view">
+
+
+<%= @body |> raw %>
+
+</article>
+
+<br/>
+
+<div class="right text_right grey">
+<small>نشر با ذکر منبع بلامانع است</small>
+</div>
+
+<a href="/articles" >بازگشت به مقالات</a>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= Overcharge.Router.Helpers.url(@conn) %>/articles/<%= @post.id %>/<%= @post.title |> String.replace(" ", "-") %>"
+  },
+  "headline": "<%= @post.title %>",
+  "datePublished": "<%= @post.inserted_at |> Ecto.DateTime.cast! |> Ecto.DateTime.to_iso8601 %>",
+  "dateModified": "<%= @post.updated_at |> Ecto.DateTime.cast! |> Ecto.DateTime.to_iso8601 %>",
+  "author": {
+    "@type": "Person",
+    "name": "Farsheed Ashouri"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Chargell",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/logo_s.png",
+      "width": 256,
+      "height": 256
+    }
+  },
+  "description": "<%= @text %>"
+}
+</script>

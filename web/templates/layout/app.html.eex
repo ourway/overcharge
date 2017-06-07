@@ -74,6 +74,7 @@
 
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+  <script async custom-element="amp-facebook-like" src="https://cdn.ampproject.org/v0/amp-facebook-like-0.1.js"></script>
 
 
   <script type="application/ld+json">
@@ -478,6 +479,46 @@ hr {background: #02a8ff; height: 2px; border: none;}
 .footer-links i {
     vertical-align: sub;
 }
+
+.article_view p {
+  color: #333;
+  padding: 20px;
+  direction: rtl;
+  text-align: justify;
+  font-size: 13px;
+}
+
+.newslist li {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.newslist li a {
+  text-decoration: none;
+  color: #db004d;
+  text-align: justify;
+}
+
+
+.newslist li:hover,  .newslist li:active{
+  background: #db004d;
+}
+
+.newslist li:hover a,  .newslist li:active a{
+  color: white;
+}
+
+.newslist li:hover i,  .newslist li:active i{
+  color: white;
+}
+
+.newslist li:hover small,  .newslist li:active small{
+  color: white;
+}
+
+
+
 
 .links_me {
   list-style: none;
@@ -910,6 +951,10 @@ input.msisdn {
   color: darkred;
 }
 
+.grey {
+  color: grey;
+}
+
 .links ul{
   text-align: left;
 }
@@ -982,6 +1027,7 @@ input.msisdn {
 
     <header class="site-header">
   <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_s_topbar.png" width="96" height="96" /></span></a>
+
 
 
   <div class="page-links">
@@ -1059,12 +1105,29 @@ input.msisdn {
     
   </div>
 </header>
+
+
+            
 <div class="subtitle">
+
+
+
 <%= if @subtitle != "" do %>
  <h1>
+
+
+
   <i class="fa fa-ioxhost"></i>
-  <%= @subtitle %> </h1>
+  <%= @subtitle %> 
+
+
+  
+  </h1>
 <% end %>
+
+
+
+
 </div>
     <main class="content" role="main">
 

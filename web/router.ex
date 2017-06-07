@@ -27,6 +27,12 @@ defmodule Overcharge.Router do
     plug Overcharge.CORS
   end
 
+  pipeline :admin_api do
+    plug :accepts, ["json"]
+    plug Overcharge.CORS
+    plug Overcharge.Admin
+  end
+
 
   pipeline :protected do
     plug :accepts, ["html"]
@@ -58,6 +64,7 @@ defmodule Overcharge.Router do
     get "/contact", PageController, :contact
     get "/about", PageController, :about
     get "/articles", PageController, :articles
+    get "/articles/:id/:title", PageController, :article_view
     get "/invoice/:refid", PageController, :invoice
     get "/mci", PageController, :mci
     get "/همراه-اول", PageController, :mci
@@ -114,6 +121,18 @@ defmodule Overcharge.Router do
     get "/index", PageController, :admin
     # Add protected routes below
   end
+
+  scope "/admin/api", Overcharge do
+    pipe_through :admin_api
+    get       "/ping",                       ApiController, :ping
+    post      "/post/new",                   ApiController, :admin_new_post
+    patch     "/post/publish/:uuid",         ApiController, :admin_publish_post
+    patch     "/post/unpublish/:uuid",       ApiController, :admin_unpublish_post
+    delete    "/post/delete/:uuid",          ApiController, :admin_delete_post
+
+  end
+
+
 
   # Other scopes may use custom stacks.
   # scope "/api", Overcharge do

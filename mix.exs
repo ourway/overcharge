@@ -21,7 +21,7 @@ defmodule Overcharge.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :coherence, :sitemap, :ex_cron, :phoenix_live_reload,
                     :jalaali, :exml, :calendar, :cachex, :mailman, :ssl, :floki, :mochiweb,
                     :phoenix_html, :cowboy, :nadia, :logger, :gettext,:httpoison,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :earmark]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,6 +37,7 @@ defmodule Overcharge.Mixfile do
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
      {:mailman, "~> 0.3.0"},
+     {:html_sanitize_ex, "~> 1.3.0"},
      {:coherence, "~> 0.3"},
      {:exrm, "~> 1.0.8"},
      {:eiconv, github: "zotonic/eiconv"},
@@ -46,6 +47,7 @@ defmodule Overcharge.Mixfile do
      {:floki, "~> 0.17.2"},
      {:sitemap, "~> 0.9.1"},
      {:nadia, "~> 0.4.2"},
+     {:earmark, "~> 1.2.2"},
      {:poison, "~> 3.1", override: true},
      {:calendar, "~> 0.16.1"},
      {:jalaali, "~> 0.1.1"},

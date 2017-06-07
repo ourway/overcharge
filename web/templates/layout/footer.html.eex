@@ -26,13 +26,14 @@
 
 
   <div>
+
+
       <amp-social-share type="twitter"></amp-social-share>
       <amp-social-share type="gplus"
         data-param-text="<%= @title %>" ></amp-social-share>
       <amp-social-share type="linkedin"
-        data-param-text="<%= @title %>"
-        data-param-url="<%= Overcharge.Router.Helpers.url(@conn) %>">
-      </amp-social-share>
+        data-param-text="<%= @title %>"></amp-social-share>
+      
   </div>
 
   <br/>
