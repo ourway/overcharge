@@ -1,7 +1,7 @@
 defmodule Overcharge.Sitemaps do
 
     use Sitemap,
-    host: "https://chargell.ir",
+    host: "https://www.chargell.com",
     files_path: "web/static/assets/sitemaps/",
     public_path: "sitemaps/",
     compress: false

@@ -13,4 +13,4 @@ Disallow: /api
 Disallow: /reports
 Disallow: /*.pdf$
 
-Sitemap: https://chargell.ir/sitemaps/sitemap.xml
+Sitemap: https://www.chargell.com/sitemaps/sitemap.xml
