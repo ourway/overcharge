@@ -8,13 +8,13 @@
 
 </article>
 
-<br/>
 
-<div class="right text_right grey">
+<div class="right text_right grey padded">
 <small>نشر با ذکر منبع بلامانع است</small>
 </div>
-
+<div class="padded">
 <a href="/articles" >بازگشت به مقالات</a>
+</div>
 
 <script type="application/ld+json">
 {
