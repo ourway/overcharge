@@ -303,15 +303,18 @@ def send_gift(chat_id) do
         score > 300 && score < 600 ->
             chat_id |> get_user_history |> Map.merge( %{ score: score - 300 }) |> set_user_history(chat_id)
             Overcharge.Gasedak.topup(msisdn, 1000 , refid, 1, 0) 
+
+            SlackWebhook.send("⚠INFO: GAME:  Send 1000 charge for #{msisdn}")
             send_message(chat_id, "شارژ ۱۰۰۰  تومانی برای شما ارسال شد.")
         score > 600 && score < 2000 ->
             chat_id |> get_user_history |> Map.merge( %{ score: score - 600 }) |> set_user_history(chat_id)
             Overcharge.Gasedak.topup(msisdn, 5000 , refid, 1, 0) 
             send_message(chat_id, "شارژ ۵۰۰۰  تومانی برای شما ارسال شد.")
+            SlackWebhook.send("⚠INFO: GAME:  Send 5000 charge for #{msisdn}")
         score > 2000 ->
             chat_id |> get_user_history |> Map.merge( %{ score: score - 2000 }) |> set_user_history(chat_id)
             chat_id |> get_user_history |> Map.merge( %{ lottery: true }) |> set_user_history(chat_id)
-            #Overcharge.Gasedak.topup(msisdn, 5000 , refid, 1, 0) 
+            SlackWebhook.send("⚠INFO: GAME:  Xbox One lottery for #{msisdn}")
             send_message(chat_id, "شما در قرعه‌کشی XBox One شرکت داده شدید.")
     end
 end
