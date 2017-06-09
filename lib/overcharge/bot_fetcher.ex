@@ -337,6 +337,13 @@ def action(id, :game, message) do
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
             id |> send_levels
+        "/new" ->
+            "شروع گیم" ->
+            id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
+            id |> send_game_menu
+            id |> send_level
+        "/start" ->
+            id |> send_rules
         "قوانین" ->
             id |> send_rules
         "کمک" ->
@@ -425,7 +432,7 @@ def game_logic(id, word) do
                     end
                 true ->
                     id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
-                    id |> send_message("کلمه باید #{target |> String.length |> convert_to_persian} حرفی باشد. امتیاز کنونی: #{(score - 1) |> convert_to_persian}")
+                    id |> send_message("کلمه باید #{target |> String.length |> convert_to_persian} حرفی باشد. امتیاز کنونی: #{(score - 1) |> convert_to_persian}. \n راهنمایی /help")
             end
     end
 end
