@@ -266,6 +266,7 @@ def reveal_word(chat_id) do
     chat_id |> get_user_history |> Map.merge( %{ score: score - 20 }) |> set_user_history(chat_id)
     chat_id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(chat_id)
     chat_id |> get_user_history |> Map.merge( %{ target_word:  nil }) |> set_user_history(chat_id)
+    chat_id |> send_message("کلمه هدف *#{target}* بود!")
 end
 
 
