@@ -260,6 +260,13 @@ def send_rules(chat_id) do
     send_message(chat_id, rule)
 end
 
+def reveal_word(chat_id) do
+    target = id |> get_user_history |> Map.get(:target_word)
+    chat_id |> get_user_history |> Map.merge( %{ score: score - 20 }) |> set_user_history(chat_id)
+    chat_id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(id)
+    chat_id |> get_user_history |> Map.merge( %{ target_word:  nil }) |> set_user_history(id)
+end
+
 
 def send_hint(chat_id) do
     target = chat_id |> get_user_history |> Map.get(:target_word)
@@ -340,6 +347,10 @@ def action(id, :game, message) do
         "/new" ->
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
+            id |> send_levels
+        "/backoff" ->
+            id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
+            id |> reveal_word
             id |> send_levels
         "/start" ->
             id |> send_rules
@@ -427,7 +438,7 @@ def game_logic(id, word) do
                         id |> get_user_history |> Map.merge( %{ score:  score - target_punish }) |> set_user_history(id)
                         pos     = number_of_correct_positions(target, suggested)
                         found   = number_of_found_chars(target, suggested)
-                        id |> send_message("نتیجه: *#{found |> convert_to_persian}*-*#{pos |> convert_to_persian}*\nامتیاز کنونی #{(score - target_punish) |> convert_to_persian}")
+                        id |> send_message("نتیجه: *#{found |> convert_to_persian}*-*#{pos |> convert_to_persian}*\nامتیاز کنونی #{(score - target_punish) |> convert_to_persian} | عقب‌ نشینی با /backoff")
                     end
                 true ->
                     id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
