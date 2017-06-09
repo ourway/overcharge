@@ -205,7 +205,7 @@ defmodule Overcharge.BotFetcher do
         try do
             update |> handle_incomming
         rescue 
-            _ ->
+           _ ->
                 :continue
         end
     end
@@ -247,10 +247,11 @@ end
 def send_game_menu(chat_id) do
     rules = %Nadia.Model.KeyboardButton{text: "قوانین", request_contact: false}
     help = %Nadia.Model.KeyboardButton{text: "کمک", request_contact: false}
-    score = %Nadia.Model.KeyboardButton{text: "امتیاز من", request_contact: false}
+    gift = %Nadia.Model.KeyboardButton{text: "جایزه", request_contact: true}
+    score = %Nadia.Model.KeyboardButton{text: "امتیاز", request_contact: false}
     purchase = %Nadia.Model.KeyboardButton{text: "انرژی", request_contact: false}
-    return = %Nadia.Model.KeyboardButton{text: "بازگشت"}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, purchase, return]], resize_keyboard: true, one_time_keyboard: false}
+    return = %Nadia.Model.KeyboardButton{text: "<-"}
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, gift, purchase, return]], resize_keyboard: true, one_time_keyboard: false}
     send_message(chat_id, "<---->", markup)
 end
 
@@ -290,6 +291,29 @@ def send_score(chat_id) do
     score = chat_id |> get_user_history |> Map.get(:score)
     message = "شما *#{score |> convert_to_persian }* امتیاز دارید."
     send_message(chat_id, message)
+end
+
+def send_gift(chat_id) do
+    score = chat_id |> get_user_history |> Map.get(:score)
+    msisdn = chat_id |> get_user_history |> Map.get(:msisdn)
+    refid = chat_id |> get_user_history |> Map.get(:uuid)
+    cond do
+        score < 300 ->
+            send_message(chat_id, "برای دریافت جایزه حداقل به ۳۰۰ امتیاز نیاز دارید.")
+        score > 300 && score < 600 ->
+            chat_id |> get_user_history |> Map.merge( %{ score: score - 300 }) |> set_user_history(chat_id)
+            Overcharge.Gasedak.topup(msisdn, 1000 , refid, 1, 0) 
+            send_message(chat_id, "شارژ ۱۰۰۰  تومانی برای شما ارسال شد.")
+        score > 600 && score < 2000 ->
+            chat_id |> get_user_history |> Map.merge( %{ score: score - 600 }) |> set_user_history(chat_id)
+            Overcharge.Gasedak.topup(msisdn, 5000 , refid, 1, 0) 
+            send_message(chat_id, "شارژ ۵۰۰۰  تومانی برای شما ارسال شد.")
+        score > 2000 ->
+            chat_id |> get_user_history |> Map.merge( %{ score: score - 2000 }) |> set_user_history(chat_id)
+            chat_id |> get_user_history |> Map.merge( %{ lottery: true }) |> set_user_history(chat_id)
+            #Overcharge.Gasedak.topup(msisdn, 5000 , refid, 1, 0) 
+            send_message(chat_id, "شما در قرعه‌کشی XBox One شرکت داده شدید.")
+    end
 end
 
 
@@ -356,6 +380,8 @@ def action(id, :game, message) do
             id |> send_levels
         "/start" ->
             id |> send_rules
+        "/gift" ->
+            id |> send_gift
         "قوانین" ->
             id |> send_rules
         "کمک" ->
@@ -364,7 +390,7 @@ def action(id, :game, message) do
             id |> send_rules
         "/hint" ->
             id |> send_hint
-        "امتیاز من" ->
+        "امتیاز" ->
             id |> send_score
         "انرژی" ->
             #id |> get_user_history |> Map.merge( %{ section:  :energy }) |> set_user_history(id)
@@ -376,6 +402,11 @@ def action(id, :game, message) do
             id |> get_user_history |> Map.merge( %{ target_word: nil }) |> set_user_history(id)
             id |> get_user_history |> Map.merge( %{ section:  :main }) |> set_user_history(id)
             id |> send_menu
+        "<-" ->
+            id |> get_user_history |> Map.merge( %{ target_word: nil }) |> set_user_history(id)
+            id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
+            id |> send_game_menu
+            id |> send_levels
         _ ->
             id |> game_logic(message)
             #id |> get_user_history |> Map.merge( %{ section:  :main }) |> set_user_history(id)
@@ -421,6 +452,8 @@ def game_logic(id, word) do
             {id, score, level, target, suggested} |> IO.inspect
             target_score = :math.pow(2, target |> String.length) |> round
             target_punish = case level do
+                :nil ->
+                    0
                 :easy ->
                     1
                 :mid ->
@@ -463,17 +496,33 @@ end
 def handle_incomming(update) do
     if update |> Map.get(:message) do
         id =  update.message.chat.id
-        profile = update.message.chat.id |> get_user_history |> Map.merge(
+        history = update.message.chat.id |> get_user_history |> Map.merge(
                     %{
                         username:    update.message.chat.username,
                         first_name:  update.message.chat.first_name,
-                        last_name:   update.message.chat.first_name,
+                        last_name:   update.message.chat.last_name,
                         messages:    id
                                             |> get_user_history 
                                             |> Map.get(:messages) 
-                                            |> List.insert_at(0, update.message.text |> Persian.fix ) |> Enum.slice(0, 10)
-                    }) |> set_user_history(id)
-        id |> action(profile.section, update.message.text )
+                                            |> List.insert_at(0, case update.message.text do
+                                                                    nil ->
+                                                                        ""
+                                                                    "" ->
+                                                                        ""
+                                                                    t ->
+                                                                        t |> Persian.fix
+                                                                 end) |> Enum.slice(0, 10) })
+                                                                      |> set_user_history(id)
+       case update |> Map.get(:message) |> Map.get(:contact) do
+            nil ->
+                id |> action(history.section, update.message.text)
+            c ->
+                profile = id |> get_user_history 
+                                |> Map.merge( %{ msisdn: c.phone_number })
+                                |> set_user_history(id)
+               profile.id |> action(history.section, "/gift")
+        end
+        
     end
 
     if update |> Map.get(:callback_query) do

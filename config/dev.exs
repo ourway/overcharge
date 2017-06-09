@@ -45,3 +45,9 @@ config :overcharge, Overcharge.Repo,
   database: "overcharge_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+
+config :nadia,
+  token: "381106026:AAFOWEEkwc4HWgQLYtr0rTGBdPzYhSHsFsw"
+
