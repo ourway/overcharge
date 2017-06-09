@@ -285,9 +285,9 @@ end
 
 
 def send_energy_list(chat_id) do
-    easy = %Nadia.Model.InlineKeyboardButton{text: "۴۰ امتیاز", url: "https://www.chargell.com/api/energy_invoice/#{chat_id}/40" |> Overcharge.SS2.get! }
-    mid = %Nadia.Model.InlineKeyboardButton{text: "۱۰۰ امتیاز", url: "https://www.chargell.com/api/energy_invoice/#{chat_id}/100" |> Overcharge.SS2.get! }
-    hard = %Nadia.Model.InlineKeyboardButton{text: "۵۰۰ امتیاز", url: "https://www.chargell.com/api/energy_invoice/#{chat_id}/500" |> Overcharge.SS2.get! }
+    easy = %Nadia.Model.InlineKeyboardButton{text: "۴۰ امتیاز", url: "https://chargell.ir/api/energy_invoice/#{chat_id}/40"}
+    mid = %Nadia.Model.InlineKeyboardButton{text: "۱۰۰ امتیاز", url: "https://chargell.ir/api/energy_invoice/#{chat_id}/100"}
+    hard = %Nadia.Model.InlineKeyboardButton{text: "۵۰۰ امتیاز", url: "https://chargell.ir/api/energy_invoice/#{chat_id}/500"}
     markup = %Nadia.Model.InlineKeyboardMarkup{inline_keyboard: [[easy, mid, hard]]}
 
    send_message(chat_id, "بسته انرژی خود را انتخاب کنید", markup)
