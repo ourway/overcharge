@@ -278,6 +278,15 @@ defmodule Overcharge.Utils do
                     :ok = get_mci_pins(count, price, invoice.id) 
                     ivs = invoice |> set_invoice_status("completed")
                     {:ok, true, ivs , "deliver_pins"}
+                func = "energy" ->
+                      count = amount |> String.to_integer
+                      id = msisdn |> String.to_integer
+                      score = id |> Overcharge.BotFetcher.get_user_history |> Map.get(:score)
+                      id |> Overcharge.BotFetcher.get_user_history 
+                        |> Map.merge( %{ score:  count + score }) 
+                        |> Overcharge.BotFetcher.set_user_history(id)
+                      id |> Overcharge.BotFetcher.send_message("#{count |> Overcharge.BotFetcher.convert_to_persian} امتیاز به شما اضافه شد." )
+                      {:ok, true, invoice, nil}
                 true ->
                     :not_implemented
                     

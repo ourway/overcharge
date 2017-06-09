@@ -97,15 +97,16 @@ defmodule Overcharge.Router do
     pipe_through :api
     get "/ping",                              ApiController, :ping
     post "/mci_topup_invoice",                ApiController, :mci_topup_invoice
-    options "/mci_topup_invoice",                ApiController, :mci_topup_invoice
+    get "/energy_invoice/:uuid/:count",      ApiController, :energy_invoice
+    options "/mci_topup_invoice",             ApiController, :mci_topup_invoice
     post "/mci_pin_invoice",                  ApiController, :mci_pin_invoice
     get "/get_mci_rbt",                       ApiController, :get_mci_rbt
     post "/irancell_topup_invoice",           ApiController, :irancell_topup_invoice
-    options "/irancell_topup_invoice",           ApiController, :irancell_topup_invoice
+    options "/irancell_topup_invoice",        ApiController, :irancell_topup_invoice
     post "/irancell_internet_invoice/:sid",   ApiController, :irancell_internet_invoice
-    options "/irancell_internet_invoice/:sid",   ApiController, :irancell_internet_invoice
+    options "/irancell_internet_invoice/:sid",ApiController, :irancell_internet_invoice
     post "/rightel_topup_invoice",            ApiController, :rightel_topup_invoice
-    options "/rightel_topup_invoice",            ApiController, :rightel_topup_invoice
+    options "/rightel_topup_invoice",         ApiController, :rightel_topup_invoice
     get "/gopay/:refid",                      ApiController, :gopay
     # Add protected routes below
   end

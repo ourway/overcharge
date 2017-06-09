@@ -94,6 +94,21 @@ defmodule Overcharge.ApiController do
 
 
 
+  def energy_invoice(conn, params) do
+      count = params["count"] |> String.to_integer
+      uuid = params["uuid"]
+      raw_amount = 3*count
+      amount = raw_amount/1.09 |> round
+      action = "energy_telegram_#{count}_#{uuid}"
+      product =  "#{count} واحد انرژی گیم تلگرام شارژل"
+      client = "980000000000" |> Overcharge.Utils.get_client
+      invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
+      ivs = invoice |> Overcharge.Pay.request
+      paylink = "https://pay.ir/payment/gateway/#{ivs.transactionid}"
+      redirect conn, external: paylink
+  end
+
+
 
   def get_mci_rbt(conn, params) do
      page = params["page"] || 0
@@ -126,7 +141,7 @@ defmodule Overcharge.ApiController do
             where: p.uuid == ^params["uuid"],
             select: p)
     |> Overcharge.Repo.one
-    |> Overcharge.Charge.changeset(
+    |> Overcharge.Post.changeset(
         %{ 
           is_published:  true
         }) 

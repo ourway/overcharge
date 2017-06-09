@@ -4,80 +4,8 @@ defmodule Overcharge.BotFetcher do
   @cachename :overcharge_cache
   @backupname "cache_backup"
   @fetchlimit 100
-  @interval 1000
+  @interval 500
 
-
-  def fixes(word) do
-    corrections = [
-        %{ list: ["؆","؇","؈","؉","؊","؍","؎","ؐ","ؑ","ؒ","ؓ","ؔ","ؕ",
-            "ؖ","ؘ","ؙ","ؚ","؞","ٖ","ٗ","٘","ٙ","ٚ","ٛ","ٜ","ٝ","ٞ","ٟ","٪",
-            "٬","٭","ہ","ۂ","ۃ","۔","ۖ","ۗ","ۘ","ۙ","ۚ","ۛ","ۜ","۞","۟","۠",
-            "ۡ","ۢ","ۣ","ۤ","ۥ","ۦ","ۧ","ۨ","۩","۪","۫","۬","ۭ","ۮ","ۯ","ﮧ",
-            "﮲","﮳","﮴","﮵","﮶","﮷","﮸","﮹","﮺","﮻","﮼","﮽","﮾","﮿","﯀","﯁","ﱞ",
-            "ﱟ","ﱠ","ﱡ","ﱢ","ﱣ","ﹰ","ﹱ","ﹲ","ﹳ","ﹴ","ﹶ","ﹷ","ﹸ","ﹹ","ﹺ","ﹻ","ﹼ","ﹽ",
-            "ﹾ","ﹿ"], rep: ""}, 
-
-    %{list:  ["أ","إ","ٱ","ٲ","ٳ","ٵ","ݳ","ݴ","ﭐ","ﭑ","ﺃ","ﺄ","ﺇ","ﺈ",
-            "ﺍ","ﺎ","𞺀","ﴼ","ﴽ","𞸀"], rep: "ا"}, 
-    
-    %{list: ["ٮ","ݕ","ݖ","ﭒ","ﭓ","ﭔ","ﭕ","ﺏ","ﺐ","ﺑ","ﺒ","𞸁","𞸜",
-            "𞸡","𞹡","𞹼","𞺁","𞺡"], rep: "ب"}, 
-    
-    %{list: ["ڀ","ݐ","ݔ","ﭖ","ﭗ","ﭘ","ﭙ","ﭚ","ﭛ","ﭜ","ﭝ"], rep: "پ"}, 
-    %{list: ["ٹ","ٺ","ٻ","ټ","ݓ","ﭞ","ﭟ","ﭠ","ﭡ","ﭢ","ﭣ","ﭤ","ﭥ",
-            "ﭦ","ﭧ","ﭨ","ﭩ","ﺕ","ﺖ","ﺗ","ﺘ","𞸕","𞸵","𞹵","𞺕","𞺵"], rep: "ت"}, 
-    %{list: ["ٽ","ٿ","ݑ","ﺙ","ﺚ","ﺛ","ﺜ","𞸖","𞸶","𞹶","𞺖","𞺶"],  rep: "ث"}, 
-    %{list: ["ڃ","ڄ","ﭲ","ﭳ","ﭴ","ﭵ","ﭶ","ﭷ","ﭸ","ﭹ","ﺝ","ﺞ","ﺟ",
-            "ﺠ","𞸂","𞸢","𞹂","𞹢","𞺂","𞺢"], rep: "ج"}, 
-    %{list: ["ڇ","ڿ","ݘ","ﭺ","ﭻ","ﭼ","ﭽ","ﭾ","ﭿ","ﮀ","ﮁ",
-            "𞸃","𞺃"], rep: "چ"}, 
-    %{list: ["ځ","ݮ","ݯ","ݲ","ݼ","ﺡ","ﺢ","ﺣ","ﺤ","𞸇","𞸧","𞹇","𞹧",
-            "𞺇","𞺧"], rep: "ح"}, 
-    %{list: ["ڂ","څ","ݗ","ﺥ","ﺦ","ﺧ","ﺨ","𞸗","𞸷","𞹗","𞹷","𞺗","𞺷"], rep: "خ"}, 
-    %{list: ["ڈ","ډ","ڊ","ڌ","ڍ","ڎ","ڏ","ڐ","ݙ","ݚ","ﺩ","ﺪ","𞺣","ﮂ",
-            "ﮃ","ﮈ","ﮉ"], rep: "د"}, 
-    %{list: ["ﱛ","ﱝ","ﺫ","ﺬ","𞸘","𞺘","𞺸","ﮄ","ﮅ","ﮆ","ﮇ"], rep: "ذ"}, 
-    %{list: ["٫","ڑ","ڒ","ړ","ڔ","ڕ","ږ","ݛ","ݬ","ﮌ","ﮍ","ﱜ","ﺭ","ﺮ",
-            "𞸓","𞺓","𞺳"], rep: "ر"}, 
-    %{list: ["ڗ","ڙ","ݫ","ݱ","ﺯ","ﺰ","𞸆","𞺆","𞺦"], rep: "ز"}, 
-    %{list: ["ﮊ","ﮋ","ژ"], rep: "ژ"}, 
-    %{list: ["ښ","ݽ","ݾ","ﺱ","ﺲ","ﺳ","ﺴ","𞸎","𞸮","𞹎","𞹮","𞺎","𞺮"], rep: "س"}, 
-    %{list: ["ڛ","ۺ","ݜ","ݭ","ݰ","ﺵ","ﺶ","ﺷ","ﺸ","𞸔","𞸴","𞹔","𞹴",
-            "𞺔","𞺴"], rep: "ش"}, 
-    %{list: ["ڝ","ﺹ","ﺺ","ﺻ","ﺼ","𞸑","𞹑","𞸱","𞹱","𞺑","𞺱"], rep: "ص"}, 
-    %{list: ["ڞ","ۻ","ﺽ","ﺾ","ﺿ","ﻀ","𞸙","𞸹","𞹙","𞹹","𞺙","𞺹"], rep: "ض"}, 
-    %{list: ["ﻁ","ﻂ","ﻃ","ﻄ","𞸈","𞹨","𞺈","𞺨"], rep: "ط"}, 
-    %{list: ["ڟ","ﻅ","ﻆ","ﻇ","ﻈ","𞸚","𞹺","𞺚","𞺺"], rep: "ظ"}, 
-    %{list: ["؏","ڠ","ﻉ","ﻊ","ﻋ","ﻌ","𞸏","𞸯","𞹏","𞹯","𞺏","𞺯"], rep: "ع"}, 
-    %{list: ["ۼ","ݝ","ݞ","ݟ","ﻍ","ﻎ","ﻏ","ﻐ","𞸛","𞸻","𞹛","𞹻","𞺛",
-            "𞺻"], rep: "غ"}, 
-    %{list: ["؋","ڡ","ڢ","ڣ","ڤ","ڥ","ڦ","ݠ","ݡ","ﭪ","ﭫ","ﭬ","ﭭ",
-            "ﭮ","ﭯ","ﭰ","ﭱ","ﻑ","ﻒ","ﻓ","ﻔ","𞸐","𞸞","𞸰","𞹰","𞹾","𞺐","𞺰"], rep: "ف"}, 
-    %{list: ["ٯ","ڧ","ڨ","ﻕ","ﻖ","ﻗ","ﻘ","𞸒","𞸟","𞸲","𞹒","𞹟","𞹲",
-            "𞺒","𞺲","؈"], rep: "ق"}, 
-    %{list: ["ػ","ؼ","ك","ڪ","ګ","ڬ","ڭ","ڮ","ݢ","ݣ","ݤ","ݿ","ﮎ",
-            "ﮏ","ﮐ","ﮑ","ﯓ","ﯔ","ﯕ","ﯖ","ﻙ","ﻚ","ﻛ","ﻜ","𞸊","𞸪","𞹪"], rep: "ک"}, 
-    %{list: ["ڰ","ڱ","ڲ","ڳ","ڴ","ﮒ","ﮓ","ﮔ","ﮕ","ﮖ","ﮗ","ﮘ","ﮙ","ﮚ",
-            "ﮛ","ﮜ","ﮝ"], rep: "گ"}, 
-    %{list: ["ڵ","ڶ","ڷ","ڸ","ݪ","ﻝ","ﻞ","ﻟ","ﻠ","𞸋","𞸫","𞹋","𞺋",
-            "𞺫"], rep: "ل"}, 
-    %{list: ["۾","ݥ","ݦ","ﻡ","ﻢ","ﻣ","ﻤ","𞸌","𞸬","𞹬","𞺌","𞺬"], rep: "م"}, 
-    %{list: ["ڹ","ں","ڻ","ڼ","ڽ","ݧ","ݨ","ݩ","ﮞ","ﮟ","ﮠ","ﮡ","ﻥ","ﻦ",
-            "ﻧ","ﻨ","𞸍","𞸝","𞸭","𞹍","𞹝","𞹭","𞺍","𞺭"], rep: "ن"}, 
-    %{list: ["ؤ","ٶ","ٷ","ۄ","ۅ","ۆ","ۇ","ۈ","ۉ","ۊ","ۋ","ۏ","ݸ","ݹ",
-            "ﯗ","ﯘ","ﯙ","ﯚ","ﯛ","ﯜ","ﯝ","ﯞ","ﯟ","ﯠ","ﯡ","ﯢ","ﯣ","ﺅ","ﺆ","ﻭ","ﻮ",
-            "𞸅","𞺅","𞺥"], rep: "و"}, 
-    %{list: ["ة","ھ","ۀ","ە","ۿ","ﮤ","ﮥ","ﮦ","ﮩ","ﮨ","ﮪ","ﮫ","ﮬ","ﮭ",
-            "ﺓ","ﺔ","ﻩ","ﻪ","ﻫ","ﻬ","𞸤","𞹤","𞺄"], rep: "ه"}, 
-    %{list: ["ؠ","ئ","ؽ","ؾ","ؿ","ى","ي","ٸ","ۍ","ێ","ې","ۑ","ے","ۓ",
-            "ݵ","ݶ","ݷ","ݺ","ݻ","ﮢ","ﮣ","ﮮ","ﮯ","ﮰ","ﮱ","ﯤ","ﯥ","ﯦ","ﯧ","ﯨ",
-            "ﯩ","ﯼ","ﯽ","ﯾ","ﯿ","ﺉ","ﺊ","ﺋ","ﺌ","ﻯ","ﻰ","ﻱ","ﻲ","ﻳ","ﻴ","𞸉","𞸩",
-            "𞹉","𞹩","𞺉","𞺩"], rep: "ی"}, 
-    %{list: ["ٴ","۽","ﺀ"], rep: "ء"}, 
-    %{list: ["ﻵ","ﻶ","ﻷ","ﻸ","ﻹ","ﻺ","ﻻ","ﻼ"], rep: "لا"}]
-
-    
-  end
 
   def convert_to_persian(digits) do
       digits |> to_string 
@@ -109,7 +37,7 @@ defmodule Overcharge.BotFetcher do
                 initial
            true ->
                get_a_word(level)
-      end
+      end |> Persian.fix
   end
 
 
@@ -126,7 +54,7 @@ defmodule Overcharge.BotFetcher do
   end
 
   def number_of_found_chars(target, entered) do
-      length(target |> get_word_chars) - length(  (target |> get_word_chars |> Enum.uniq ) -- (entered |> get_word_chars) )
+      length(target |> get_word_chars) - length(  (target |> get_word_chars ) -- (entered |> get_word_chars) )
   end
 
   def is_match?(target, entered) do
@@ -142,8 +70,28 @@ defmodule Overcharge.BotFetcher do
         end
   end
 
+
+  def find_all_members do
+      for k <- Cachex.keys!(@cachename) do
+          try do
+            "bot_user_history_" <> i  = k
+                i |> String.to_integer
+           rescue
+               MatchError ->
+                0
+           end
+      end |> Enum.filter(fn(x) -> x != 0 end)
+  end
+
+
+  def broadcast_message(text) do
+        for member <- find_all_members do
+            send_message(member, text)
+        end
+  end
+
   def get_user_history(id) do
-      case Cachex.get(@cachename, "bot_user_#{id}_history") do
+      case Cachex.get(@cachename, "bot_user_history_#{id}") do
             {:ok, history} ->
                 history
             {:missing, nil} ->
@@ -166,7 +114,7 @@ defmodule Overcharge.BotFetcher do
   end
 
   def set_user_history(data, id) do
-      {:ok, true} = Cachex.set(@cachename, "bot_user_#{id}_history", data)
+      {:ok, true} = Cachex.set(@cachename, "bot_user_history_#{id}", data)
       data
   end
 
@@ -271,8 +219,8 @@ defmodule Overcharge.BotFetcher do
 ################# handle #####################
 
 
-def send_message(id, text, reply_markup \\ nil) do
-    Process.send_after(self(), {:send_message, id, text, reply_markup}, 10)
+def send_message(id, text, reply_markup \\ nil, delay \\ 10) do
+    Process.send_after(self(), {:send_message, id, text, reply_markup}, delay)
 end
 
 
@@ -281,13 +229,13 @@ def send_levels(chat_id) do
     mid = %Nadia.Model.InlineKeyboardButton{text: "متوسط", callback_data: "level_mid", url: ""}
     hard = %Nadia.Model.InlineKeyboardButton{text: "سخت", callback_data: "level_hard", url: ""}
     markup = %Nadia.Model.InlineKeyboardMarkup{inline_keyboard: [[easy, mid, hard]]}
-    send_message(chat_id, "سختی بازی رو انتخاب کنید", markup)
+    send_message(chat_id, "سختی بازی رو انتخاب کنید", markup, 1000)
 end
 
 def send_menu(chat_id) do
-    charge = %Nadia.Model.KeyboardButton{text: "خرید شارژ", request_contact: false}
+    #charge = %Nadia.Model.KeyboardButton{text: "خرید شارژ", request_contact: false}
     game = %Nadia.Model.KeyboardButton{text: "شروع گیم", request_contact: false}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[game, charge]]}
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[game]], one_time_keyboard: true, resize_keyboard: true}
     send_message(chat_id, "انتخاب کنید", markup)
 end
 
@@ -297,8 +245,8 @@ def send_game_menu(chat_id) do
     score = %Nadia.Model.KeyboardButton{text: "امتیاز من", request_contact: false}
     purchase = %Nadia.Model.KeyboardButton{text: "انرژی", request_contact: false}
     return = %Nadia.Model.KeyboardButton{text: "بازگشت"}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, purchase, return]]}
-    send_message(chat_id, "انتخاب کنید", markup)
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, purchase, return]], resize_keyboard: true, one_time_keyboard: true}
+    send_message(chat_id, "<---->", markup)
 end
 
 
@@ -309,13 +257,18 @@ end
 
 
 def send_hint(chat_id) do
-    message = "some hint"
+    target = chat_id |> get_user_history |> Map.get(:target_word)
+    score = chat_id |> get_user_history |> Map.get(:score)
+    chat_id |> get_user_history |> Map.merge( %{ score: score - 10 }) |> set_user_history(chat_id)
+    c = target |> get_word_chars |> Enum.random
+    message = "کلمه هدف *#{c}* دارد!"
     send_message(chat_id, message)
 end
 
 
 def send_score(chat_id) do
-    message = "your score is some score"
+    score = chat_id |> get_user_history |> Map.get(:score)
+    message = "شما *#{score |> convert_to_persian }* امتیاز دارید."
     send_message(chat_id, message)
 end
 
@@ -326,9 +279,20 @@ def send_charge_price_list(chat_id) do
     third = %Nadia.Model.KeyboardButton{text: "۵۰۰۰ تومان"}
     fourth = %Nadia.Model.KeyboardButton{text: "۱۰,۰۰۰ تومان"}
     fifth = %Nadia.Model.KeyboardButton{text: "بازگشت"}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[first, second, third, fourth, fifth]]}
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[first, second, third, fourth, fifth]], one_time_keyboard: true, resize_keyboard: true}
     send_message(chat_id, "انتخاب کنید", markup)
 end
+
+
+def send_energy_list(chat_id) do
+    easy = %Nadia.Model.InlineKeyboardButton{text: "۴۰ امتیاز", url: "https://www.chargell.com/api/energy_invoice/#{chat_id}/40" |> Overcharge.SS2.get! }
+    mid = %Nadia.Model.InlineKeyboardButton{text: "۱۰۰ امتیاز", url: "https://www.chargell.com/api/energy_invoice/#{chat_id}/100" |> Overcharge.SS2.get! }
+    hard = %Nadia.Model.InlineKeyboardButton{text: "۵۰۰ امتیاز", url: "https://www.chargell.com/api/energy_invoice/#{chat_id}/500" |> Overcharge.SS2.get! }
+    markup = %Nadia.Model.InlineKeyboardMarkup{inline_keyboard: [[easy, mid, hard]]}
+
+   send_message(chat_id, "بسته انرژی خود را انتخاب کنید", markup)
+end
+
 
 
 def action(id, :main, message) do
@@ -340,25 +304,42 @@ def action(id, :main, message) do
         "خرید شارژ" ->
             id |> get_user_history |> Map.merge( %{ section:  :charge }) |> set_user_history(id)
             id |> send_charge_price_list
+        "lets_broadcast_it" ->
+            id |> get_user_history |> Map.merge( %{ section:  :broadcast }) |> set_user_history(id)
         _ ->
             id |> send_menu
     end
 end
 
 
+def action(id, :broadcast, message) do
+      broadcast_message(message)
+      id |> get_user_history |> Map.merge( %{ section:  :main }) |> set_user_history(id)
+      id |> send_message("sent to all")
+end
+
+
 
 def action(id, :game, message) do
     case message do
+        "شروع گیم" ->
+            id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
+            id |> send_game_menu
+            id |> send_levels
         "قوانین" ->
             id |> send_rules
         "کمک" ->
             id |> send_hint
         "امتیاز من" ->
             id |> send_score
+        "انرژی" ->
+            #id |> get_user_history |> Map.merge( %{ section:  :energy }) |> set_user_history(id)
+            id |> send_energy_list
         "خرید امتیاز" ->
             id |> get_user_history |> Map.merge( %{ section:  :charge }) |> set_user_history(id)
             id |> send_charge_price_list
         "بازگشت" ->
+            id |> get_user_history |> Map.merge( %{ target_word: nil }) |> set_user_history(id)
             id |> get_user_history |> Map.merge( %{ section:  :main }) |> set_user_history(id)
             id |> send_menu
         _ ->
@@ -381,43 +362,61 @@ def action(id, :charge, message) do
 end
 
 
+def action(id, :energy, message) do
+    case message do
+        "بازگشت" ->
+            id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
+            id |> send_menu
+        _ ->
+            id |> send_message("not yet")
+    end
+end
+
+def game_logic(_id, nil) do
+    :ok
+end
 
 
-def game_logic(id, suggested) do
-    target = id |> get_user_history |> Map.get(:target_word) |> IO.inspect
-    level = id |> get_user_history |> Map.get(:level)
-    score = id |> get_user_history |> Map.get(:score)
-    target_score = :math.pow(2, target |> String.length) |> round
-    target_punish = target |> String.length
+def game_logic(id, word) do
+    suggested = word |> Persian.fix
+    target = id |> get_user_history |> Map.get(:target_word)
 
-    cond do
-        (suggested |> String.length) == (target |> String.length) ->
-            if is_match?(target, suggested) == true do
-                    id |> get_user_history |> Map.merge( %{ score:  target_score + score }) |> set_user_history(id)
-                    id |> send_message("آفرین! شما #{target_score |> convert_to_persian} امتیاز به دست آوردید و مجموع امتیاز شما به #{(target_score + score) |> convert_to_persian} رسید.")
-                    id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(id)
-                    id |> send_game_menu
-            else 
-                id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
-                pos     = number_of_correct_positions(target, suggested)
-                found   = number_of_found_chars(target, suggested)
-                id |> send_message("نتیجه: *#{found |> convert_to_persian}*-*#{pos |> convert_to_persian}*\nامتیاز کنونی #{(score - 1) |> convert_to_persian}")
+    if target do
+            level = id |> get_user_history |> Map.get(:level)
+            score = id |> get_user_history |> Map.get(:score)
+            {id, score, level, target, suggested} |> IO.inspect
+            target_score = :math.pow(2, target |> String.length) |> round
+            #target_punish = target |> String.length
+
+            cond do
+                (suggested |> String.length) == (target |> String.length) ->
+                    if is_match?(target, suggested) == true do
+                            id |> get_user_history |> Map.merge( %{ score:  target_score + score }) |> set_user_history(id)
+                            id |> send_message("آفرین! شما #{target_score |> convert_to_persian} امتیاز به دست آوردید و مجموع امتیاز شما به #{(target_score + score) |> convert_to_persian} رسید.")
+                            id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(id)
+                            id |> send_levels
+                    else 
+                        id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
+                        pos     = number_of_correct_positions(target, suggested)
+                        found   = number_of_found_chars(target, suggested)
+                        id |> send_message("نتیجه: *#{found |> convert_to_persian}*-*#{pos |> convert_to_persian}*\nامتیاز کنونی #{(score - 1) |> convert_to_persian}")
+                    end
+                true ->
+                    id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
+                    id |> send_message("کلمه باید #{target |> String.length |> convert_to_persian} حرفی باشد. امتیاز کنونی: #{(score - 1) |> convert_to_persian}")
             end
-        true ->
-            id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
-            id |> send_message("کلمه باید #{target |> String.length |> convert_to_persian} حرفی باشد. امتیاز کنونی: #{(score - 1) |> convert_to_persian}")
     end
 end
 
 
 
 def start_game(id, level) do
+    #markup = %Nadia.Model.ReplyKeyboardHide{hide_keyboard: true}
     word = get_a_word(level)
     target_score = :math.pow(2, word |> String.length) |> round
     score = id |> get_user_history |> Map.get(:score)
     id |> get_user_history |> Map.merge( %{ target_word:  word }) |> set_user_history(id)
     id |> send_message("برای شروع یک کلمه *#{word |> String.length |> convert_to_persian}* حرفی به فارسی بنویسید.\n امتیاز هدف: *#{target_score |> convert_to_persian}* | امتیاز کنونی: *#{score |> convert_to_persian}*")
-
 end
 
 def handle_incomming(update) do
@@ -431,15 +430,17 @@ def handle_incomming(update) do
                         messages:    id
                                             |> get_user_history 
                                             |> Map.get(:messages) 
-                                            |> List.insert_at(0, update.message.text) |> Enum.slice(0, 10)
+                                            |> List.insert_at(0, update.message.text |> Persian.fix ) |> Enum.slice(0, 10)
                     }) |> set_user_history(id)
-        id |> action(profile.section, update.message.text)
+        id |> action(profile.section, update.message.text )
     end
 
     if update |> Map.get(:callback_query) do
         id = update.callback_query.message.chat.id
+        #id |> send_game_menu
         query_id = update.callback_query.id
         data = update.callback_query.data
+
         case data do
             "level_easy" ->
                 id |> get_user_history |> Map.merge( %{ level:  :easy }) |> set_user_history(id)
