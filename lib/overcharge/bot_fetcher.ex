@@ -261,10 +261,11 @@ def send_rules(chat_id) do
 end
 
 def reveal_word(chat_id) do
-    target = id |> get_user_history |> Map.get(:target_word)
+    target = chat_id |> get_user_history |> Map.get(:target_word)
+    score = chat_id |> get_user_history |> Map.get(:score)
     chat_id |> get_user_history |> Map.merge( %{ score: score - 20 }) |> set_user_history(chat_id)
-    chat_id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(id)
-    chat_id |> get_user_history |> Map.merge( %{ target_word:  nil }) |> set_user_history(id)
+    chat_id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(chat_id)
+    chat_id |> get_user_history |> Map.merge( %{ target_word:  nil }) |> set_user_history(chat_id)
 end
 
 
