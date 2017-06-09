@@ -12,7 +12,7 @@ defmodule Overcharge.Pay do
             "amount" =>         invoice.amount * 10,
             "redirect" =>       "https://chargell.ir/deliver/#{invoice.uuid}",
             "factorNumber" =>   invoice.refid
-        } |> Poison.encode
+        } |> Poison.encode |> IO.inspect
 
        {:ok,  %HTTPoison.Response{body: body}} = HTTPoison.post("#{@baseurl}/send", payload, 
 					                    [{"Content-Type", "application/json"}], [])
