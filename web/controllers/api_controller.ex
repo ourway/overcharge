@@ -13,8 +13,8 @@ defmodule Overcharge.ApiController do
   end
 
   def mci_topup_invoice(conn, params) do
+      host = Overcharge.Router.Helpers.url(conn)
       #host = Overcharge.Router.Helpers.url(conn)
-      host = "https://chargell.ir"
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
       amount = raw_amount/1.09 |> round
@@ -30,8 +30,7 @@ defmodule Overcharge.ApiController do
 
 
   def irancell_topup_invoice(conn, params) do
-      #host = Overcharge.Router.Helpers.url(conn)
-      host = "https://chargell.ir"
+      host = Overcharge.Router.Helpers.url(conn)
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
       amount = raw_amount/1.09 |> round
@@ -47,8 +46,7 @@ defmodule Overcharge.ApiController do
 
 
   def irancell_internet_invoice(conn, params) do
-      #host = Overcharge.Router.Helpers.url(conn)
-      host = "https://chargell.ir"
+      host = Overcharge.Router.Helpers.url(conn)
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       sid = params["sid"] |> String.to_integer
       raw_amount = params["amount"] |> String.to_integer
@@ -64,8 +62,7 @@ defmodule Overcharge.ApiController do
 
 
   def rightel_topup_invoice(conn, params) do
-      #host = Overcharge.Router.Helpers.url(conn)
-      host = "https://chargell.ir"
+      host = Overcharge.Router.Helpers.url(conn)
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
       amount = raw_amount/1.09 |> round
@@ -81,8 +78,7 @@ defmodule Overcharge.ApiController do
 
 
   def mci_pin_invoice(conn, params) do
-      #host = Overcharge.Router.Helpers.url(conn)
-      host = "https://chargell.ir"
+      host = Overcharge.Router.Helpers.url(conn)
       count = params["count"] |> String.to_integer
       raw_amount = 940*count
       amount = raw_amount/1.09 |> round
