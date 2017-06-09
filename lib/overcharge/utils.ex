@@ -77,6 +77,7 @@ defmodule Overcharge.Utils do
                     description: action,
                     product: product,
                     rate: rate,
+                    uuid: Ecto.UUID.generate |> to_string,
                     success_callback_action: action,
                     raw_amount: rate,
                     amount: (rate + rate*0.09) |> round

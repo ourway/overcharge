@@ -27,7 +27,7 @@ defmodule Overcharge.Invoice do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:transactionid, :product, :quantity, :rate, :tax, :raw_amount, :id, :is_checked_out, :amount, :description, :client, :paylink, :refid, :success_callback_action, :status])
+    |> cast(params, [:uuid, :transactionid, :product, :quantity, :rate, :tax, :raw_amount, :id, :is_checked_out, :amount, :description, :client, :paylink, :refid, :success_callback_action, :status])
     |> validate_required([:product, :rate, :amount, :raw_amount, :description, :success_callback_action])
     |> unique_constraint(:refid, [:refid])
     |> cast_assoc(:user)
