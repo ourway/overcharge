@@ -240,7 +240,7 @@ end
 def send_menu(chat_id) do
     #charge = %Nadia.Model.KeyboardButton{text: "خرید شارژ", request_contact: false}
     game = %Nadia.Model.KeyboardButton{text: "شروع گیم", request_contact: false}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[game]], one_time_keyboard: true, resize_keyboard: true}
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[game]], one_time_keyboard: false, resize_keyboard: true}
     send_message(chat_id, "انتخاب کنید", markup)
 end
 
@@ -250,13 +250,13 @@ def send_game_menu(chat_id) do
     score = %Nadia.Model.KeyboardButton{text: "امتیاز من", request_contact: false}
     purchase = %Nadia.Model.KeyboardButton{text: "انرژی", request_contact: false}
     return = %Nadia.Model.KeyboardButton{text: "بازگشت"}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, purchase, return]], resize_keyboard: true, one_time_keyboard: true}
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, purchase, return]], resize_keyboard: true, one_time_keyboard: false}
     send_message(chat_id, "<---->", markup)
 end
 
 
 def send_rules(chat_id) do
-    rule = "قواعد بازى شارژل:\n\n١- در شروع شما سختى مرحله را انتخاب ميكنيد.\n٢- سپس بايد يك كلمه به تعداد حروف درخواستى بنويسيد. مثلا اگر كلمه ٤ حرفى خواسته شده باشد بنويسيد: آرام\n\n٣- بعد از ورود كلمه نتيجه اى به شما اعلام ميشود، مثلا ٢-١. اين بدان معناست كه كلمه اى كه نوشته ايد ٢ حرف از كلمه هدف را دارد و جايگاه ١ حرف هم درست است.\n\nمثال:  فرض كنيد كلمه هدف بازى \"باران\" است. از شما خواسته ميشود يك كلمه ٥ حرفى بنويسيد.  مثلا با آرامش شروع ميكنيد، امتياز شما ميشود: ٣-٠. حرف \"ا\" و \"ر\" در كلمه هدف وجود دارد (\"ا\" دوبار در باران هست) ولى جايگاه هيچ كدام درست نيست.\n\n٤- با نوشتن كلمات به بازى ادامه دهيد تا كلمه مورد نظر را بيابيد.\n\nامتيازات:\n\n١- در شروع امتياز شما صفر است.\n٢- هر بار سعى بر پيدا كردن كلمه ١ امتياز از شما كسر ميكند.\n٣- امتياز هر كلمه در اول گيم اعلام ميشود\n٤- هر راهنمايى ١٠ امتياز از شما كسر ميكند\n٥- براى گرفتن كمك حداقل بايد ١٠ امتياز داشته باشيد.\n\nجوايز:\n\n١- اگر ٣٠٠ امتياز بدست آوريد، ١٠٠٠ تومان شارژ به شما ارسال ميشود.\n\n٢- اگر ٦٠٠ امتياز به دست آوريد، ٥٠٠٠ تومان شارژ ارسال ميشود.\n\n٣- اگر ٢٠٠٠ امتياز به دست آوريد در قرعه كشى XBox One شركت داده ميشويد.\n\nانرژى:\n\n١- ميتوانيد امتياز بخريد.  به. ازاى هر ١٠٠٠ تومن شارژ تلفن همراه كه از شارژل بخريد ١٠ امتياز به شما اضافه ميشود\n٢- هر امتياز ٣ تومان است. ميتوانيد بسته هاى ١٠٠ تومانى و ٥٠٠ تومانى امتياز ما را بخريد.\n\nموفق باشد."
+    rule = "قواعد بازى شارژل:\nبرای راهنمایی /help را میتوانید بزنید\n\n١- در شروع شما سختى مرحله را انتخاب ميكنيد.\n٢- سپس بايد يك كلمه به تعداد حروف درخواستى بنويسيد. مثلا اگر كلمه ٤ حرفى خواسته شده باشد بنويسيد: آرام\n\n٣- بعد از ورود كلمه نتيجه اى به شما اعلام ميشود، مثلا ٢-١. اين بدان معناست كه كلمه اى كه نوشته ايد ٢ حرف از كلمه هدف را دارد و جايگاه ١ حرف هم درست است.\n\nمثال:  فرض كنيد كلمه هدف بازى \"باران\" است. از شما خواسته ميشود يك كلمه ٥ حرفى بنويسيد.  مثلا با آرامش شروع ميكنيد، امتياز شما ميشود: ٣-٠. حرف \"ا\" و \"ر\" در كلمه هدف وجود دارد (\"ا\" دوبار در باران هست) ولى جايگاه هيچ كدام درست نيست.\n\n٤- با نوشتن كلمات به بازى ادامه دهيد تا كلمه مورد نظر را بيابيد.\n\nامتيازات:\n\n١- در شروع امتياز شما صفر است.\n٢- هر بار سعى بر پيدا كردن كلمه ١ امتياز از شما كسر ميكند.\n٣- امتياز هر كلمه در اول گيم اعلام ميشود\n٤- هر راهنمايى ١٠ امتياز از شما كسر ميكند\n٥- براى گرفتن كمك حداقل بايد ١٠ امتياز داشته باشيد.\n\nجوايز:\n\n١- اگر ٣٠٠ امتياز بدست آوريد، ١٠٠٠ تومان شارژ به شما ارسال ميشود.\n\n٢- اگر ٦٠٠ امتياز به دست آوريد، ٥٠٠٠ تومان شارژ ارسال ميشود.\n\n٣- اگر ٢٠٠٠ امتياز به دست آوريد در قرعه كشى XBox One شركت داده ميشويد.\n\nانرژى:\n\n١- ميتوانيد امتياز بخريد.  به. ازاى هر ١٠٠٠ تومن شارژ تلفن همراه كه از شارژل بخريد ١٠ امتياز به شما اضافه ميشود\n٢- هر امتياز ٣ تومان است. ميتوانيد بسته هاى ١٠٠ تومانى و ٥٠٠ تومانى امتياز ما را بخريد.\n\nموفق باشد."
     send_message(chat_id, rule)
 end
 
@@ -290,7 +290,7 @@ def send_charge_price_list(chat_id) do
     third = %Nadia.Model.KeyboardButton{text: "۵۰۰۰ تومان"}
     fourth = %Nadia.Model.KeyboardButton{text: "۱۰,۰۰۰ تومان"}
     fifth = %Nadia.Model.KeyboardButton{text: "بازگشت"}
-    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[first, second, third, fourth, fifth]], one_time_keyboard: true, resize_keyboard: true}
+    markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[first, second, third, fourth, fifth]], one_time_keyboard: false, resize_keyboard: true}
     send_message(chat_id, "انتخاب کنید", markup)
 end
 
@@ -340,6 +340,10 @@ def action(id, :game, message) do
         "قوانین" ->
             id |> send_rules
         "کمک" ->
+            id |> send_hint
+        "/help" ->
+            id |> send_rules
+        "/hint" ->
             id |> send_hint
         "امتیاز من" ->
             id |> send_score
