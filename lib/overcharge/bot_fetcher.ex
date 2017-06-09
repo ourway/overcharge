@@ -259,9 +259,14 @@ end
 def send_hint(chat_id) do
     target = chat_id |> get_user_history |> Map.get(:target_word)
     score = chat_id |> get_user_history |> Map.get(:score)
-    chat_id |> get_user_history |> Map.merge( %{ score: score - 10 }) |> set_user_history(chat_id)
-    c = target |> get_word_chars |> Enum.random
-    message = "کلمه هدف *#{c}* دارد!"
+    message =   if score >= 10 do
+                    chat_id |> get_user_history |> Map.merge( %{ score: score - 10 }) |> set_user_history(chat_id)
+                    c = target |> get_word_chars |> Enum.random
+                    "کلمه هدف *#{c}* دارد!"
+                else
+                    "برای راهنمایی حداقل ۱۰ امتیاز نیاز دارید"
+                end
+        
     send_message(chat_id, message)
 end
 
