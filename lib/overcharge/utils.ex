@@ -287,8 +287,9 @@ defmodule Overcharge.Utils do
                         |> Map.merge( %{ score:  count + score }) 
                         |> Overcharge.BotFetcher.set_user_history(id)
                         message = "#{count |> Overcharge.BotFetcher.convert_to_persian} امتیاز به شما اضافه شد."
+                         ivs = invoice |> set_invoice_status("completed")
                         id |> send_message(message) 
-                      {:ok, true, invoice, nil}
+                      {:ok, true, ivs, nil}
                 true ->
                     :not_implemented
                     
