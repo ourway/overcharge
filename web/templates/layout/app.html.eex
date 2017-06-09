@@ -484,6 +484,8 @@ hr {background: #02a8ff; height: 2px; border: none;}
 .article_view {
 
   direction: rtl;
+  padding-left: 20px;
+  padding-right: 20px;
 
 }
 
