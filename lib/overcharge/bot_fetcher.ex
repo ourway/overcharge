@@ -268,6 +268,7 @@ def send_hint(chat_id) do
                 end
         
     send_message(chat_id, message)
+    chat_id |> send_game_menu
 end
 
 
