@@ -286,7 +286,8 @@ defmodule Overcharge.Utils do
                       id |> Overcharge.BotFetcher.get_user_history 
                         |> Map.merge( %{ score:  count + score }) 
                         |> Overcharge.BotFetcher.set_user_history(id)
-                      id |> Overcharge.BotFetcher.send_message("#{count |> Overcharge.BotFetcher.convert_to_persian} امتیاز به شما اضافه شد." )
+                        message = "#{count |> Overcharge.BotFetcher.convert_to_persian} امتیاز به شما اضافه شد."
+                        id |> send_message(message) 
                       {:ok, true, invoice, nil}
                 true ->
                     :not_implemented
@@ -311,6 +312,15 @@ defmodule Overcharge.Utils do
              {:error, invoice}
         end
     end
+
+
+
+
+
+    def send_message(id, message) do
+        Overcharge.BotFetcher.handle_info({:send_message, id, message, nil}, %{})
+    end
+
 
 
 
