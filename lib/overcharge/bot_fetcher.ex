@@ -202,7 +202,12 @@ defmodule Overcharge.BotFetcher do
     data |> get_latest_update_id |> set_last_update_id
 
     for update <- data do
-        update |> handle_incomming
+        try do
+            update |> handle_incomming
+        rescue 
+            _ ->
+                :continue
+        end
     end
 
     schedule_work() # Reschedule once more
