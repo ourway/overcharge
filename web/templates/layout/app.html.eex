@@ -480,6 +480,14 @@ hr {background: #02a8ff; height: 2px; border: none;}
     vertical-align: sub;
 }
 
+
+.article_view {
+
+  direction: rtl;
+
+}
+
+
 .article_view p {
   color: #333;
   padding-left: 20px;
