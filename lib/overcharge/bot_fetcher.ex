@@ -338,7 +338,6 @@ def action(id, :game, message) do
             id |> send_game_menu
             id |> send_levels
         "/new" ->
-            "شروع گیم" ->
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
             id |> send_level
