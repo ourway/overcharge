@@ -279,7 +279,7 @@ defmodule Overcharge.Utils do
                     :ok = get_mci_pins(count, price, invoice.id) 
                     ivs = invoice |> set_invoice_status("completed")
                     {:ok, true, ivs , "deliver_pins"}
-                func = "energy" ->
+                func == "energy" ->
                       count = amount |> String.to_integer
                       id = msisdn |> String.to_integer
                       score = id |> Overcharge.BotFetcher.get_user_history |> Map.get(:score)
