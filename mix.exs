@@ -3,7 +3,7 @@ defmodule Overcharge.Mixfile do
 
   def project do
     [app: :overcharge,
-     version: "0.0.2",
+     version: "0.0.3",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -21,7 +21,7 @@ defmodule Overcharge.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :coherence, :sitemap, :ex_cron, :phoenix_live_reload,
                     :jalaali, :exml, :calendar, :cachex, :mailman, :ssl, :floki, :mochiweb,
                     :phoenix_html, :cowboy, :nadia, :logger, :gettext,:httpoison,
-                    :phoenix_ecto, :postgrex, :earmark]]
+                    :phoenix_ecto, :postgrex, :earmark, :html_sanitize_ex ]]
   end
 
   # Specifies which paths to compile per environment.
