@@ -131,6 +131,7 @@ defmodule Overcharge.Router do
     patch     "/post/unpublish/:uuid",       ApiController, :admin_unpublish_post
     delete    "/post/delete/:uuid",          ApiController, :admin_delete_post
     post      "/bot/broadcast",              ApiController, :admin_publish_bot
+    post      "/bot/count",                  ApiController, :admin_get_bot_members_count
 
   end
 

@@ -187,4 +187,11 @@ defmodule Overcharge.ApiController do
   end
 
 
+    def admin_get_bot_members_count(conn, _params) do
+        members = Overcharge.BotFetcher.find_all_members
+        conn |> json(%{result: members |> length})
+  end
+
+
+
 end
