@@ -100,6 +100,8 @@ defmodule Overcharge.BotFetcher do
                     messages: [],
                     msisdn:   nil,
                     score: 0,
+                    got_mci_voucher: false,
+                    last_activity: Timex.DateTime.now ,
                     level: nil,
                     section: :main,
                     uuid: Ecto.UUID.generate |> to_string,
@@ -247,13 +249,28 @@ def send_menu(chat_id) do
     send_message(chat_id, "انتخاب کنید", markup)
 end
 
+def send_mci_voucher(chat_id) do
+    #charge = %Nadia.Model.KeyboardButton{text: "خرید شارژ", request_contact: false}
+    message = case chat_id |> get_user_history |> Map.get(:got_mci_voucher) do
+        true ->
+            "هر هفته فقط ۱ کارت شارژ رایگان میتوانید دریافت کنید.  هفته بعد تلاش کنید."
+        false ->
+            code = Overcharge.Utils.get_a_pin(1000)
+            chat_id |> get_user_history |> Map.merge( %{ got_mci_voucher:  true }) |> set_user_history(chat_id)
+            IO.puts("MCI FREE GIFT ::: sent FREE voucher to #{chat_id}")
+            "کد رمز کارت شارژ همراه اول شما `#{code}`\nممنون که از شارژل استفاده میکنید. www.chargell.com/mci"
+    end
+    send_message(chat_id, message)
+end
+
+
 def send_game_menu(chat_id) do
     rules = %Nadia.Model.KeyboardButton{text: "قوانین", request_contact: false}
     help = %Nadia.Model.KeyboardButton{text: "کمک", request_contact: false}
     gift = %Nadia.Model.KeyboardButton{text: "جایزه", request_contact: true}
     score = %Nadia.Model.KeyboardButton{text: "امتیاز", request_contact: false}
     purchase = %Nadia.Model.KeyboardButton{text: "انرژی", request_contact: false}
-    return = %Nadia.Model.KeyboardButton{text: "<-"}
+    return = %Nadia.Model.KeyboardButton{text: "شروع"}
     markup = %Nadia.Model.ReplyKeyboardMarkup{keyboard: [[rules, help, score, gift, purchase, return]], resize_keyboard: true, one_time_keyboard: false}
     send_message(chat_id, "<---->", markup)
 end
@@ -308,11 +325,11 @@ def send_gift(chat_id) do
             Overcharge.Gasedak.topup(msisdn, 1000 , refid, 1, 0) 
 
             SlackWebhook.send("⚠INFO: GAME:  Send 1000 charge for #{msisdn}")
-            send_message(chat_id, "شارژ ۱۰۰۰  تومانی برای شما ارسال شد.")
+            send_message(chat_id, "شارژ ۱۰۰۰  تومانی برای شما ارسال شد. پشتیبانی sales@chargell.ir")
         score > 600 && score < 2000 ->
             chat_id |> get_user_history |> Map.merge( %{ score: score - 600 }) |> set_user_history(chat_id)
             Overcharge.Gasedak.topup(msisdn, 2000 , refid, 1, 0) 
-            send_message(chat_id, "شارژ ۲۰۰۰  تومانی برای شما ارسال شد.")
+            send_message(chat_id, "شارژ ۲۰۰۰  تومانی برای شما ارسال شد. پشتیبانی sales@chargell.ir")
             SlackWebhook.send("⚠INFO: GAME:  Send 2000 charge for #{msisdn}")
         score > 2000 ->
             chat_id |> get_user_history |> Map.merge( %{ score: score - 2000 }) |> set_user_history(chat_id)
@@ -320,6 +337,14 @@ def send_gift(chat_id) do
             SlackWebhook.send("⚠INFO: GAME:  Xbox One lottery for #{msisdn}")
             send_message(chat_id, "شما در قرعه‌کشی XBox One شرکت داده شدید.")
     end
+
+    case chat_id |> get_user_history |> Map.get(:got_mci_voucher) do
+        true ->
+            :continue
+        _ ->
+            send_message(chat_id, "با ارسال /mcipin کد رمز شارژ رایگان همراه اول دریافت کنید. البته اگر همراه اولی هستید!")
+    end
+
 end
 
 
@@ -380,6 +405,9 @@ def action(id, :game, message) do
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
             id |> send_levels
+        "/mcipin" ->
+            id |> send_mci_voucher
+
         "/backoff" ->
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> reveal_word
@@ -409,6 +437,12 @@ def action(id, :game, message) do
             id |> get_user_history |> Map.merge( %{ section:  :main }) |> set_user_history(id)
             id |> send_menu
         "<-" ->
+            id |> get_user_history |> Map.merge( %{ target_word: nil }) |> set_user_history(id)
+            id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
+            id |> send_game_menu
+            id |> send_levels
+            
+        "شروع" ->
             id |> get_user_history |> Map.merge( %{ target_word: nil }) |> set_user_history(id)
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
@@ -513,13 +547,14 @@ def handle_incomming(update) do
         id =  update.message.chat.id
         history = update.message.chat.id |> get_user_history |> Map.merge(
                     %{
-                        username:    update.message.chat.username,
-                        first_name:  update.message.chat.first_name,
-                        last_name:   update.message.chat.last_name,
-                        messages:    id
-                                            |> get_user_history 
-                                            |> Map.get(:messages) 
-                                            |> List.insert_at(0, case update.message.text do
+                        username:           update.message.chat.username,
+                        first_name:         update.message.chat.first_name,
+                        last_name:          update.message.chat.last_name,
+                        last_activity:      Timex.DateTime.now,
+                        messages:           id
+                                                |> get_user_history 
+                                                |> Map.get(:messages) 
+                                                |> List.insert_at(0, case update.message.text do
                                                                     nil ->
                                                                         ""
                                                                     "" ->

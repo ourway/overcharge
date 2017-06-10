@@ -27,6 +27,22 @@ defmodule Overcharge.Utils do
         end
     end
 
+
+    def get_a_pin(amount) do
+        case (from p in Overcharge.Pin,
+                where: p.is_active == true,
+                where: p.amount == ^amount,
+                where: p.is_used == false,
+                limit: 1,
+                select: p ) |> Overcharge.Repo.one do
+            nil ->
+                :error
+            np ->
+                {:ok, p} = Overcharge.Pin.changeset(np, %{ is_used: true}) |> Overcharge.Repo.update
+                    p.code
+         end
+    end
+
     def get_new_mci_pin(amount, invoice_id) do
         case (from p in Overcharge.Pin,
                 where: p.is_active == true,
