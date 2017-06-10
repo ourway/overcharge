@@ -1,6 +1,6 @@
 defmodule Overcharge.Pay do
     ## pay.ir
-    @apikey "f6db095efea7f0ac16b025d3c4450610"
+    @apikey "499dc0e6059efa42ee8af59149e1cb41"
     @baseurl "https://pay.ir/payment"
 
     @doc """
@@ -10,7 +10,7 @@ defmodule Overcharge.Pay do
         {:ok, payload} = %{
             "api" =>            @apikey,
             "amount" =>         invoice.amount * 10,
-            "redirect" =>       "https://chargell.ir/deliver/#{invoice.uuid}",
+            "redirect" =>       "https://www.chargell.com/deliver/#{invoice.uuid}",
             "factorNumber" =>   invoice.refid
         } |> Poison.encode
 
