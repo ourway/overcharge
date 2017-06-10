@@ -4,7 +4,7 @@ defmodule Overcharge.BotFetcher do
   @cachename :overcharge_cache
   @backupname "cache_backup"
   @fetchlimit 100
-  @interval 500
+  @interval 400
 
 
   def convert_to_persian(digits) do
@@ -184,11 +184,14 @@ defmodule Overcharge.BotFetcher do
 
 
   def handle_info({:send_message, target, message, reply_markup}, state) do
+      
       case reply_markup do
           nil ->
-            Nadia.send_message(target, message, [parse_mode: "Markdown", disable_web_page_preview: true])
+            spawn(Nadia, :send_message, [target, message, [parse_mode: "Markdown", disable_web_page_preview: true]])
+            #Nadia.send_message(target, message, [parse_mode: "Markdown", disable_web_page_preview: true])
           _ ->
-            Nadia.send_message(target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true])
+            spawn(Nadia, :send_message, [target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true]])
+            #Nadia.send_message(target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true])
       end
     {:noreply, state}
   end

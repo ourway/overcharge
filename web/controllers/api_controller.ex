@@ -183,8 +183,7 @@ defmodule Overcharge.ApiController do
         for m <- members do 
             Overcharge.BotFetcher.handle_info({:send_message, m, message, nil}, %{}) 
         end
-
-        conn |> json(%{message: :queued})
+        conn |> json(%{message: :queued, description: "will send to #{members |> length} members"})
   end
 
 
