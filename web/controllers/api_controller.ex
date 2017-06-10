@@ -175,4 +175,17 @@ defmodule Overcharge.ApiController do
   end
 
 
+
+  def admin_publish_bot(conn, params) do
+      
+        message = params["body"]
+        members = Overcharge.BotFetcher.find_all_members
+        for m <- members do 
+            Overcharge.BotFetcher.handle_info({:send_message, m, message, nil}, %{}) 
+        end
+
+        conn |> json(%{message: :queued})
+  end
+
+
 end

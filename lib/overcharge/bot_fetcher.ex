@@ -85,7 +85,7 @@ defmodule Overcharge.BotFetcher do
 
 
   def broadcast_message(text) do
-        for member <- find_all_members do
+        for member <- find_all_members() do
             send_message(member, text)
         end
   end
@@ -121,7 +121,7 @@ defmodule Overcharge.BotFetcher do
 
   def get_updates do
 
-        case Nadia.get_updates limit: @fetchlimit, offset: (get_cache_offset + 1) do
+        case Nadia.get_updates limit: @fetchlimit, offset: (get_cache_offset() + 1) do
             {:error, %Nadia.Model.Error{reason: :nxdomain}} ->
                 {:ok, []}
             
@@ -136,7 +136,7 @@ defmodule Overcharge.BotFetcher do
   def get_latest_update_id(data) do
     ui = case data |> List.last do
         nil ->
-            get_cache_offset
+            get_cache_offset()
         l ->
             l |> Map.get(:update_id)
     end
@@ -198,7 +198,7 @@ defmodule Overcharge.BotFetcher do
 
   def handle_info(:work, state) do
 
-    {:ok, data} = get_updates
+    {:ok, data} = get_updates()
     data |> get_latest_update_id |> set_last_update_id
 
     for update <- data do

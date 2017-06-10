@@ -7,16 +7,16 @@ defmodule Overcharge.CORS do
 		opts
 	end
 
-	def call(conn, opts) do
+	def call(conn, _opts) do
         host =  Overcharge.Router.Helpers.url(conn)
-        c = Plug.Conn.fetch_query_params(conn, opts)
-        orig = c.query_params |> Map.get("__amp_source_origin")
-        origin = cond do
-           orig == host ->
-               host
-            orig != host ->
-                "https://www-chargell-com.cdn.ampproject.org"
-        end
+        #c = Plug.Conn.fetch_query_params(conn, opts)
+        #orig = c.query_params |> Map.get("__amp_source_origin")
+        #origin = cond do
+        #   orig == host ->
+        #       host
+        #    orig != host ->
+        #        "https://www-chargell-com.cdn.ampproject.org"
+        #end
             
         #origin = conn |> Plug.Conn.get_req_header("origin") |> List.first
         conn
