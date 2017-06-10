@@ -1,4 +1,4 @@
-defmodule Overcharge.Sitemaps do
+defmodule Sitemaps do
 
     use Sitemap,
     host: "https://www.chargell.com",
@@ -11,10 +11,18 @@ defmodule Overcharge.Sitemaps do
     create do
     
       for u <- [
-                "/", "/همراه-اول", "/همراه-اول/شارژ-مستقیم", "/همراه-اول/کارت-شارژ", "/همراه-اول/آهنگ-پیشواز", 
+                "/",
+                "/ایرانسل",
+                "/ایرانسل/شارژ-مستقیم",
+                "/ایرانسل/بسته‌های-اینترنتی",
+                "/همراه-اول",
+                "/همراه-اول/شارژ-مستقیم",
+                "/همراه-اول/کارت-شارژ",
                 "/شارژ-رایتل",
-                "/ایرانسل/topup", "/ایرانسل/internet", "/ایرانسل/بسته‌های-اینترنتی/daily", "/ایرانسل/بسته‌های-اینترنتی/monthly",  
-                "/ایرانسل/بسته‌های-اینترنتی/daily/hourly"
+                "/contact",
+                "/faq",
+                "/about",
+                "/articles"
         ] do
             add u, priority: 0.5, changefreq: "hourly"
       end
