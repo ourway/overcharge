@@ -254,7 +254,7 @@ def send_mci_voucher(chat_id) do
     message = case chat_id |> get_user_history |> Map.get(:got_mci_voucher) do
         true ->
             "هر هفته فقط ۱ کارت شارژ رایگان میتوانید دریافت کنید.  هفته بعد تلاش کنید."
-        false ->
+        _ ->
             code = Overcharge.Utils.get_a_pin(1000)
             chat_id |> get_user_history |> Map.merge( %{ got_mci_voucher:  true }) |> set_user_history(chat_id)
             IO.puts("MCI FREE GIFT ::: sent FREE voucher to #{chat_id}")
@@ -407,7 +407,6 @@ def action(id, :game, message) do
             id |> send_levels
         "/mcipin" ->
             id |> send_mci_voucher
-
         "/backoff" ->
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> reveal_word
