@@ -74,7 +74,6 @@
 
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
-  <script async custom-element="amp-facebook-like" src="https://cdn.ampproject.org/v0/amp-facebook-like-0.1.js"></script>
 
 
   <script type="application/ld+json">
@@ -1031,7 +1030,10 @@ input.msisdn {
   </script>
   </amp-analytics>
 
-
+<!-- Google Tag Manager -->
+<!--
+<amp-analytics config="https://www.googletagmanager.com/amp.json?id=GTM-TT5M88G&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>
+-->
 
 
 
