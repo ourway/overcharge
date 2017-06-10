@@ -90,11 +90,11 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "url": "http://www.google.com",
+  "url": "<%= Overcharge.Router.Helpers.url(@conn) %>",
   "logo": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/logo_s.png",
   "contactPoint": [{
     "@type": "ContactPoint",
-    "telephone": "+98-21-44237749",
+    "url": "<%= Overcharge.Router.Helpers.url(@conn) %>/contact",
     "contactType": "customer service"
   }]
 }

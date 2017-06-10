@@ -176,7 +176,8 @@ defmodule Overcharge.BotFetcher do
 
     case Cachex.load(@cachename, @backupname) do
         {:error, :unreachable_file} ->
-            Cachex.dump(@cachename, @backupname)
+            :error
+            #Cachex.dump(@cachename, @backupname)
         {:ok, true} ->
             :ok
     end
