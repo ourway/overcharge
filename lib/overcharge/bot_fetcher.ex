@@ -343,7 +343,8 @@ def send_gift(chat_id) do
         true ->
             :continue
         _ ->
-            send_message(chat_id, "با ارسال /mcipin کد رمز شارژ رایگان همراه اول دریافت کنید. البته اگر همراه اولی هستید!")
+            #send_message(chat_id, "با ارسال /mcipin کد رمز شارژ رایگان همراه اول دریافت کنید. البته اگر همراه اولی هستید!")
+            send_message(chat_id, "هر شب ساعت ۲۲:۰۰ تا ۲۲:۱۰ شارژ رایگان به ۵۰۰ نفر در شارژل.  حتما به ما سر بزنید.\nwww.chargell.com")
     end
 
 end
@@ -406,8 +407,8 @@ def action(id, :game, message) do
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
             id |> send_levels
-        "/mcipin" ->
-            id |> send_mci_voucher
+        #"/mcipin" -> disabled for now
+        #    id |> send_mci_voucher
         "/backoff" ->
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> reveal_word
