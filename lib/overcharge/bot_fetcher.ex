@@ -148,7 +148,7 @@ defmodule Overcharge.BotFetcher do
 
 
   def dump_cache_to_disk(last_update_id) do
-    case last_update_id |> rem(10) do
+    case (last_update_id |> rem(10)) == 0 do
         0 ->
             {:ok, true} = Cachex.dump(@cachename, @backupname)
         _ ->
@@ -497,7 +497,7 @@ def game_logic(id, word) do
                 :easy ->
                     1
                 :mid ->
-                    2
+                    3
                 :hard ->
                     5
             end
@@ -508,6 +508,7 @@ def game_logic(id, word) do
                             id |> get_user_history |> Map.merge( %{ score:  target_score + score }) |> set_user_history(id)
                             id |> send_message("آفرین! شما #{target_score |> convert_to_persian} امتیاز به دست آوردید و مجموع امتیاز شما به #{(target_score + score) |> convert_to_persian} رسید.")
                             id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(id)
+                            id |> get_user_history |> Map.merge( %{ target_word:  nil }) |> set_user_history(id)
                             id |> send_levels
                     else 
                         id |> get_user_history |> Map.merge( %{ score:  score - target_punish }) |> set_user_history(id)
@@ -531,9 +532,9 @@ def start_game(id, level) do
                 :nil ->
                     0
                 :easy ->
-                    16
+                    15
                 :mid ->
-                    48
+                    50
                 :hard ->
                     100
             end
