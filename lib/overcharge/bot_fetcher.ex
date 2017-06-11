@@ -149,7 +149,7 @@ defmodule Overcharge.BotFetcher do
 
   def dump_cache_to_disk(last_update_id) do
     case rem(last_update_id, 10) do
-        0 -
+        0 ->
             {:ok, true} = Cachex.dump(@cachename, @backupname)
         _ ->
             :continue
