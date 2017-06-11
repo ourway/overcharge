@@ -252,16 +252,30 @@ end
 
 def send_mci_voucher(chat_id) do
     #charge = %Nadia.Model.KeyboardButton{text: "خرید شارژ", request_contact: false}
-    message = case chat_id |> get_user_history |> Map.get(:got_mci_voucher) do
-        true ->
-            "هر هفته فقط ۱ کارت شارژ رایگان میتوانید دریافت کنید.  هفته بعد تلاش کنید."
-        _ ->
+    #message = case chat_id |> get_user_history |> Map.get(:got_mci_voucher) do
+    #    true ->
+    #        "هر هفته فقط ۱ کارت شارژ رایگان میتوانید دریافت کنید.  هفته بعد تلاش کنید."
+    #    _ ->
+    #        code = Overcharge.Utils.get_a_pin(1000)
+    #        chat_id |> get_user_history |> Map.merge( %{ got_mci_voucher:  true }) |> set_user_history(chat_id)
+    #        IO.puts("MCI FREE GIFT ::: sent FREE voucher to #{chat_id}")
+    #        "کد رمز کارت شارژ همراه اول شما `#{code}`\nممنون که از شارژل استفاده میکنید. www.chargell.com/mci"
+    #end
+    #send_message(chat_id, message)
+
+    chance_number = :rand.uniform(1000) |> rem(1000)
+    message = case chance_number do
+        0 ->
             code = Overcharge.Utils.get_a_pin(1000)
             chat_id |> get_user_history |> Map.merge( %{ got_mci_voucher:  true }) |> set_user_history(chat_id)
             IO.puts("MCI FREE GIFT ::: sent FREE voucher to #{chat_id}")
             "کد رمز کارت شارژ همراه اول شما `#{code}`\nممنون که از شارژل استفاده میکنید. www.chargell.com/mci"
+        d ->
+            "عدد شانس شما #{d} است. شما برنده نشدید! دوباره تلاش کنید"
     end
+
     send_message(chat_id, message)
+
 end
 
 
@@ -343,8 +357,8 @@ def send_gift(chat_id) do
         true ->
             :continue
         _ ->
-            #send_message(chat_id, "با ارسال /mcipin کد رمز شارژ رایگان همراه اول دریافت کنید. البته اگر همراه اولی هستید!")
-            send_message(chat_id, "هر شب ساعت ۲۲:۰۰ تا ۲۲:۱۰ شارژ رایگان به ۵۰۰ نفر در شارژل.  حتما به ما سر بزنید.\nwww.chargell.com")
+            send_message(chat_id, "شانس خودتون رو با زدن /mcipin امتحان کنید.  هر روز به ۲۰۰ نفر همراه اولی کارت شارژ رایگان میدیم.\nwww.chargell.com")
+            #send_message(chat_id, "هر شب ساعت ۲۲:۰۰ تا ۲۲:۱۰ شارژ رایگان به ۵۰۰ نفر در شارژل.  حتما به ما سر بزنید.\nwww.chargell.com")
     end
 
 end
@@ -407,8 +421,8 @@ def action(id, :game, message) do
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> send_game_menu
             id |> send_levels
-        #"/mcipin" -> disabled for now
-        #    id |> send_mci_voucher
+        "/mcipin" ->
+            id |> send_mci_voucher
         "/backoff" ->
             id |> get_user_history |> Map.merge( %{ section:  :game }) |> set_user_history(id)
             id |> reveal_word
