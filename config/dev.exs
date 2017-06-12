@@ -49,6 +49,6 @@ config :overcharge, Overcharge.Repo,
 
 
 config :nadia,
-  token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws"  ##prod
-  #token: "381106026:AAFOWEEkwc4HWgQLYtr0rTGBdPzYhSHsFsw"
+  #token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws"  ##prod
+  token: "381106026:AAFOWEEkwc4HWgQLYtr0rTGBdPzYhSHsFsw"
 
