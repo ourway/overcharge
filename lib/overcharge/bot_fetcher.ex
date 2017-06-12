@@ -203,17 +203,24 @@ def send_mci_voucher(chat_id) do
     #end
     #send_message(chat_id, message)
 
-    chance_number = :rand.uniform(1000) |> rem(1000)
-    message = case chance_number do
-        0 ->
-            code = Overcharge.Utils.get_a_pin(1000)
-            chat_id |> get_user_history |> Map.merge( %{ got_mci_voucher:  true }) |> set_user_history(chat_id)
-            IO.puts("MCI FREE GIFT ::: sent FREE voucher to #{chat_id}")
-            "کد رمز کارت شارژ همراه اول شما `#{code}`\nممنون که از شارژل استفاده میکنید. www.chargell.com/mci"
-        d ->
-            "عدد شانس شما #{d} است. شما برنده نشدید! دوباره تلاش کنید"
-    end
+    message = case Cachex.get(@cachename, "MCIGIFT_LOCK_#{chat_id}") do
+        {:missing, nil} ->
+            {:ok, true}  = Cachex.set(@cachename, "MCIGIFT_LOCK_#{chat_id}", true, [ttl: :timer.seconds(10)])
+            chance_number = :rand.uniform(1000) |> rem(1000)
+            case chance_number do
+                0 ->
+                    code = Overcharge.Utils.get_a_pin(1000)
+                    chat_id |> get_user_history |> Map.merge( %{ got_mci_voucher:  true }) |> set_user_history(chat_id)
+                    IO.puts("MCI FREE GIFT ::: sent FREE voucher to #{chat_id}")
+                    "کد رمز کارت شارژ همراه اول شما `#{code}`\nممنون که از شارژل استفاده میکنید. www.chargell.com/mci"
+                d ->
+                    "عدد شانس شما #{d} است. شما برنده نشدید! دوباره تلاش کنید"
+            end
+        _ ->
 
+            "عجله نکنید"
+    end
+    
     send_message(chat_id, message)
 
 end
