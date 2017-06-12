@@ -123,7 +123,6 @@ defmodule Overcharge.BotFetcher do
 
 
   def get_updates do
-       IO.puts("get update")
 
         case Nadia.get_updates limit: @fetchlimit, offset: (get_cache_offset() + 1) do
             {:error, %Nadia.Model.Error{reason: :nxdomain}} ->
