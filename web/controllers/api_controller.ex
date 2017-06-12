@@ -194,83 +194,88 @@ defmodule Overcharge.ApiController do
 
 
 
-  def bot(conn, %{"bot_token" => _token,
-  "callback_query" => %{"chat_instance" => _chat_instance,
-    "data" => data,
-    "from" => %{"first_name" => _first_name, "id" => id,
-      "language_code" => _, "last_name" => _last_name,
-      "username" =>_username}, "id" => queryid,
-    "message" => %{"chat" => %{"first_name" => _, "id" => _,
-        "last_name" => _ , "type" => _,
-        "username" => _}, "date" => _,
-      "from" => %{"first_name" => _ch_id, "id" => _channel,
-        "username" => _chusername}, "message_id" => _,
-      "text" => _text}},
-  "update_id" => _}) do
+#   def bot(conn, %{"bot_token" => _token,
+#   "callback_query" => %{"chat_instance" => _chat_instance,
+#     "data" => data,
+#     "from" => %{"first_name" => _first_name, "id" => id,
+#       "language_code" => _, "last_name" => _last_name,
+#       "username" =>_username}, "id" => queryid,
+#     "message" => %{"chat" => %{"first_name" => _, "id" => _,
+#         "last_name" => _ , "type" => _,
+#         "username" => _}, "date" => _,
+#       "from" => %{"first_name" => _ch_id, "id" => _channel,
+#         "username" => _chusername}, "message_id" => _,
+#       "text" => _text}},
+#   "update_id" => _}) do
 
-    Overcharge.Bot.handle_callback(id, queryid, data)
-    conn |> json(%{status: true})
-  end
+#     Overcharge.Bot.handle_callback(id, queryid, data)
+#     conn |> json(%{status: true})
+#   end
 
 
 
-  def bot(conn, %{
-                    "update_id" => _updateid,
-                    "message" =>
-                        %{
-                            "text" => text,
-                            "message_id" => _message_id,
-                            "from" =>
-                                %{
-                                    "username" => username,
-                                    "last_name" => last_name,
-                                    "language_code" => _,
-                                    "id" => id,
-                                    "first_name" => first_name
-                                },
-                            "date" => _,
-                            "chat" =>
-                                %{
-                                    "username" => _,
-                                    "type" => _,
-                                    "last_name" => _,
-                                    "id" => _,
-                                    "first_name" => _
-                                }
-                        },
-                    "bot_token" => _token
-                }
-        ) do
+#   def bot(conn, %{
+#                     "update_id" => _updateid,
+#                     "message" =>
+#                         %{
+#                             "text" => text,
+#                             "message_id" => _message_id,
+#                             "from" =>
+#                                 %{
+#                                     "username" => username,
+#                                     "last_name" => last_name,
+#                                     "language_code" => _,
+#                                     "id" => id,
+#                                     "first_name" => first_name
+#                                 },
+#                             "date" => _,
+#                             "chat" =>
+#                                 %{
+#                                     "username" => _,
+#                                     "type" => _,
+#                                     "last_name" => _,
+#                                     "id" => _,
+#                                     "first_name" => _
+#                                 }
+#                         },
+#                     "bot_token" => _token
+#                 }
+#         ) do
     
-    #text |> IO.inspect
-    {id, username, first_name, last_name, text} |> IO.inspect
-    Overcharge.Bot.handle_incomming(id, username, first_name, last_name, text)
-        conn |> json(%{status: true})
+#     #text |> IO.inspect
+#     {id, username, first_name, last_name, text} |> IO.inspect
+#     Overcharge.Bot.handle_incomming(id, username, first_name, last_name, text)
+#         conn |> json(%{status: true})
 
-    end
-
-
+#     end
 
 
-    def bot(conn, %{"bot_token" => _token,
-  "message" => %{"chat" => %{"first_name" => first_name, "id" => id,
-      "last_name" => last_name, "type" => _,
-      "username" => username},
-      "contact" => %{"first_name" => _, "last_name" => _,
-      "phone_number" => msisdn, "user_id" => _},
-    "date" => _id,
-    "from" => %{"first_name" => _, "id" => _,
-      "language_code" => _, "last_name" => _,
-      "username" => _}, "message_id" => _}, "update_id" => _}) do
+
+
+#     def bot(conn, %{"bot_token" => _token,
+#   "message" => %{"chat" => %{"first_name" => first_name, "id" => id,
+#       "last_name" => last_name, "type" => _,
+#       "username" => username},
+#       "contact" => %{"first_name" => _, "last_name" => _,
+#       "phone_number" => msisdn, "user_id" => _},
+#     "date" => _id,
+#     "from" => %{"first_name" => _, "id" => _,
+#       "language_code" => _, "last_name" => _,
+#       "username" => _}, "message_id" => _}, "update_id" => _}) do
      
-    {id, username, first_name, last_name, msisdn} |> IO.inspect
-    Overcharge.Bot.handle_incomming(id, username, first_name, last_name, nil, msisdn)
+#     {id, username, first_name, last_name, msisdn} |> IO.inspect
+#     Overcharge.Bot.handle_incomming(id, username, first_name, last_name, nil, msisdn)
 
 
+#         conn |> json(%{status: true})
+
+#       end
+
+
+    def bot(conn, params) do
+        params |> IO.inspect
         conn |> json(%{status: true})
-
-      end
-
+    end
 
 
 end
