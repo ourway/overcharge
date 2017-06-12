@@ -163,11 +163,11 @@ def send_message(chat_id, text, reply_markup \\ nil, _delay \\ 10) do
 
       case reply_markup do
           nil ->
-            spawn(Nadia, :send_message, [chat_id, text, [parse_mode: "Markdown", disable_web_page_preview: true]])
-            #Nadia.send_message(target, message, [parse_mode: "Markdown", disable_web_page_preview: true])
+            #spawn(Nadia, :send_message, [chat_id, text, [parse_mode: "Markdown", disable_web_page_preview: true]])
+            Nadia.send_message(target, message, [parse_mode: "Markdown", disable_web_page_preview: true])
           _ ->
-            spawn(Nadia, :send_message, [chat_id, text, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true]])
-            #Nadia.send_message(target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true])
+            #spawn(Nadia, :send_message, [chat_id, text, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true]])
+            Nadia.send_message(target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true])
       end
 
 
