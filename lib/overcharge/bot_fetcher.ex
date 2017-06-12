@@ -1,10 +1,9 @@
-defmodule Overcharge.BotFetcher do
-  use GenServer
+defmodule Overcharge.Bot do
 
   @cachename :overcharge_cache
   @backupname "cache_backup"
   @fetchlimit 100
-  @interval 1000
+  #@interval 1000
 
 
   def convert_to_persian(digits) do
@@ -159,80 +158,20 @@ defmodule Overcharge.BotFetcher do
 
 
 
+def send_message(chat_id, text, reply_markup \\ nil, _delay \\ 10) do
+    #IO.puts("i am here to send #{text}")
 
-
-
-  def start_link do
-    GenServer.start_link(__MODULE__, %{})
-  end
-
-  def init(state) do
-    ## load wordlist
-    :ets.new(:wordlist, [:named_table])   ## create new ets table
-    {:ok, wordlist} = File.read!("wordlist.json") |> Poison.decode
-    true = :ets.insert(:wordlist, {:easy, wordlist |> Map.get("fours")})
-    true = :ets.insert(:wordlist, {:mid, wordlist |> Map.get("sixes")})
-    true = :ets.insert(:wordlist, {:hard, wordlist |> Map.get("tens")})
-
-
-    case Cachex.load(@cachename, @backupname) do
-        {:error, :unreachable_file} ->
-            :error
-            #Cachex.dump(@cachename, @backupname)
-        {:ok, true} ->
-            :ok
-    end
-    schedule_work() # Schedule work to be performed at some point
-    {:ok, state}
-  end
-
-
-  def handle_info({:send_message, target, message, reply_markup}, state) do
-      
       case reply_markup do
           nil ->
-            spawn(Nadia, :send_message, [target, message, [parse_mode: "Markdown", disable_web_page_preview: true]])
+            spawn(Nadia, :send_message, [chat_id, text, [parse_mode: "Markdown", disable_web_page_preview: true]])
             #Nadia.send_message(target, message, [parse_mode: "Markdown", disable_web_page_preview: true])
           _ ->
-            spawn(Nadia, :send_message, [target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true]])
+            spawn(Nadia, :send_message, [chat_id, text, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true]])
             #Nadia.send_message(target, message, [reply_markup: reply_markup, parse_mode: "Markdown", disable_web_page_preview: true])
       end
-    {:noreply, state}
-  end
 
 
-
-
-  def handle_info(:work, state) do
-
-    {:ok, data} = get_updates()
-    data |> get_latest_update_id |> set_last_update_id
-
-    for update <- data do
-        try do
-            update |> handle_incomming
-        rescue 
-           _ ->
-                :continue
-        end
-    end
-
-    schedule_work() # Reschedule once more
-    {:noreply, state}
-  end
-
-  defp schedule_work() do
-    Process.send_after(self(), :work, @interval ) # 5 seconds
-  end
-
-
-
-
-################# handle #####################
-
-
-def send_message(id, text, reply_markup \\ nil, delay \\ 10) do
-    Process.send_after(self(), {:send_message, id, text, reply_markup}, delay)
+    #Process.send_after(self(), {:send_message, id, text, reply_markup}, delay)
 end
 
 
@@ -571,19 +510,17 @@ def start_game(id, level) do
     id |> send_message("برای شروع یک کلمه *#{word |> String.length |> convert_to_persian}* حرفی به فارسی بنویسید.\n امتیاز هدف: *#{target_score |> convert_to_persian}* | امتیاز کنونی: *#{score |> convert_to_persian}*")
 end
 
-def handle_incomming(update) do
-    if update |> Map.get(:message) do
-        id =  update.message.chat.id
-        history = update.message.chat.id |> get_user_history |> Map.merge(
+def handle_incomming(id, username, first_name, last_name, text, msisdn \\ nil) do
+        history = id |> get_user_history |> Map.merge(
                     %{
-                        username:           update.message.chat.username,
-                        first_name:         update.message.chat.first_name,
-                        last_name:          update.message.chat.last_name,
+                        username:           username,
+                        first_name:         first_name,
+                        last_name:          last_name,
                         last_activity:      Timex.DateTime.now,
                         messages:           id
                                                 |> get_user_history 
                                                 |> Map.get(:messages) 
-                                                |> List.insert_at(0, case update.message.text do
+                                                |> List.insert_at(0, case text do
                                                                     nil ->
                                                                         ""
                                                                     "" ->
@@ -592,24 +529,22 @@ def handle_incomming(update) do
                                                                         t |> Persian.fix
                                                                  end) |> Enum.slice(0, 10) })
                                                                       |> set_user_history(id)
-       case update |> Map.get(:message) |> Map.get(:contact) do
+        
+       #id |> action(history.section, text) 
+       case msisdn do
             nil ->
-                id |> action(history.section, update.message.text)
-            c ->
+                id |> action(history.section, text)
+            m ->
                 profile = id |> get_user_history 
-                                |> Map.merge( %{ msisdn: c.phone_number })
+                                |> Map.merge( %{ msisdn: m })
                                 |> set_user_history(id)
                profile.id |> action(history.section, "/gift")
         end
         
-    end
+    
+end
 
-    if update |> Map.get(:callback_query) do
-        id = update.callback_query.message.chat.id
-        #id |> send_game_menu
-        query_id = update.callback_query.id
-        data = update.callback_query.data
-
+    def handle_callback(id, queryid, data) do
         case data do
             "level_easy" ->
                 id |> get_user_history |> Map.merge( %{ level:  :easy }) |> set_user_history(id)
@@ -621,13 +556,8 @@ def handle_incomming(update) do
                 id |> get_user_history |> Map.merge( %{ level:  :hard }) |> set_user_history(id)
                 id |> start_game(:hard)
         end
-        Nadia.answer_callback_query(query_id, [text: "باشه"])
+        Nadia.answer_callback_query(queryid, [text: "باشه"])
     end
-
-
-    
-end
-
 
 
 

@@ -298,11 +298,11 @@ defmodule Overcharge.Utils do
                 func == "energy" ->
                       count = amount |> String.to_integer
                       id = msisdn |> String.to_integer
-                      score = id |> Overcharge.BotFetcher.get_user_history |> Map.get(:score)
-                      id |> Overcharge.BotFetcher.get_user_history 
+                      score = id |> Overcharge.Bot.get_user_history |> Map.get(:score)
+                      id |> Overcharge.Bot.get_user_history 
                         |> Map.merge( %{ score:  count + score }) 
-                        |> Overcharge.BotFetcher.set_user_history(id)
-                        message = "#{count |> Overcharge.BotFetcher.convert_to_persian} امتیاز به شما اضافه شد."
+                        |> Overcharge.Bot.set_user_history(id)
+                        message = "#{count |> Overcharge.Bot.convert_to_persian} امتیاز به شما اضافه شد."
                          ivs = invoice |> set_invoice_status("completed")
                         id |> send_message(message) 
                       {:ok, true, ivs, nil}
@@ -335,7 +335,7 @@ defmodule Overcharge.Utils do
 
 
     def send_message(id, message) do
-        Overcharge.BotFetcher.handle_info({:send_message, id, message, nil}, %{})
+        Overcharge.Bot.send_message(id, message, nil)
     end
 
 

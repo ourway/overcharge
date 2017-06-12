@@ -31,7 +31,8 @@ config :logger, level: :info
 
 
 config :nadia,
-  token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws"
+  token: "381106026:AAFOWEEkwc4HWgQLYtr0rTGBdPzYhSHsFsw" #dev
+  #token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws" #prod
 
 
 # ## SSL Support

@@ -8,7 +8,7 @@ use Mix.Config
 # with brunch.io to recompile .js and .css sources.
 config :overcharge, Overcharge.Endpoint,
   #http: [port: 4000],
-  https: [port: 4443,
+  https: [port: 4444  ,
           otp_app: :overcharge,
           keyfile: "priv/keys/localhost.key",
           certfile: "priv/keys/localhost.cert"],
