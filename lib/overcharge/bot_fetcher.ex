@@ -205,7 +205,6 @@ def send_mci_voucher(chat_id) do
 
     message = case Cachex.get(@cachename, "MCIGIFT_LOCK_#{chat_id}") do
         {:missing, nil} ->
-            {:ok, true}  = Cachex.set(@cachename, "MCIGIFT_LOCK_#{chat_id}", true, [ttl: :timer.seconds(10)])
             chance_number = :rand.uniform(1000) |> rem(1000)
             case chance_number do
                 0 ->
@@ -222,6 +221,7 @@ def send_mci_voucher(chat_id) do
     end
     
     send_message(chat_id, message)
+    {:ok, true}  = Cachex.set(@cachename, "MCIGIFT_LOCK_#{chat_id}", true, [ttl: :timer.seconds(10)])
 
 end
 
