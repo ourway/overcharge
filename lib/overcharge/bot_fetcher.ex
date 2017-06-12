@@ -4,7 +4,7 @@ defmodule Overcharge.BotFetcher do
   @cachename :overcharge_cache
   @backupname "cache_backup"
   @fetchlimit 100
-  @interval 400
+  @interval 1000
 
 
   def convert_to_persian(digits) do
@@ -123,6 +123,7 @@ defmodule Overcharge.BotFetcher do
 
 
   def get_updates do
+       IO.puts("get update")
 
         case Nadia.get_updates limit: @fetchlimit, offset: (get_cache_offset() + 1) do
             {:error, %Nadia.Model.Error{reason: :nxdomain}} ->
