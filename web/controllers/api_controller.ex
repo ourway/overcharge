@@ -243,6 +243,7 @@ defmodule Overcharge.ApiController do
         ) do
     
     #text |> IO.inspect
+    {id, username, first_name, last_name, text} |> IO.inspect
     Overcharge.Bot.handle_incomming(id, username, first_name, last_name, text)
         conn |> json(%{status: true})
 
@@ -262,6 +263,7 @@ defmodule Overcharge.ApiController do
       "language_code" => _, "last_name" => _,
       "username" => _}, "message_id" => _}, "update_id" => _}) do
      
+    {id, username, first_name, last_name, msisdn} |> IO.inspect
     Overcharge.Bot.handle_incomming(id, username, first_name, last_name, nil, msisdn)
 
 
