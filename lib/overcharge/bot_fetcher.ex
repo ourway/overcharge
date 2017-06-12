@@ -341,6 +341,7 @@ def send_gift(chat_id) do
               true ->
                   "برای دریافت جایزه بعدی منتظر بمانید"
               _ ->
+                chat_id |> get_user_history |> Map.merge( %{ got_gift: true }) |> set_user_history(chat_id)
                 chat_id |> get_user_history |> Map.merge( %{ score: score - 300 }) |> set_user_history(chat_id)
                 Overcharge.Gasedak.topup(msisdn, 1000 , refid, 1, 0) 
                 SlackWebhook.send("⚠INFO: GAME:  Send 1000 charge for #{msisdn} id: #{chat_id}")
@@ -506,7 +507,18 @@ def game_logic(id, word) do
             level = id |> get_user_history |> Map.get(:level)
             score = id |> get_user_history |> Map.get(:score)
             {id, score, level, target, suggested} |> IO.inspect
-            target_score = :math.pow(2, target |> String.length) |> round
+
+            target_score = case level do
+                        :nil ->
+                            0
+                        :easy ->
+                            15
+                        :mid ->
+                            50
+                        :hard ->
+                            100
+                    end
+
             target_punish = case level do
                 :nil ->
                     0
