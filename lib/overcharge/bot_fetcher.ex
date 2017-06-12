@@ -101,6 +101,7 @@ defmodule Overcharge.BotFetcher do
                     msisdn:   nil,
                     score: 0,
                     got_mci_voucher: false,
+                    got_gift: false,
                     last_activity: Timex.DateTime.now ,
                     level: nil,
                     section: :main,
@@ -335,17 +336,17 @@ def send_gift(chat_id) do
     cond do
         score < 300 ->
             send_message(chat_id, "برای دریافت جایزه حداقل به ۳۰۰ امتیاز نیاز دارید.")
-        score > 300 && score < 600 ->
-            chat_id |> get_user_history |> Map.merge( %{ score: score - 300 }) |> set_user_history(chat_id)
-            Overcharge.Gasedak.topup(msisdn, 1000 , refid, 1, 0) 
-
-            SlackWebhook.send("⚠INFO: GAME:  Send 1000 charge for #{msisdn}")
-            send_message(chat_id, "شارژ ۱۰۰۰  تومانی برای شما ارسال شد. پشتیبانی sales@chargell.ir")
-        score > 600 && score < 2000 ->
-            chat_id |> get_user_history |> Map.merge( %{ score: score - 600 }) |> set_user_history(chat_id)
-            Overcharge.Gasedak.topup(msisdn, 2000 , refid, 1, 0) 
-            send_message(chat_id, "شارژ ۲۰۰۰  تومانی برای شما ارسال شد. پشتیبانی sales@chargell.ir")
-            SlackWebhook.send("⚠INFO: GAME:  Send 2000 charge for #{msisdn}")
+        score > 300 && score < 2000 ->
+            message = case chat_id |> get_user_history |> Map.get(:got_gift) do
+              true ->
+                  "برای دریافت جایزه بعدی منتظر بمانید"
+              _ ->
+                chat_id |> get_user_history |> Map.merge( %{ score: score - 300 }) |> set_user_history(chat_id)
+                Overcharge.Gasedak.topup(msisdn, 1000 , refid, 1, 0) 
+                SlackWebhook.send("⚠INFO: GAME:  Send 1000 charge for #{msisdn} id: #{chat_id}")
+                "شارژ ۱۰۰۰  تومانی برای شما ارسال شد. پشتیبانی sales@chargell.ir"
+            end
+            send_message(chat_id, message)
         score > 2000 ->
             chat_id |> get_user_history |> Map.merge( %{ score: score - 2000 }) |> set_user_history(chat_id)
             chat_id |> get_user_history |> Map.merge( %{ lottery: true }) |> set_user_history(chat_id)
