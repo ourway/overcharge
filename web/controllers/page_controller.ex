@@ -348,9 +348,19 @@ defmodule Overcharge.PageController do
     def deliver(conn, params) do
 
       uuid = params["uuid"]
-      target = uuid |> Overcharge.Utils.get_invoice_uuid
-                    |> Overcharge.Utils.set_invoice_checked_out
-                     
+      _status = params["status"]
+      _transid = params["transId"]
+      _factorNumber = params["factorNumber"]
+      message = params["message"]
+      
+      t = uuid |> Overcharge.Utils.get_invoice_uuid
+      target = case message do
+        "OK" ->
+          t |> Overcharge.Utils.set_invoice_checked_out
+        _ ->
+          t
+      end
+
       ivs = if target.status == "pending" do  ## only first time
               case target |> Overcharge.Pay.verify do
                 1 ->
