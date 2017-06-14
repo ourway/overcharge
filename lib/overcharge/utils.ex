@@ -82,6 +82,9 @@ defmodule Overcharge.Utils do
                 |> Overcharge.Repo.all
     end 
 
+    @doc """
+        Overcharge.Utils.
+    """
     def create_invoice(action, amount, client, product) do 
       amount = amount
       off = 0.0  ##indirim :)

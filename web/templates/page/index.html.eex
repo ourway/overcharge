@@ -59,7 +59,7 @@
 
 
 
-<article>
+<article class="hidden">
 
 <h3 class="right center whitecolor">
     شارژل شارژت میکنه تو ۳ سوت!
@@ -72,7 +72,7 @@
 </p>
 
 </article>
-<article>
+<article class="hidden">
 <h3 class="right center whitecolor">
     همکاران تجاری ما
 </h3>
@@ -90,7 +90,7 @@
 </article>
 
 
-<article>
+<article class="hidden">
 <h3 class="right center whitecolor">
     قبلا از ما خرید کردید؟
 </h3>

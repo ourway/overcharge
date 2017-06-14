@@ -7,7 +7,7 @@ defmodule Overcharge.PageController do
 
     render conn, "index.html",
       description: "شارژ نیاز دارید؟  بسته اینترنتی لازم دارید؟  با شارژل همه چی تو سه سوت! ",
-      title:       "خرید شارژ",
+      title:       "خرید شارژ و بسته اینترنتی همراه اول، ایرانسل و رایتل",
       subtitle:    "خرید شارژ و بسته اینترنتی همراه اول، ایرانسل و رایتل",
       color:       "#f8f8f8",
       text_color:  "#ffffff",

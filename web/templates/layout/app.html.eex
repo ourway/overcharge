@@ -359,7 +359,7 @@ font-family: 'IRANSans', sans-serif;
 background-image: url(/images/bg-<%= @product %>.svg);
 background-position: 0px -50px;
 <%= if @page_type == "landing" do %>
-    background-position: -378px 0px;
+    background-position: 0px -50px;
 <%= end %>
 background-size: cover;
 background-color: <%= @color %>;
