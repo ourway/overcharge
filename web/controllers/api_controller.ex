@@ -271,7 +271,8 @@ defmodule Overcharge.ApiController do
 
       end
 
-  def bot(conn, _params) do
+  def bot(conn, params) do
+        params |> IO.inspect
       conn |> json(%{status: true})
   end
 
