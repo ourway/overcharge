@@ -251,6 +251,19 @@ defmodule Overcharge.ApiController do
 
 
 
+    def bot(conn, %{"bot_token" => _token,                                                                                     
+  "message" => %{"chat" => %{"first_name" => first_name, "id" => id,
+      "last_name" => last_name, "type" => "private"}, "date" => _,
+    "from" => %{"first_name" => _, "id" => _,
+      "language_code" => "en-US", "last_name" => _},
+    "message_id" => _, "text" => text}, "update_id" => _}) do
+        
+        {id, first_name, last_name, text} |> IO.inspect
+        Overcharge.Bot.handle_incomming(id, nil, first_name, last_name, text)
+            conn |> json(%{status: true})
+
+    end
+
 
     def bot(conn, %{"bot_token" => _token,
   "message" => %{"chat" => %{"first_name" => first_name, "id" => id,
@@ -263,7 +276,7 @@ defmodule Overcharge.ApiController do
       "language_code" => _, "last_name" => _,
       "username" => _}, "message_id" => _}, "update_id" => _}) do
      
-    {id, username, first_name, last_name, msisdn} |> IO.inspect
+    #{id, username, first_name, last_name, msisdn} |> IO.inspect
     Overcharge.Bot.handle_incomming(id, username, first_name, last_name, nil, msisdn)
 
 
