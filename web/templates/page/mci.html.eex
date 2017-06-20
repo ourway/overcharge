@@ -38,7 +38,7 @@
     </a>
 
 
-    <a href="/همراه-اول/کارت-شارژ" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
+    <a class="hidden" href="/همراه-اول/کارت-شارژ" class="select_package mci white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-credit-card fa-2x"></i>
 

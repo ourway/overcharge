@@ -17,7 +17,7 @@
         </amp-img>
     </a>
 
-    <a href="/همراه-اول" class="select_package mci" itemscope itemtype="http://schema.org/Product">
+    <a href="/همراه-اول/شارژ-مستقیم" class="select_package mci" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-tags"></i>
 
@@ -26,7 +26,7 @@
       <span itemprop="brand">همراه اول</span>
             </span>
             <br/>
-            <small itemprop="description">کارت شارژ و شارژ مستقیم سریع</small>
+            <small itemprop="description">شارژ مستقیم سریع</small>
         </h1>
         <amp-img alt="خرید شارژ همراه اول با کلی تخفیف" src="/images/corporate-gifting.png" width="110" height="100" layout="fixed">
         </amp-img>
