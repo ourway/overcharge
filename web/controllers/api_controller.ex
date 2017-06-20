@@ -214,17 +214,17 @@ defmodule Overcharge.ApiController do
 
 
 
-  def bot(conn, %{"bot_token" => _token,                                                                                     │
-  "callback_query" => %{"chat_instance" => _chat_instance,                                                                                     │
-    "data" => data,                                                                                                                           │
-    "from" => %{"first_name" => _first_name, "id" => id,                                                                                        │
-      "language_code" => "en-US", "last_name" => _last_name},                                                                                           │
-    "id" => queryid,                                                                                                                    │
-    "message" => %{"chat" => %{"first_name" => _, "id" => _,                                                                         │
-        "last_name" => _, "type" => "private"}, "date" => _,                                                                          │
-      "from" => %{"first_name" => "Chargell GAME", "id" => _,                                                                                 │
-        "username" => "chergell_bot"}, "message_id" => _,                                                                                        │
-      "text" => _text}},                                                                                                         │
+  def bot(conn, %{"bot_token" => _token,
+  "callback_query" => %{"chat_instance" => _chat_instance,
+    "data" => data,
+    "from" => %{"first_name" => _first_name, "id" => id,
+      "language_code" => "en-US", "last_name" => _last_name},
+    "id" => queryid,
+    "message" => %{"chat" => %{"first_name" => _, "id" => _,
+        "last_name" => _, "type" => "private"}, "date" => _,
+      "from" => %{"first_name" => "Chargell GAME", "id" => _,
+        "username" => "chergell_bot"}, "message_id" => _,
+      "text" => _text}},
   "update_id" => 758423623} ) do
 
     Overcharge.Bot.handle_callback(id, queryid, data)
