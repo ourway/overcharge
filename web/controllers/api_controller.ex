@@ -225,7 +225,7 @@ defmodule Overcharge.ApiController do
       "from" => %{"first_name" => "Chargell GAME", "id" => _,
         "username" => "chergell_bot"}, "message_id" => _,
       "text" => _text}},
-  "update_id" => 758423623} ) do
+  "update_id" => _} ) do
 
     Overcharge.Bot.handle_callback(id, queryid, data)
     conn |> json(%{status: true})
