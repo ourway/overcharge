@@ -1077,7 +1077,7 @@ input.msisdn {
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link rightel_color" 
-          href="/rightel"><span itemprop="name">شارژ رایتل</span></a>
+          href="/rightel/topup"><span itemprop="name">شارژ رایتل</span></a>
           <meta itemprop="position" content="2" />
         </li>
     <% end %>
