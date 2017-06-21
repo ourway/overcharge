@@ -6,20 +6,6 @@ defmodule Overcharge.Bot do
   #@interval 1000
 
 
-  def convert_to_persian(digits) do
-      digits |> to_string 
-        |> String.replace("0", "۰") 
-        |> String.replace("1", "۱") 
-        |> String.replace("2", "۲") 
-        |> String.replace("3", "۳") 
-        |> String.replace("4", "۴") 
-        |> String.replace("5", "۵") 
-        |> String.replace("6", "۶") 
-        |> String.replace("7", "۷") 
-        |> String.replace("8", "۸") 
-        |> String.replace("9", "۹") 
-        |> String.replace("-", "منفی ") 
-  end
 
 
 
@@ -271,7 +257,7 @@ end
 
 def send_score(chat_id) do
     score = chat_id |> get_user_history |> Map.get(:score)
-    message = "شما *#{score |> convert_to_persian }* امتیاز دارید."
+    message = "شما *#{score |> Persian.to_persian_digits }* امتیاز دارید."
     send_message(chat_id, message)
 end
 
@@ -480,7 +466,7 @@ def game_logic(id, word) do
                 (suggested |> String.length) == (target |> String.length) ->
                     if is_match?(target, suggested) == true do
                             id |> get_user_history |> Map.merge( %{ score:  target_score + score }) |> set_user_history(id)
-                            id |> send_message("آفرین! شما #{target_score |> convert_to_persian} امتیاز به دست آوردید و مجموع امتیاز شما به #{(target_score + score) |> convert_to_persian} رسید.")
+                            id |> send_message("آفرین! شما #{target_score |> Persian.to_persian_digits} امتیاز به دست آوردید و مجموع امتیاز شما به #{(target_score + score) |> Persian.to_persian_digits} رسید.")
                             id |> get_user_history |> Map.merge( %{ level:  nil }) |> set_user_history(id)
                             id |> get_user_history |> Map.merge( %{ target_word:  nil }) |> set_user_history(id)
                             id |> send_levels
@@ -488,11 +474,11 @@ def game_logic(id, word) do
                         id |> get_user_history |> Map.merge( %{ score:  score - target_punish }) |> set_user_history(id)
                         pos     = number_of_correct_positions(target, suggested)
                         found   = number_of_found_chars(target, suggested)
-                        id |> send_message("نتیجه: *#{found |> convert_to_persian}*-*#{pos |> convert_to_persian}*\nامتیاز کنونی #{(score - target_punish) |> convert_to_persian} | عقب‌ نشینی با /backoff")
+                        id |> send_message("نتیجه: *#{found |> Persian.to_persian_digits}*-*#{pos |> Persian.to_persian_digits}*\nامتیاز کنونی #{(score - target_punish) |> Persian.to_persian_digits} | عقب‌ نشینی با /backoff")
                     end
                 true ->
                     id |> get_user_history |> Map.merge( %{ score:  score - 1 }) |> set_user_history(id)
-                    id |> send_message("کلمه باید #{target |> String.length |> convert_to_persian} حرفی باشد. امتیاز کنونی: #{(score - 1) |> convert_to_persian}. \n راهنمایی /help")
+                    id |> send_message("کلمه باید #{target |> String.length |> Persian.to_persian_digits} حرفی باشد. امتیاز کنونی: #{(score - 1) |> Persian.to_persian_digits}. \n راهنمایی /help")
             end
     end
 end
@@ -514,7 +500,7 @@ def start_game(id, level) do
             end
     score = id |> get_user_history |> Map.get(:score)
     id |> get_user_history |> Map.merge( %{ target_word:  word }) |> set_user_history(id)
-    id |> send_message("برای شروع یک کلمه *#{word |> String.length |> convert_to_persian}* حرفی به فارسی بنویسید.\n امتیاز هدف: *#{target_score |> convert_to_persian}* | امتیاز کنونی: *#{score |> convert_to_persian}*")
+    id |> send_message("برای شروع یک کلمه *#{word |> String.length |> Persian.to_persian_digits}* حرفی به فارسی بنویسید.\n امتیاز هدف: *#{target_score |> Persian.to_persian_digits}* | امتیاز کنونی: *#{score |> Persian.to_persian_digits}*")
 end
 
 def handle_incomming(id, username, first_name, last_name, text, msisdn \\ nil) do

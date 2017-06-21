@@ -305,7 +305,7 @@ defmodule Overcharge.Utils do
                       id |> Overcharge.Bot.get_user_history 
                         |> Map.merge( %{ score:  count + score }) 
                         |> Overcharge.Bot.set_user_history(id)
-                        message = "#{count |> Overcharge.Bot.convert_to_persian} امتیاز به شما اضافه شد."
+                        message = "#{count |> Persian.to_persian_digits} امتیاز به شما اضافه شد."
                          ivs = invoice |> set_invoice_status("completed")
                         id |> send_message(message) 
                       {:ok, true, ivs, nil}

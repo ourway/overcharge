@@ -1,6 +1,5 @@
 defmodule Overcharge.ApiController do
   use Overcharge.Web, :controller
-  @token "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws"
 
 
   def echo(conn, params) do
@@ -192,41 +191,5 @@ defmodule Overcharge.ApiController do
         conn |> json(%{result: members |> length})
   end
 
-
-
-  def bot(conn, %{"bot_token" => @token,
-        "callback_query" => %{ "data" => data, "from" => %{"id" => id}, "id" => queryid}}) do
-
-    Overcharge.Bot.handle_callback(id, queryid, data)
-    conn |> json(%{status: true})
-  end
-
-
-
-    def bot(conn, %{
-      "bot_token" => @token,
-      "message" => %{"chat" => %{"id" => id}, "text" => text}}) do
-        {id, text} |> IO.inspect
-        Overcharge.Bot.handle_incomming(id, nil, nil, nil, text)
-        conn |> json(%{status: true})
-
-    end
-
-
-    def bot(conn, %{"bot_token" => @token,
-          "message" => %{ "chat" => %{"id" => id},
-          "contact" => %{ "phone_number" => msisdn} }}) do
-          
-        {id, msisdn} |> IO.inspect
-        Overcharge.Bot.handle_incomming(id, nil, nil, nil, nil, msisdn)
-        conn |> json(%{status: true})
-
-      end
-
-
-  def bot(conn, params) do
-        params |> IO.inspect
-      conn |> json(%{status: true})
-  end
 
 end

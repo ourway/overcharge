@@ -98,5 +98,22 @@ defmodule Persian do
   end
 
 
+  def to_persian_digits(digits) do
+      digits |> to_string 
+        |> String.replace("0", "۰") 
+        |> String.replace("1", "۱") 
+        |> String.replace("2", "۲") 
+        |> String.replace("3", "۳") 
+        |> String.replace("4", "۴") 
+        |> String.replace("5", "۵") 
+        |> String.replace("6", "۶") 
+        |> String.replace("7", "۷") 
+        |> String.replace("8", "۸") 
+        |> String.replace("9", "۹") 
+        |> String.replace("-", "منفی ") 
+  end
+
+
+
 
 end

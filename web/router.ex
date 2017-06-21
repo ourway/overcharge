@@ -114,7 +114,7 @@ defmodule Overcharge.Router do
 
   scope "/bot", Overcharge do
     pipe_through :api
-    post "/:bot_token", ApiController, :bot
+    post "/:bot_token", BotController, :bot
   end
 
   scope "/admin", Overcharge do
