@@ -12,7 +12,7 @@ defmodule Overcharge do
     {:ok, wordlist} = File.read!("wordlist.json") |> Poison.decode
     true = :ets.insert(:wordlist, {:easy, wordlist |> Map.get("fours")})
     true = :ets.insert(:wordlist, {:mid, wordlist |> Map.get("sixes")})
-    true = :ets.insert(:wordlist, {:hard, wordlist |> Map.get("tens")})
+    true = :ets.insert(:wordlist, {:hard, wordlist |> Map.get("sixes")})
 
 
 
