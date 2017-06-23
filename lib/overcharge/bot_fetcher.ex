@@ -446,9 +446,9 @@ def game_logic(id, word) do
                         :easy ->
                             15
                         :mid ->
-                            50
+                            32
                         :hard ->
-                            100
+                            48
                     end
 
             target_punish = case level do
@@ -494,9 +494,9 @@ def start_game(id, level) do
                 :easy ->
                     15
                 :mid ->
-                    50
+                    32
                 :hard ->
-                    100
+                    48
             end
     score = id |> get_user_history |> Map.get(:score)
     id |> get_user_history |> Map.merge( %{ target_word:  word }) |> set_user_history(id)
