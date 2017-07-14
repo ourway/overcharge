@@ -170,7 +170,8 @@ defmodule Overcharge.Utils do
     end
 
     def post_xml(url, data) do
-        {:ok, resp} = HTTPoison.post(url, data, ["Content-Type": "text/xml"])
+        options = [connect_timeout: 60_000, recv_timeout: 60_000, timeout: 60_000]
+        {:ok, resp} = HTTPoison.post(url, data, ["Content-Type": "text/xml"], options)
         resp
     end
 
