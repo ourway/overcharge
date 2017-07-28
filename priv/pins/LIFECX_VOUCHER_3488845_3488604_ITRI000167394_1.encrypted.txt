@@ -1,42 +1,3 @@
-PackageId:17052615
-Quantity:10000
-CardPrefix:47
-FaceValue:10000
-StartDate:20170706
-StopDate:20220706
-Currency:1
-ResID1:1
-Resleft1:9175
-ResActiveDays1:0
-ResID2:2
-Resleft2:30
-ResActiveDays2:0
-ResID3:-1
-Resleft3:0
-ResActiveDays3:0
-ResID4:-1
-Resleft4:0
-ResActiveDays4:0
-ResID5:-1
-Resleft5:0
-ResActiveDays5:0
-ResID6:-1
-Resleft6:0
-ResActiveDays6:0
-ResID7:-1
-Resleft7:0
-ResActiveDays7:0
-ResID8:-1
-Resleft8:0
-ResActiveDays8:0
-ResID9:-1
-Resleft9:0
-ResActiveDays9:0
-ResID10:-1
-Resleft10:0
-ResActiveDays10:0
-Start_Sequence:
-[BEGIN]
 47170526150000000 997457243711795
 47170526150000001 990750542364624
 47170526150000002 997247036312940
@@ -10037,4 +9998,3 @@ Start_Sequence:
 47170526150009997 999659442826326
 47170526150009998 994494284347075
 47170526150009999 999799586872182
-[END]
