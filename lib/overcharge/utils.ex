@@ -1,6 +1,7 @@
 defmodule Overcharge.Utils do
 
     import Ecto.Query
+    use Overcharge.Web, :controller
 
     def get_random_string(len \\ 16) do
         Ecto.UUID.generate |> binary_part(16,len)
@@ -63,6 +64,31 @@ defmodule Overcharge.Utils do
 
          end
     end
+
+
+    def direct_1000_pin_fetch(conn, params) do
+        amount = 1000
+        client = "88Hs0bhSSd"
+        case (from p in Overcharge.Pin,
+                where: p.is_active == true,
+                where: p.amount == ^amount,
+                where: p.is_used == false,
+                limit: 1,
+                select: p ) |> Overcharge.Repo.one do
+            nil ->
+                conn 
+                    |> put_status(503)
+                    |> json(%{result: :finished})
+            np ->
+            {:ok, _} = 
+                Overcharge.Pin.changeset(np, %{ is_used: true, client: client, msisdn: params["msisdn"]}) |> Overcharge.Repo.update
+                #%{code: np.code, serial: np.serial}
+                conn 
+                    |> put_status(200)
+                    |> json(%{pincode: np.code})
+         end
+    end
+
 
 
     def get_mci_pins(count, amount, invoice_id) do
