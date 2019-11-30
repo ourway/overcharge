@@ -32,11 +32,12 @@ config :coherence,
   repo: Overcharge.Repo,
   module: Overcharge,
   logged_out_url: "/",
-  email_from_name: "Your Name",
-  email_from_email: "yourname@example.com",
+  email_from_name: "Chargell Sales",
+  email_from_email: "sales@chargell.ir",
   opts: [:confirmable, :rememberable, :registerable, :invitable, :authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token]
 
 config :coherence, Overcharge.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
   api_key: "your api key here"
 # %% End Coherence Configuration %%
+

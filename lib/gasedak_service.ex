@@ -107,7 +107,7 @@ defmodule Overcharge.Gasedak do
                 {:error, :halt}
             %{"ResultCode" => 5} ->
                 SlackWebhook.async_send("⚠CRITICAL: Gasedak (www.elkapos.com) low credit reported while charging #{msisdn}")
-                Overcharge.SMS.send_sms("9120228207", "Chargell.ir\nToshanet Low credit.\n #{msisdn} faild to charge #{amount} tomans.")
+                Overcharge.SMS.send_sms("9120228207", "Chargell.com\nToshanet Low credit.\n #{msisdn} faild to charge #{amount} tomans.")
                 {:error, :low_credit}
             _ ->
                 :error
@@ -130,7 +130,7 @@ defmodule Overcharge.Gasedak do
                 check_transaction_status(transactionid, refid, msisdn)
             %{"ResultCode" => errorcode} ->
                 SlackWebhook.async_send("⚠CRITICAL: Gasedak: Charge Failed for #{national_number}. refid: #{refid}")
-                Overcharge.SMS.send_sms("9120228207", "Chargell.ir\nToshanet Charge Error.\n #{msisdn} failed to charge.\nRefid: #{refid}")
+                Overcharge.SMS.send_sms("9120228207", "Chargell.com\nToshanet Charge Error.\n #{msisdn} failed to charge.\nRefid: #{refid}")
                 Overcharge.SMS.send_sms(national_number, "مشتری گرامی، مشکل عدم شارژ شما در حال پیگیری است.\n\nRefid: #{refid}")
                 {:error, errorcode}
             _ ->

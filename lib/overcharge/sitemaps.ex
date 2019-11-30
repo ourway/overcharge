@@ -1,8 +1,8 @@
-defmodule Overcharge.Sitemaps do
+defmodule Sitemaps do
 
     use Sitemap,
-    host: "https://overcharge.ir",
-    files_path: "priv/static/sitemaps/",
+    host: "https://www.chargell.com",
+    files_path: "web/static/assets/sitemaps/",
     public_path: "sitemaps/",
     compress: false
 
@@ -11,8 +11,18 @@ defmodule Overcharge.Sitemaps do
     create do
     
       for u <- [
-                "/", "/mci", "/mci/topup", "/mci/pin", "/taliya/topup", "/rightel/topup",
-                "/irancell/topup", "/irancell/internet"
+                "/",
+                "/ایرانسل",
+                "/ایرانسل/شارژ-مستقیم",
+                "/ایرانسل/بسته‌های-اینترنتی",
+                "/همراه-اول",
+                "/همراه-اول/شارژ-مستقیم",
+                "/همراه-اول/کارت-شارژ",
+                "/شارژ-رایتل",
+                "/contact",
+                "/faq",
+                "/about",
+                "/articles"
         ] do
             add u, priority: 0.5, changefreq: "hourly"
       end

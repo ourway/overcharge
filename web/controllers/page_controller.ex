@@ -2,10 +2,13 @@ defmodule Overcharge.PageController do
   use Overcharge.Web, :controller
 
   def index(conn, _params) do
+
+
+
     render conn, "index.html",
-      description: "خرید ارزان و سریع شارژ ایرانسل، همراه اول و تالیا و رایتل به همراه قرعه‌کشی و جوایز + شارژ رایگان",
-      title:       "خرید شارژ همراه اول - ایرانسل - رایتل - تالیا",
-      subtitle:    "خرید شارژ و بسته اینترنتی",
+      description: "شارژ نیاز دارید؟  بسته اینترنتی لازم دارید؟  با شارژل همه چی تو سه سوت! ",
+      title:       "خرید شارژ و بسته اینترنتی همراه اول، ایرانسل و رایتل",
+      subtitle:    "خرید شارژ و بسته اینترنتی همراه اول، ایرانسل و رایتل",
       color:       "#f8f8f8",
       text_color:  "#ffffff",
       page_type:   "landing",
@@ -18,8 +21,8 @@ defmodule Overcharge.PageController do
 
   def mci(conn, _params) do
     render conn, "mci.html",
-      description: "خرید ارزان و سریع شارژ مستقیم همراه اول و کارت شارژ همراه اول به همراه کارت شارژ رایگان + شارژ مستقیم رایگان",
-      title:       "خرید شارژ همراه اول",
+      description: "شارژ همراه اول خودتون رو از ما بخرید و کلی تخفیف هم بگیرید! همین الان شروع کنید",
+      title:       "شارژ همراه اول",
       subtitle:    "خرید پین و شارژ مستقیم همراه اول",
       color:       "#e3fffe",
       text_color:  "#fff",
@@ -33,7 +36,7 @@ defmodule Overcharge.PageController do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
     render conn, "mci-topup.html",
-      description: "خرید ارزان و سریع شارژ مستقیم همراه اول + طرح ویژه شارژ رایگان همراه اول برای شما",
+      description: "شارژ مستقیم همراه اول میخوای؟  تو ۳ سوت شارژ میشی. شروع کن!",
       title:       "شارژ مستقیم همراه اول",
       subtitle:    "شارژ مستقیم همراه اول",
       color:       "#e3fffe",
@@ -54,7 +57,7 @@ defmodule Overcharge.PageController do
      title_postfix = artists |> Enum.join(" و ")
      description_postfix = songs |> Enum.join(" ، ")
      render conn, "mci-rbt.html",
-      description: "آهنگ های پیشواز همراه اول شامل #{description_postfix} + ده‌ها سکه جایزه و شارژ رایگان",
+      description: "آهنگ های پیشواز همراه اول شامل #{description_postfix}",
       title:       "آوای انتظار همراه اول از #{title_postfix}",
       keywords:    artists ++ songs,
       page:        page |> String.to_integer,
@@ -68,9 +71,9 @@ defmodule Overcharge.PageController do
   end
 
 
-  def mci_pin(conn, params) do
+  def mci_pin(conn, _params) do
     render conn, "mci-pin.html",
-      description: "خرید کارت شارژ ۱۰۰۰ تومانی همراه اول با قیمت عمده باور نکردنی و تخفیف ویژه + کارت شارژ رایگان",
+      description: "شارژ هزار تومنی همراه اول رو با قیمیت باورنکردنی ۸۵۰ تومن بخر. ",
       title:       "کارت شارژ همراه اول",
       subtitle:    "فروش کارت شارژ 1000 تومانی همراه اول",
       color:       "#e3fffe",
@@ -86,8 +89,8 @@ defmodule Overcharge.PageController do
 
   def irancell(conn, _params) do
     render conn, "irancell.html",
-      description: "خرید سریع و ارزان شارژ مستقیم و بسته های اینترنتی ایرانسل بدون نیاز به وارد کردن رمز و کد + صدها جایزه و شارژ رایگان و اینترنت رایگان",
-      title:       "خرید شارژ ایرانسل و بسته های اینترنتی ایرانسل",
+      description: "ما خودمون هم ایرانسلی هستیم! بسته اینترنت ارزون و شارژ مستقیم تو سه سوت با ۲ تا کلیک! بزن بریم!",
+      title:       "شارژ ایرانسل",
       subtitle:    "خرید شارژ مستقیم و بسته های اینترنتی ایرانسل",
       color:       "#fff2a7",
       text_color:  "#333",
@@ -101,7 +104,7 @@ defmodule Overcharge.PageController do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
     render conn, "irancell-topup.html",
-      description: "خرید ارزان و سریع شارژ مستقیم ایرانسل به همراه جایزه سکه های طلایی + اینترنت رایگان",
+      description: "شارژ مستقیم ایرانسل اینجا سریع تر از همه جاست.  تو ۳ سوت شارژ شو",
       title:       "شارژ مستقیم ایرانسل",
       subtitle:    "شارژ مستقیم ایرانسل",
       color:       "#fff2a",
@@ -122,7 +125,7 @@ defmodule Overcharge.PageController do
         %{ persian: "ساعتی نامحدود", en: "hourly", data: Overcharge.Gasedak.get_irancell_packages(50)},
       ]
     render conn, "irancell-internet.html",
-      description: "خرید ارزان و سریع بسته اینترنتی ایرانسل همراه با جایزه باورنکردنی + اینترنت رایگان برای شما!",
+      description: "بسته های اینترنتی ایرانسل ما هم ارزون هستن، هم بهترین ها رو واستون انتخاب کردیم!",
       title:       "بسته اینترنتی ایرانسل",
       subtitle:    "بسته های اینترنتی ایرانسل",
       color:       "#fff2a",
@@ -149,14 +152,14 @@ defmodule Overcharge.PageController do
       "hourly" ->
           %{ persian: "ساعتی نامحدود", en: "hourly", data: Overcharge.Gasedak.get_irancell_packages(50)}
     end
-    sid = 47
-    data = Overcharge.Gasedak.get_irancell_packages(sid)
+    #sid = 47
+    #data = Overcharge.Gasedak.get_irancell_packages(sid)
     render conn, "irancell-internet-package.html",
-      description: "خرید ارزان و سریع بسته اینترنتی #{package.persian} ایرانسل همراه با جایزه و اینترنت رایگان",
+      description: "خرید ارزان و سریع بسته اینترنتی #{package.persian} ایرانسل و اینترنت رایگان شبانه",
       title:       "بسته‌های اینترنتی #{package.persian} ایرانسل",
       subtitle:    "بسته اینترنتی #{package.persian} ایرانسل",
       color:       "#fff2a",
-      sid:        sid,
+      #sid:        sid,
       amount:     amount |> String.to_integer,
       msisdn:     msisdn,
       package:    package,
@@ -175,7 +178,7 @@ defmodule Overcharge.PageController do
     msisdn = params["msisdn"]
     amount = params["amount"] || "2000"
     render conn, "rightel.html",
-      description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد + شارژ رایگان جدید",
+      description: "خرید سریع و ارزان شارژ مستقیم رایتل بدون نیاز به وارد کردن رمز و کد",
       title:       "خرید شارژ رایتل",
       subtitle:    "خرید شارژ مستقیم رایتل",
       color:       "#ffedf8",
@@ -287,27 +290,84 @@ defmodule Overcharge.PageController do
 
   def articles(conn, _params) do
 
+    posts = (from p in Overcharge.Post,
+            where: p.is_published == true,
+            order_by: [desc: p.inserted_at],
+            select: %{
+              title: p.title,
+              id:    p.id,
+              datetime:  p.updated_at
+            })
+    |> Overcharge.Repo.all
+
     render conn, "articles.html",
       description: "مقالات و مطالب مربوط به آخرین رویدادهای مربوط به شارژ در ایران",
       title:       "مقالات شارژل",
-      subtitle:    "مقالات",
+      subtitle:    "مقالات و رویدادهای دنیای مخابرت و تلفن‌های همراه",
+      posts:       posts,
       color:       "#f8f8f8",
       text_color:  "",
       page_type:   "article",
-      product:     "article",
+      product:     "news",
       product_fr:  "مقاله"
 
   end
 
 
+
+  def article_view(conn, params) do
+
+    post = (from p in Overcharge.Post,
+            where: p.id == ^params["id"],
+            where: p.is_published == true,
+            select: p)
+    |> Overcharge.Repo.one
+
+    {:ok, body, []} = post.body |> Earmark.as_html
+    text = body |> HtmlSanitizeEx.strip_tags
+
+    render conn, "article_view.html",
+      description: text,
+      title:       post.title,
+      subtitle:    post.title,
+      post:       post,
+      body:       body,
+      text:       text,
+      color:       "#f8f8f8",
+      text_color:  "",
+      page_type:   "article",
+      product:     "news",
+      product_fr:  "مقاله"
+
+  end
+
+
+
+
+
     def deliver(conn, params) do
 
       uuid = params["uuid"]
-      target = uuid |> Overcharge.Utils.get_invoice_uuid
-                    |> Overcharge.Utils.set_invoice_checked_out
-                     
+      _status = params["status"]
+      _transid = params["transId"]
+      _factorNumber = params["factorNumber"]
+      message = params["message"]
+      
+      t = uuid |> Overcharge.Utils.get_invoice_uuid
+      target = case message do
+        "OK" ->
+          t |> Overcharge.Utils.set_invoice_checked_out
+        _ ->
+          t
+      end
+
       ivs = if target.status == "pending" do  ## only first time
-              target |> Overcharge.Utils.set_invoice_status("payed")
+              case target |> Overcharge.Pay.verify do
+                1 ->
+                  target |> Overcharge.Utils.set_invoice_status("payed")
+                _ ->
+                  target
+              end
             else
               target
             end

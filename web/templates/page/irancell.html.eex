@@ -1,7 +1,7 @@
 
 <div class="index_page">
 
-    <a href="/irancell/topup#form" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/ایرانسل/شارژ-مستقیم" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-bolt fa-2x"></i>
 
@@ -38,7 +38,7 @@
     </a>
 
 
-    <a href="/irancell/internet" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
+    <a href="/ایرانسل/بسته‌های-اینترنتی" class="select_package irancell white_border" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa  fa-wifi  fa-2x"></i>
 

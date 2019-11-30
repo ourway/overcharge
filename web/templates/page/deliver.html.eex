@@ -2,7 +2,13 @@
 
 
 <div class="text_right right padded">
-<h4 align="center" id="form"><i class="fa fa-check-square success"></i> پرداخت شما با موفقیت انجام شد.</h4>
+<h4 align="center" id="form"><i class="fa fa-check-square success"></i>
+     <%= if @invoice.is_checked_out == true do %>
+      پرداخت شما با موفقیت انجام شد
+    <% else %>
+      پرداخت شما لغو گردید
+    <% end %>
+      </h4>
 <%   {func, operator, amount, msisdn} = @invoice.success_callback_action |> Overcharge.Utils.parse_invoice_action  %>
     <%= if func == "topup" && @code == "st-001" do %>
     <div class="padded success">

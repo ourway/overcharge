@@ -28,6 +28,13 @@ config :overcharge, Overcharge.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+
+
+config :nadia,
+  #token: "381106026:AAFOWEEkwc4HWgQLYtr0rTGBdPzYhSHsFsw" #dev
+  token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws" #prod
+
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

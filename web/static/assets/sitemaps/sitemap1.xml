@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+  xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
+  xmlns:geo='http://www.google.com/geo/schemas/sitemap/1.0'
+  xmlns:news='http://www.google.com/schemas/sitemap-news/0.9'
+  xmlns:image='http://www.google.com/schemas/sitemap-image/1.1'
+  xmlns:video='http://www.google.com/schemas/sitemap-video/1.1'
+  xmlns:mobile='http://www.google.com/schemas/sitemap-mobile/1.0'
+  xmlns:pagemap='http://www.google.com/schemas/sitemap-pagemap/1.0'
+  xmlns:xhtml='http://www.w3.org/1999/xhtml'
+>
+<url>
+	<loc>https://www.chargell.com</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%D8%B3%D9%84</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%D8%B3%D9%84/%D8%B4%D8%A7%D8%B1%DA%98-%D9%85%D8%B3%D8%AA%D9%82%DB%8C%D9%85</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%D8%B3%D9%84/%D8%A8%D8%B3%D8%AA%D9%87%E2%80%8C%D9%87%D8%A7%DB%8C-%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA%DB%8C</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/همراه-اول</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/%D9%87%D9%85%D8%B1%D8%A7%D9%87-%D8%A7%D9%88%D9%84/%D8%B4%D8%A7%D8%B1%DA%98-%D9%85%D8%B3%D8%AA%D9%82%DB%8C%D9%85</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/%D9%87%D9%85%D8%B1%D8%A7%D9%87-%D8%A7%D9%88%D9%84/%DA%A9%D8%A7%D8%B1%D8%AA-%D8%B4%D8%A7%D8%B1%DA%98</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/%D8%B4%D8%A7%D8%B1%DA%98-%D8%B1%D8%A7%DB%8C%D8%AA%D9%84</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/contact</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/faq</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/about</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url><url>
+	<loc>https://www.chargell.com/articles</loc>
+	<lastmod>2017-06-10T17:29:49Z</lastmod>
+	<changefreq>hourly</changefreq>
+	<priority>0.5</priority>
+</url></urlset>

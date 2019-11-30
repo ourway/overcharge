@@ -4,12 +4,13 @@
   <head>
 
 
-  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    <meta http-equiv="content-language" content="fa" />
     <meta name="description" content="<%= @description %>">
     <title><%= @title %></title>
     <meta name="author" content="Overcharge Framework 1/1">
@@ -57,7 +58,7 @@
     <meta property="og:url" content="<%= Overcharge.Router.Helpers.url(@conn) %>" />
     <meta property="og:image" content="<%= Overcharge.Router.Helpers.url(@conn) %>/images/apple-touch-icon.png" />
     <meta property="og:description" content="<%= @description %>" /> 
-    <meta property="og:site_name" content="OverCharge" />
+    <meta property="og:site_name" content="CharGELL" />
     <meta property="fb:admins" content="220534798462355" />
 
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
@@ -68,7 +69,7 @@
     <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
   <% end %>
 
-  <%= if @page_type=="list" do %>
+  <%= if @page_type=="landing" do %>
   <% end %>
 
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
@@ -89,11 +90,11 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "url": "http://www.google.com",
+  "url": "<%= Overcharge.Router.Helpers.url(@conn) %>",
   "logo": "<%= Overcharge.Router.Helpers.url(@conn) %>/images/logo_s.png",
   "contactPoint": [{
     "@type": "ContactPoint",
-    "telephone": "+98-21-44237749",
+    "url": "<%= Overcharge.Router.Helpers.url(@conn) %>/contact",
     "contactType": "customer service"
   }]
 }
@@ -234,6 +235,11 @@ form.amp-form-submit-success.hide-inputs > input {
   padding: 2px;
 }
 
+.blackback {
+  background:black;
+  padding: 10px;
+}
+
 .blueback {
   background: #0ab6ff;
   padding: 5px;
@@ -351,8 +357,11 @@ main { display: block; }
 body { 
 font-family: 'IRANSans', sans-serif;
 background-image: url(/images/bg-<%= @product %>.svg);
-background-size: cover;
 background-position: 0px -50px;
+<%= if @page_type == "landing" do %>
+    background-position: 0px -50px;
+<%= end %>
+background-size: cover;
 background-color: <%= @color %>;
  margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-font-feature-settings: "liga=1, dlig=1"; -ms-font-feature-settings: "liga", "dlig"; -webkit-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; }
 
@@ -368,6 +377,10 @@ background-color: <%= @color %>;
     color: white;
     /* width: 100%; */
 
+}
+.bold {
+  font-weight: 800;
+  font-size: 14px;
 }
 @media only screen and (max-width: 800px) { .site-header { padding: 0 0px; } }
 .site-header .page-links { display: block; position: absolute; top: 10px; right: 0; font-weight: 800; font-style: bold; font-size: 14px; line-height: 30px; }
@@ -465,6 +478,57 @@ hr {background: #02a8ff; height: 2px; border: none;}
 .footer-links i {
     vertical-align: sub;
 }
+
+
+.article_view {
+
+  direction: rtl;
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+
+
+.article_view p {
+  color: #333;
+  padding-left: 20px;
+  padding-right: 20px;
+  direction: rtl;
+  text-align: justify;
+  font-size: 13px;
+}
+
+.newslist li {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.newslist li a {
+  text-decoration: none;
+  color: #db004d;
+  text-align: justify;
+}
+
+
+.newslist li:hover,  .newslist li:active{
+  background: #db004d;
+}
+
+.newslist li:hover a,  .newslist li:active a{
+  color: white;
+}
+
+.newslist li:hover i,  .newslist li:active i{
+  color: white;
+}
+
+.newslist li:hover small,  .newslist li:active small{
+  color: white;
+}
+
+
+
 
 .links_me {
   list-style: none;
@@ -897,6 +961,10 @@ input.msisdn {
   color: darkred;
 }
 
+.grey {
+  color: grey;
+}
+
 .links ul{
   text-align: left;
 }
@@ -937,6 +1005,7 @@ input.msisdn {
 
 
 
+  <link async=true href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -949,7 +1018,7 @@ input.msisdn {
   <script type="application/json">
   {
     "vars": {
-      "account": "UA-XXXXX-Y"
+      "account": "UA-100499611-1"
     },
     "triggers": {
       "trackPageview": {
@@ -961,13 +1030,17 @@ input.msisdn {
   </script>
   </amp-analytics>
 
-
+<!-- Google Tag Manager -->
+<!--
+<amp-analytics config="https://www.googletagmanager.com/amp.json?id=GTM-TT5M88G&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>
+-->
 
 
 
 
     <header class="site-header">
   <a href="/" class="logo"><span class="logo"><amp-img src="/images/logo_s_topbar.png" width="96" height="96" /></span></a>
+
 
 
   <div class="page-links">
@@ -1004,7 +1077,7 @@ input.msisdn {
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
           <a itemscope itemtype="http://schema.org/Thing" 
           itemprop="item" class="page-link rightel_color" 
-          href="/rightel"><span itemprop="name">شارژ رایتل</span></a>
+          href="/rightel/topup"><span itemprop="name">شارژ رایتل</span></a>
           <meta itemprop="position" content="2" />
         </li>
     <% end %>
@@ -1045,12 +1118,29 @@ input.msisdn {
     
   </div>
 </header>
+
+
+            
 <div class="subtitle">
+
+
+
 <%= if @subtitle != "" do %>
  <h1>
+
+
+
   <i class="fa fa-ioxhost"></i>
-  <%= @subtitle %> </h1>
+  <%= @subtitle %> 
+
+
+  
+  </h1>
 <% end %>
+
+
+
+
 </div>
     <main class="content" role="main">
 

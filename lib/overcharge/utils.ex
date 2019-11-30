@@ -1,6 +1,7 @@
 defmodule Overcharge.Utils do
 
     import Ecto.Query
+    use Overcharge.Web, :controller
 
     def get_random_string(len \\ 16) do
         Ecto.UUID.generate |> binary_part(16,len)
@@ -27,9 +28,26 @@ defmodule Overcharge.Utils do
         end
     end
 
+
+    def get_a_pin(amount) do
+        case (from p in Overcharge.Pin,
+                where: p.is_active == true,
+                where: p.amount == ^amount,
+                where: p.is_used == false,
+                limit: 1,
+                select: p ) |> Overcharge.Repo.one do
+            nil ->
+                :error
+            np ->
+                {:ok, p} = Overcharge.Pin.changeset(np, %{ is_used: true}) |> Overcharge.Repo.update
+                    p.code
+         end
+    end
+
     def get_new_mci_pin(amount, invoice_id) do
         case (from p in Overcharge.Pin,
                 where: p.is_active == true,
+                where: p.amount == ^amount,
                 where: p.is_used == false,
                 preload: :invoice,
                 limit: 1,
@@ -46,6 +64,31 @@ defmodule Overcharge.Utils do
 
          end
     end
+
+
+    def direct_1000_pin_fetch(conn, params) do
+        amount = 1000
+        client = "88Hs0bhSSd"
+        case (from p in Overcharge.Pin,
+                where: p.is_active == true,
+                where: p.amount == ^amount,
+                where: p.is_used == false,
+                limit: 1,
+                select: p ) |> Overcharge.Repo.one do
+            nil ->
+                conn 
+                    |> put_status(503)
+                    |> json(%{result: :finished})
+            np ->
+            {:ok, _} = 
+                Overcharge.Pin.changeset(np, %{ is_used: true, client: client, msisdn: params["msisdn"]}) |> Overcharge.Repo.update
+                #%{code: np.code, serial: np.serial}
+                conn 
+                    |> put_status(200)
+                    |> json(%{pincode: np.code})
+         end
+    end
+
 
 
     def get_mci_pins(count, amount, invoice_id) do
@@ -65,6 +108,9 @@ defmodule Overcharge.Utils do
                 |> Overcharge.Repo.all
     end 
 
+    @doc """
+        Overcharge.Utils.
+    """
     def create_invoice(action, amount, client, product) do 
       amount = amount
       off = 0.0  ##indirim :)
@@ -76,6 +122,7 @@ defmodule Overcharge.Utils do
                     description: action,
                     product: product,
                     rate: rate,
+                    uuid: Ecto.UUID.generate |> to_string,
                     success_callback_action: action,
                     raw_amount: rate,
                     amount: (rate + rate*0.09) |> round
@@ -149,7 +196,8 @@ defmodule Overcharge.Utils do
     end
 
     def post_xml(url, data) do
-        {:ok, resp} = HTTPoison.post(url, data, ["Content-Type": "text/xml"])
+        options = [connect_timeout: 60_000, recv_timeout: 60_000, timeout: 60_000]
+        {:ok, resp} = HTTPoison.post(url, data, ["Content-Type": "text/xml"], options)
         resp
     end
 
@@ -231,6 +279,7 @@ defmodule Overcharge.Utils do
                                     amount |> String.split(":") |> List.last |> String.to_integer,
                                 }
                       end |> IO.inspect
+                    
                     case Overcharge.Gasedak.topup(msisdn, price , invoice.refid, mode, sid) do  ## do charge
                         {:ok, true, transactionid} ->
                             #:timer.sleep(500)
@@ -238,7 +287,7 @@ defmodule Overcharge.Utils do
                             Task.async fn() -> 
                                 case transactionid |> Overcharge.Gasedak.check_transaction_status(invoice.refid, msisdn) do  ## check status
                                     {:ok, true} ->
-                                        ivs = invoice 
+                                        ivs = invoice
                                                     |> set_transactionid(transactionid)
                                                     |> set_invoice_status("completed")
                                         {:ok, true, ivs , nil}
@@ -272,11 +321,21 @@ defmodule Overcharge.Utils do
                             :error
                     end
                 func == "pin" ->
-                    IO.puts("Not implemented yet")
-                    [count, price] = amount |> String.split(":") |> Enum.map(fn(x) -> x |> String.to_integer end) |> IO.inspect
+                    [count, price] = amount |> String.split(":") |> Enum.map(fn(x) -> x |> String.to_integer end)
                     :ok = get_mci_pins(count, price, invoice.id) 
                     ivs = invoice |> set_invoice_status("completed")
                     {:ok, true, ivs , "deliver_pins"}
+                func == "energy" ->
+                      count = amount |> String.to_integer
+                      id = msisdn |> String.to_integer
+                      score = id |> Overcharge.Bot.get_user_history |> Map.get(:score)
+                      id |> Overcharge.Bot.get_user_history 
+                        |> Map.merge( %{ score:  count + score }) 
+                        |> Overcharge.Bot.set_user_history(id)
+                        message = "#{count |> Persian.to_persian_digits} امتیاز به شما اضافه شد."
+                         ivs = invoice |> set_invoice_status("completed")
+                        id |> send_message(message) 
+                      {:ok, true, ivs, nil}
                 true ->
                     :not_implemented
                     
@@ -300,6 +359,17 @@ defmodule Overcharge.Utils do
              {:error, invoice}
         end
     end
+
+
+
+
+
+    def send_message(id, message) do
+        Overcharge.Bot.send_message(id, message, nil)
+    end
+
+
+
 
 
 end

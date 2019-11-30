@@ -48,7 +48,7 @@
 <%= for p <- @package.data |> Enum.slice(1,20) do %>
 
       <li option="<%= p.price |> div(10) %>"
-        <%= if @amount |> IO.inspect == p.price do %>
+        <%= if @amount == p.price do %>
           selected
         <% end %>
         class="px1 mb1">

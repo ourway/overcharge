@@ -8,6 +8,8 @@ defmodule Overcharge.Pin do
     field :prefix, :integer
     field :amount, :integer
     field :serial, :string
+    field :client, :string
+    field :msisdn, :string
     field :code, :string
     belongs_to :used_by, Overcharge.MSISDN
     belongs_to :invoice, Overcharge.Invoice
@@ -20,7 +22,7 @@ defmodule Overcharge.Pin do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:id, :is_active, :is_used, :prefix, :serial, :code, :amount])
+    |> cast(params, [:id, :is_active, :is_used, :prefix, :serial, :code, :amount, :client, :msisdn])
     |> validate_required([:serial, :code, :amount])
     |> unique_constraint(:code, [:code])
     |> unique_constraint(:serial, [:serial])

@@ -1,7 +1,11 @@
 defmodule Overcharge.ApiController do
   use Overcharge.Web, :controller
-  
 
+
+  def echo(conn, params) do
+    params |> IO.inspect
+    json(conn, %{message: :pong})
+  end
 
   def ping(conn, _params) do
        json(conn, %{message: :pong})
@@ -9,6 +13,7 @@ defmodule Overcharge.ApiController do
 
   def mci_topup_invoice(conn, params) do
       host = Overcharge.Router.Helpers.url(conn)
+      #host = Overcharge.Router.Helpers.url(conn)
       msisdn = params["msisdn"] |> Overcharge.Utils.validate_msisdn
       raw_amount = params["amount"] |> String.to_integer
       amount = raw_amount/1.09 |> round
@@ -89,6 +94,22 @@ defmodule Overcharge.ApiController do
 
 
 
+  def energy_invoice(conn, params) do
+      count = params["count"] |> String.to_integer
+      uuid = params["uuid"]
+      raw_amount = 3*count
+      amount = raw_amount/1.09 |> round
+      action = "energy_telegram_#{count}_#{uuid}"
+      product =  "#{count} واحد انرژی گیم تلگرام شارژل"
+      client = "980000000000" |> Overcharge.Utils.get_client
+      invoice = Overcharge.Utils.create_invoice(action, amount, client, product)
+      ivs = invoice |> Overcharge.Pay.request |> IO.inspect
+
+      paylink = "https://pay.ir/payment/gateway/#{ivs.transactionid}"
+      redirect conn, external: paylink
+  end
+
+
 
   def get_mci_rbt(conn, params) do
      page = params["page"] || 0
@@ -98,11 +119,77 @@ defmodule Overcharge.ApiController do
 
   def gopay(conn, params) do
       refid = params["refid"]
-      gateway = Overcharge.Gasedak
-      paylink = conn |> gateway.checkout(refid)
+      ivs = Overcharge.Utils.get_invoice(refid) |> Overcharge.Pay.request 
+      paylink = "https://pay.ir/payment/gateway/#{ivs.transactionid}"
       redirect conn, external: paylink
   end
 
+
+  def admin_new_post(conn, params) do
+      {:ok, post} = Overcharge.Post.changeset(
+            %Overcharge.Post{},
+                %{
+                    title: params["title"],
+                    body:  params["body"],
+                    is_published:  true
+                }) |> Overcharge.Repo.insert
+      conn |> json(%{message: :created, status: 0, uuid: post.uuid})
+  end
+
+
+  def admin_publish_post(conn, params) do
+    (from p in Overcharge.Post,
+            where: p.uuid == ^params["uuid"],
+            select: p)
+    |> Overcharge.Repo.one
+    |> Overcharge.Post.changeset(
+        %{ 
+          is_published:  true
+        }) 
+    |> Overcharge.Repo.update!
+
+      conn |> json(%{message: :published})
+  end
+
+  def admin_unpublish_post(conn, params) do
+
+    (from p in Overcharge.Post,
+            where: p.uuid == ^params["uuid"],
+            select: p)
+    |> Overcharge.Repo.one
+    |> Overcharge.Post.changeset(
+        %{ 
+          is_published:  false
+        }) 
+    |> Overcharge.Repo.update!
+
+      conn |> json(%{message: :unpublished})
+  end
+
+
+  def admin_delete_post(conn, params) do
+        (from p in Overcharge.Post, where: p.uuid == ^params["uuid"])
+        |> Overcharge.Repo.delete_all
+        conn |> json(%{message: :deleted})
+  end
+
+
+
+  def admin_publish_bot(conn, params) do
+      
+        message = params["body"]
+        members = Overcharge.Bot.find_all_members
+        for m <- members do 
+            Overcharge.Bot.send_message(m, message, nil) 
+        end
+        conn |> json(%{message: :queued, description: "will send to #{members |> length} members"})
+  end
+
+
+    def admin_get_bot_members_count(conn, _params) do
+        members = Overcharge.Bot.find_all_members
+        conn |> json(%{result: members |> length})
+  end
 
 
 end

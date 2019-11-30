@@ -5,9 +5,9 @@
   <div class="links"> 
 
     <ul >
-      <li> <a href="/mci" >شارژ همراه اول</a> <i class="fa fa-tag"></i></li>
-      <li><a href="/irancell" >شارژ ایرنسل</a> <i class="fa fa-tag"></i> </li>
-      <li><a href="/rightel" >شارژ رایتل</a> <i class="fa fa-tag"></i></li>
+      <li> <a href="/همراه-اول" >شارژ همراه اول</a> <i class="fa fa-tag"></i></li>
+      <li><a href="/ایرانسل" >شارژ ایرنسل</a> <i class="fa fa-tag"></i> </li>
+      <li><a href="/شارژ-رایتل" >شارژ رایتل</a> <i class="fa fa-tag"></i></li>
     </ul>
 
 
@@ -26,13 +26,14 @@
 
 
   <div>
+
+
       <amp-social-share type="twitter"></amp-social-share>
       <amp-social-share type="gplus"
         data-param-text="<%= @title %>" ></amp-social-share>
       <amp-social-share type="linkedin"
-        data-param-text="<%= @title %>"
-        data-param-url="<%= Overcharge.Router.Helpers.url(@conn) %>">
-      </amp-social-share>
+        data-param-text="<%= @title %>"></amp-social-share>
+      
   </div>
 
   <br/>

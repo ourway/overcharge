@@ -3,7 +3,7 @@
 
 
 
-    <a href="/irancell" class="select_package irancell" itemscope itemtype="http://schema.org/Product">
+    <a href="/ایرانسل" class="select_package irancell" itemscope itemtype="http://schema.org/Product">
         <h1> <i class="fa fa-tags"></i>
 
         <span itemprop="name">
@@ -17,13 +17,7 @@
         </amp-img>
     </a>
 
-
-
-
-
-
-
-    <a href="/mci" class="select_package mci" itemscope itemtype="http://schema.org/Product">
+    <a href="/همراه-اول/شارژ-مستقیم" class="select_package mci" itemscope itemtype="http://schema.org/Product">
         <h1>
             <i class="fa fa-tags"></i>
 
@@ -32,7 +26,7 @@
       <span itemprop="brand">همراه اول</span>
             </span>
             <br/>
-            <small itemprop="description">کارت شارژ و شارژ مستقیم سریع</small>
+            <small itemprop="description">شارژ مستقیم سریع</small>
         </h1>
         <amp-img alt="خرید شارژ همراه اول با کلی تخفیف" src="/images/corporate-gifting.png" width="110" height="100" layout="fixed">
         </amp-img>
@@ -44,7 +38,7 @@
 
 
 
-    <a href="/rightel" class="select_package rightel" itemscope itemtype="http://schema.org/Product">
+    <a href="/شارژ-رایتل" class="select_package rightel" itemscope itemtype="http://schema.org/Product">
         <h1> <i class="fa  fa-tags"></i>
 
         <span itemprop="name">
@@ -59,3 +53,57 @@
     </a>
 
 </div>
+
+<br/>
+
+
+
+
+<article class="hidden">
+
+<h3 class="right center whitecolor">
+    شارژل شارژت میکنه تو ۳ سوت!
+</h3>
+<p class="center right bold">
+    تو اینترنت هزار تا سایت شارژ هست. اما ما معتقدیم متفاوتیم. نه از شارژت کم میکنیم، نه سود زیاد ور میداریم.
+</p>
+
+<p class="center right bold">
+</p>
+
+</article>
+<article class="hidden">
+<h3 class="right center whitecolor">
+    همکاران تجاری ما
+</h3>
+
+<p class="center right bold">
+    ما با 
+    <a class="whitecolor" href="http://www.toshanet.com/" target="_blank">
+    سامانه توشانت</a>
+     همکاری میکنیم و از اینکه باهاشون همکاریم خوشحالیم.
+     <br/>
+     <a>تمام کارت های بانکی برای پرداخت رو هم پشتیبانی میکنیم.</a>
+</div>
+
+
+</article>
+
+
+<article class="hidden">
+<h3 class="right center whitecolor">
+    قبلا از ما خرید کردید؟
+</h3>
+
+<p class="center right bold">
+    اگر قبلا از ما خرید کردید و راضی هستید،  ممنون میشیم ما رو به دوستانتون معرفی کنید.
+    اگر هم به هر دلیلی ناراضی بودید،  الان به ما
+    <i class="fa fa-inbox"></i>
+    <a class="whitecolor" href="mailto:sales@chargell.ir">ایمیل</a>
+    بزنید تا فوری پیگیری کنیم.
+</div>
+
+
+</article>
+
+

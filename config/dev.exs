@@ -7,8 +7,8 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :overcharge, Overcharge.Endpoint,
-  #http: [port: 4000],
-  https: [port: 4443,
+  http: [port: 4000],
+  https: [port: 4444  ,
           otp_app: :overcharge,
           keyfile: "priv/keys/localhost.key",
           certfile: "priv/keys/localhost.cert"],
@@ -45,3 +45,10 @@ config :overcharge, Overcharge.Repo,
   database: "overcharge_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+
+config :nadia,
+  #token: "396811502:AAGK-M5KH9yJBSzC72RiY6lC7OelWvh06Ws"  ##prod
+  token: "381106026:AAFOWEEkwc4HWgQLYtr0rTGBdPzYhSHsFsw"
+
